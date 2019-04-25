@@ -5,6 +5,17 @@ const {app, BrowserWindow, Tray} = require('electron')
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
 
+
+function initApp() {
+  const tray = new Tray('./images/icon.png')
+  tray.setToolTip('Chimeverse')
+  createWindow()
+
+  tray.on('click', function() {
+    mainWindow.show();
+  });
+}
+
 function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({
@@ -35,7 +46,7 @@ function createWindow () {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on('ready', createWindow)
+app.on('ready', initApp)
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
