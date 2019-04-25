@@ -2,17 +2,62 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Hello World!</title>
+    <title>Chimeverse</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="node_modules/converse.js/css/converse.css">
+    <link rel="stylesheet" href="node_modules/uikit/dist/css/uikit.min.css">
+    <link rel="stylesheet" href="css/login.css">
   </head>
-  <body>
-    <h1>Hello World!</h1>
-    <!-- All of the Node.js APIs are available in this renderer process. -->
-    We are using Node.js <script>document.write(process.versions.node)</script>,
-    Chromium <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
+  <body ng-app="app">
+    <!-- Account form -->
+    <div class="main-window" ng-controller="AppController">
+      <div ng-hide="loginExist" class="uk-section uk-section-muted uk-flex uk-flex-middle uk-animation-fade" uk-height-viewport ng-controller="LoginController">
+        <div class="uk-width-1-1">
+          <div class="uk-container">
+            <h3 class="uk-card-title uk-text-center">Welcome to Chimeverse</h3>
+            <div class="uk-text-center">Jabber/XMPP client based on Converse.js and Electron</div>
+            <div class="uk-grid-margin uk-grid uk-grid-stack" uk-grid>
+              <div class="uk-width-1-1@m">
+                <div class="uk-margin uk-width-large uk-margin-auto uk-card uk-card-default uk-card-body uk-box-shadow-large">
+                  <form name="accountForm">
+                    <div class="uk-margin">
+                        <div class="uk-inline uk-width-1-1">
+                          <span class="uk-form-icon" uk-icon="icon: link"></span>
+                          <input ng-model="boshService" class="uk-input uk-form-large" type="text" placeholder="Bosh service url" required>
+                        </div>
+                      </div>
+                    <div class="uk-margin">
+                      <div class="uk-inline uk-width-1-1">
+                        <span class="uk-form-icon" uk-icon="icon: user"></span>
+                        <input ng-model="login" class="uk-input uk-form-large" type="text" placeholder="jid@jabber.org" required>
+                      </div>
+                    </div>
+                    <div class="uk-margin">
+                      <div class="uk-inline uk-width-1-1">
+                        <span class="uk-form-icon" uk-icon="icon: lock"></span>
+                        <input ng-model="password" class="uk-input uk-form-large" type="password" placeholder="Password" required>
+                      </div>
+                    </div>
+                    <div class="uk-margin">
+                      <button class="uk-button uk-button-primary uk-button-large uk-width-1-1" ng-click="addAccountAction()" ng-disabled="accountForm.$invalid" disabled>Add account</button>
+                    </div>
+                    <div class="uk-text-small uk-text-center">
+                      Credentials stored via Keychain
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /Account form -->
+    </div>
 
+    <script src="node_modules/uikit/dist/js/uikit.min.js"></script>
+    <script src="node_modules/uikit/dist/js/uikit-icons.min.js"></script>
     <script>
       // You can also require other files to run in this process
+      require('converse.js');
       require('./renderer.js')
     </script>
   </body>
