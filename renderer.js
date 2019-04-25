@@ -18,12 +18,29 @@ angApp.controller('AppController', function ($scope) {
         var password = keytar.getPassword(xmppService, $scope.login);
         password.then((result) => {
             $scope.password = result;
+
+            converse.plugins.add('chimeVerse', {
+                initialize: function() {
+                  var _converse = this._converse;
+                  Promise.all([
+                      _converse.api.waitUntil('rosterContactsFetched'),
+                      _converse.api.waitUntil('chatBoxesFetched')
+                  ]).then(function() {
+                    _converse.on('message', function (data) {
+                        //_converse.api.archive.query({'with': 'admin2@localhost'});
+                        console.log(data);
+                    });
+                  });
+                }
+              });
+
             converse.initialize({
                 bosh_service_url: $scope.boshService,
                 view_mode: 'fullscreen',
                 jid: $scope.login,
                 password: $scope.password,
-                auto_login: true
+                auto_login: true,
+                whitelisted_plugins: ['chimeVerse'],
             });
         });
     }
