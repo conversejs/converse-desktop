@@ -54,9 +54,21 @@
 
     <script src="node_modules/uikit/dist/js/uikit.min.js"></script>
     <script src="node_modules/uikit/dist/js/uikit-icons.min.js"></script>
+    <!--
+      @see comment https://github.com/signalapp/libsignal-protocol-javascript/issues/6#issuecomment-247208665
+    -->
+    <script>
+        window.nodeRequire = require
+        delete window.require
+    </script>
+    <script src="node_modules/converse.js/3rdparty/libsignal-protocol.js"></script>
+    <script>
+        window.require = window.nodeRequire
+        delete window.nodeRequire
+    </script>
     <script>
       // You can also require other files to run in this process
-      require('converse.js');
+      require('converse.js')
       require('./renderer.js')
     </script>
   </body>
