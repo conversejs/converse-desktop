@@ -5,13 +5,14 @@ const {app, BrowserWindow, Tray} = require('electron')
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
 
+let tray = null;
 
 function initApp() {
-  const tray = new Tray('./images/icon.png')
+  tray = new Tray('./images/icon.png')
   tray.setToolTip('Chimeverse')
-  createWindow()
-
+  createWindow();
   tray.on('click', function() {
+    hideEnvelope();
     mainWindow.show();
   });
 }
@@ -40,6 +41,7 @@ function createWindow () {
     mainWindow = null
   })
 
+
   mainWindow.webContents.openDevTools();
 }
 
@@ -63,3 +65,13 @@ app.on('activate', function () {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+
+function showEnvelope() {
+  tray.setImage('./images/envelope.png')
+}
+
+function hideEnvelope() {
+  tray.setImage('./images/icon.png')
+}
+
+exports.showEnvelope = showEnvelope;
