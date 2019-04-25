@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="node_modules/uikit/dist/css/uikit.min.css">
   </head>
   <body ng-app="app">
-    <!-- Account form -->
     <div class="main-window" ng-controller="AppController">
+      <!-- Account form -->
       <div ng-hide="loginExist" class="uk-section uk-section-muted uk-flex uk-flex-middle uk-animation-fade" uk-height-viewport ng-controller="LoginController">
         <div class="uk-width-1-1">
           <div class="uk-container">
@@ -48,8 +48,13 @@
             </div>
           </div>
         </div>
+        <!-- /Account form -->
+        <!-- Background and settings -->
+        <div ng-show="loginExist" class="uk-position-center">
+          <h3 class="uk-text-center">Chimeverse</h3>
+        </div>
       </div>
-      <!-- /Account form -->
+
     </div>
 
     <script src="node_modules/uikit/dist/js/uikit.min.js"></script>

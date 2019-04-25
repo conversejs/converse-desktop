@@ -39,14 +39,12 @@ angApp.controller('AppController', function ($scope) {
                         //_converse.api.archive.query({'with': 'admin2@localhost'});
                         $scope.playAudio();
                         showEnvelope();
-                        console.log(data);
                     });
                   });
                 }
               });
 
             var lang = navigator.language;
-
             converse.initialize({
                 bosh_service_url: $scope.boshService,
                 view_mode: 'fullscreen',
