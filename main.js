@@ -8,7 +8,8 @@ let mainWindow
 let tray = null;
 
 function initApp() {
-  tray = new Tray('./images/icon.png')
+  let iconPath = __dirname + '/images/icon.png'
+  tray = new Tray(iconPath)
   tray.setToolTip('Chimeverse')
   createWindow();
   tray.on('click', function() {
@@ -79,11 +80,11 @@ app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required');
  * Export functions
  */
 function showEnvelope() {
-  tray.setImage('./images/envelope.png')
+  tray.setImage(__dirname + '/images/envelope.png')
 }
 
 function hideEnvelope() {
-  tray.setImage('./images/icon.png')
+  tray.setImage(__dirname + '/images/icon.png')
 }
 
 exports.showEnvelope = showEnvelope;
