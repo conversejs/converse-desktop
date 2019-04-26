@@ -17,7 +17,11 @@ A very basic integration of [Converse.js](https://conversejs.org/) and Electron.
 - Tray notifications
 - All the best from Converse.js like system notifications, MAM, OMEMO etc. See details on [Converse.js](https://conversejs.org/)
 
+#### Changelog
+
+See CHANGES.md
+
 #### Latest release binaries
-   - [Chimeverse-0.0.14.dmg](https://github.com/nick-denry/Chimeverse/releases/download/0.0.14/Chimeverse-0.0.14.dmg)
-   - [Chimeverse-0.0.14.dmg.zip](https://github.com/nick-denry/Chimeverse/releases/download/0.0.14/Chimeverse-0.0.14.dmg.zip)
+   - [Chimeverse-0.0.15-x64.dmg](https://github.com/nick-denry/Chimeverse/releases/download/0.0.15/Chimeverse-0.0.15-x64.dmg)
+   - [All releases](https://github.com/nick-denry/Chimeverse/releases)
 
