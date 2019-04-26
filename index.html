@@ -5,11 +5,12 @@
     <title>Chimeverse</title>
     <link rel="stylesheet" type="text/css" media="screen" href="node_modules/converse.js/css/converse.css">
     <link rel="stylesheet" href="node_modules/uikit/dist/css/uikit.min.css">
+    <style> .ng-cloak { display: none !important; } </style>
   </head>
   <body ng-app="app">
     <div class="main-window" ng-controller="AppController">
       <!-- Account form -->
-      <div ng-hide="loginExist" class="uk-section uk-section-muted uk-flex uk-flex-middle uk-animation-fade" uk-height-viewport ng-controller="LoginController">
+      <div ng-show="showLoginForm" class="uk-section uk-section-muted uk-flex uk-flex-middle uk-animation-fade ng-cloak" uk-height-viewport>
         <div class="uk-width-1-1">
           <div class="uk-container">
             <h3 class="uk-card-title uk-text-center">Welcome to Chimeverse</h3>
@@ -21,7 +22,7 @@
                     <div class="uk-margin">
                         <div class="uk-inline uk-width-1-1">
                           <span class="uk-form-icon" uk-icon="icon: link"></span>
-                          <input ng-model="boshService" class="uk-input uk-form-large" type="text" placeholder="Bosh service url" required>
+                          <input ng-model="bosh" class="uk-input uk-form-large" type="text" placeholder="Bosh service url" required>
                         </div>
                       </div>
                     <div class="uk-margin">
@@ -48,13 +49,19 @@
             </div>
           </div>
         </div>
-        <!-- /Account form -->
-        <!-- Background and settings -->
-        <div ng-show="loginExist" class="uk-position-center">
-          <h3 class="uk-text-center">Chimeverse</h3>
-        </div>
       </div>
-
+      <!-- /Account form -->
+      <!-- Background and settings -->
+      <div ng-show="!showLoginForm" class="uk-position-center ng-cloak">
+          <div class="uk-text-center">
+              <img src="images/logo.png" srcset="images/logo@2x.png 2x" alt="" />
+              <h3 class="uk-heading-small uk-text-muted uk-margin-remove">Chimeverse</h3>
+              <!--
+                TODO: Add next
+                <span ng-hide="showSpinner" class="uk-margin-small-right" uk-spinner="ratio: 2"></span>
+              -->
+          </div>
+        </div>
     </div>
 
     <script src="node_modules/uikit/dist/js/uikit.min.js"></script>

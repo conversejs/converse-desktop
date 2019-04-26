@@ -2,68 +2,185 @@
 // be executed in the renderer process for that window.
 // All of the Node.js APIs are available in this process.
 
-const keytar = require('keytar');
-const angular = require('angular');
-const settings = require('electron-settings');
+const angular = require('angular')
+
+var angApp = angular.module('app', [])
 
 
-var remote = require('electron').remote;
+angApp.factory('SettingsServise', () => {
 
-var angApp = angular.module('app', []);
+    const keytar = require('keytar')
+    const settings = require('electron-settings')
 
-angApp.controller('AppController', function ($scope) {
-    $scope.loginExist = false;
-    $scope.login = settings.get('login');
+    let settingsService = {}
 
-    $scope.playAudio = function() {
-        var audio = new Audio('sounds/graceful.ogg');
-        audio.play();
-    };
-
-    if ($scope.login) {
-        var showEnvelope = remote.require('./main').showEnvelope;
-        $scope.loginExist = true;
-        $scope.boshService = settings.get('bosh');
-        var xmppService = $scope.login.split('@').pop();
-        var password = keytar.getPassword(xmppService, $scope.login);
-        password.then((result) => {
-            $scope.password = result;
-            converse.plugins.add('chimeVerse', {
-                initialize: function() {
-                  var _converse = this._converse;
-                  Promise.all([
-                      _converse.api.waitUntil('rosterContactsFetched'),
-                      _converse.api.waitUntil('chatBoxesFetched')
-                  ]).then(function() {
-                    _converse.on('message', function (data) {
-                        //_converse.api.archive.query({'with': 'admin2@localhost'});
-                        $scope.playAudio();
-                        showEnvelope();
-                    });
-                  });
-                }
-              });
-
-            var lang = navigator.language;
-            converse.initialize({
-                bosh_service_url: $scope.boshService,
-                view_mode: 'fullscreen',
-                jid: $scope.login,
-                password: $scope.password,
-                auto_login: true,
-                whitelisted_plugins: ['chimeVerse'],
-                i18n: lang
-            });
-        });
+    settingsService.getCredentials = () => {
+        let credentials = {}
+        credentials.login = settings.get('login')
+        let promise = new Promise((resolve, reject) => {
+            if (credentials.login) {
+                credentials.bosh = settings.get('bosh')
+                credentials.xmppService = credentials.login.split('@').pop()
+                let password = keytar.getPassword(credentials.xmppService, credentials.login)
+                password.then((result) => {
+                    credentials.password = result
+                    resolve(credentials)
+                })
+            }
+            else {
+                reject(Error('No login stored'))
+            }
+        })
+        return promise
     }
-});
 
-angApp.controller('LoginController', function ($scope) {
+    settingsService.addCredentials = (bosh, login, password) => {
+        console.log('sdsad')
+        let xmppService = login.split('@').pop()
+        settings.set('bosh', bosh)
+        settings.set('login', login)
+        keytar.setPassword(xmppService, login, password)
+    }
+
+    settingsService.removeCredentials = (login) => {
+        let xmppService = login.split('@').pop()
+        passwordDelete = keytar.deletePassword(xmppService, login)
+        let promise = new Promise((resolve, reject) => {
+            passwordDelete.then((result) => {
+                settings.delete('login')
+                settings.delete('bosh')
+                resolve()
+            }, (error) => {
+                reject(error)
+            })
+        })
+        return promise
+    }
+
+    return settingsService
+})
+
+
+angApp.factory('SystemService', () => {
+
+    const remote = require('electron').remote
+
+    let systemService = {}
+
+    systemService.playAudio = () => {
+        var audio = new Audio('sounds/graceful.ogg')
+        audio.play()
+    }
+
+    systemService.showEnvelope = () => {
+        remote.require('./main').showEnvelope()
+    }
+
+    systemService.hideEnvelope = () => {
+        remote.require('./main').hideEnvelope()
+    }
+
+    systemService.reloadWindow = () => {
+        remote.getCurrentWindow().reload()
+    }
+
+    return systemService
+
+})
+
+
+angApp.factory('ChimeVerseService', (SettingsServise, SystemService) => {
+
+    let chimeverseService = {}
+
+    chimeverseService.settings = SettingsServise
+    chimeverseService.system = SystemService
+
+    console.log(chimeverseService.system)
+
+    chimeverseService._notifyMessage = (data) => {
+        if (data.message.attributes.sender === 'me') {
+            chimeverseService.system.hideEnvelope()
+            return ;
+        }
+        if (data.message.attributes.chat_state === 'active') {
+            chimeverseService.system.playAudio()
+            chimeverseService.system.showEnvelope()
+        }
+    }
+
+    chimeverseService.addChimeVersePluign = () => {
+        converse.plugins.add('chimeVerse', {
+            initialize: (event) => {
+                var _converse = event.properties._converse
+                Promise.all([
+                    _converse.api.waitUntil('rosterContactsFetched'),
+                    _converse.api.waitUntil('chatBoxesFetched')
+                ]).then(() => {
+                    _converse.api.listen.on('logout', () => {
+                        let credentials = SettingsServise.getCredentials()
+                        credentials.then((result) => {
+                            let remove = chimeverseService.settings.removeCredentials(result.login)
+                            remove.then(() => {
+                                chimeverseService.system.reloadWindow()
+                            })
+                        })
+                    })
+                    _converse.api.listen.on('messageAdded', (data) => {
+                        chimeverseService._notifyMessage(data)
+                    })
+                    _converse.api.listen.on('chatBoxFocused', () => {
+                        chimeverseService.system.hideEnvelope()
+                    })
+                })
+            }
+        })
+    }
+
+    chimeverseService.initConverse = (bosh, login, password) => {
+        chimeverseService.addChimeVersePluign()
+        let lang = navigator.language
+        converse.initialize({
+            bosh_service_url: bosh,
+            view_mode: 'fullscreen',
+            jid: login + '/chimeverse',
+            password: password,
+            auto_login: true,
+            whitelisted_plugins: ['chimeVerse'],
+            i18n: lang,
+            priority: 50,
+            debug: true,
+            auto_reconnect: true
+        })
+    }
+
+    return chimeverseService
+
+})
+
+
+angApp.controller('AppController', function ($scope, ChimeVerseService) {
+
+    $scope.showLoginForm = false
+
     $scope.addAccountAction = function() {
-        var xmppService = $scope.login.split('@').pop();
-        settings.set('bosh', $scope.boshService);
-        settings.set('login', $scope.login);
-        keytar.setPassword(xmppService, $scope.login, $scope.password);
-
+        ChimeVerseService.settings.addCredentials($scope.bosh, $scope.login, $scope.password)
+        $scope.showLoginForm = false
+        ChimeVerseService.initConverse($scope.bosh, $scope.login, $scope.password)
     }
-});
+
+    $scope.getCredentialsAndLogin = () => {
+        let credentials = ChimeVerseService.settings.getCredentials()
+        credentials.then((result) => {
+            console.log(credentials.bosh)
+            ChimeVerseService.initConverse(result.bosh, result.login, result.password)
+        }, (error) => {
+            console.log(error)
+            $scope.showLoginForm = true
+            $scope.$apply()
+        })
+    }
+
+    $scope.getCredentialsAndLogin()
+
+})
