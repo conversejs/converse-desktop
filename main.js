@@ -44,9 +44,7 @@ function createWindow () {
     // when you should delete the corresponding element.
     mainWindow = null
   })
-
-
-  mainWindow.webContents.openDevTools();
+  //mainWindow.webContents.openDevTools();
 }
 
 // This method will be called when Electron has finished
