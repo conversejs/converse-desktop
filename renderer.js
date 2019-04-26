@@ -72,11 +72,11 @@ angApp.factory('SystemService', () => {
     }
 
     systemService.showEnvelope = () => {
-        remote.require('./main').showEnvelope()
+        remote.require('./main').trayService.showEnvelope()
     }
 
     systemService.hideEnvelope = () => {
-        remote.require('./main').hideEnvelope()
+        remote.require('./main').trayService.hideEnvelope()
     }
 
     systemService.reloadWindow = () => {

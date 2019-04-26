@@ -1,24 +1,15 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow, Tray, shell} = require('electron')
+const {app, BrowserWindow, shell} = require('electron')
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
 
-let tray = null;
+// Require other app modules
+const trayService = require(__dirname+'/js/tray-service')
 
 function initApp() {
-  let iconPath = __dirname + '/images/icon.png'
-  tray = new Tray(iconPath)
-  tray.setToolTip('Chimeverse')
-  createWindow();
-  tray.on('click', function() {
-    hideEnvelope();
-    if (mainWindow === null) {
-      createWindow();
-    }
-    mainWindow.show();
-  });
+  createWindow()
 }
 
 function createWindow () {
@@ -34,6 +25,9 @@ function createWindow () {
   // and load the index.html of the app.
   mainWindow.loadFile('index.html')
 
+  // Init tray
+  trayService.initTray(mainWindow)
+
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
 
@@ -46,10 +40,10 @@ function createWindow () {
   })
 
   mainWindow.webContents.on('new-window', function(e, url) {
-    e.preventDefault();
-    shell.openExternal(url);
-  });
-  //mainWindow.webContents.openDevTools();
+    e.preventDefault()
+    shell.openExternal(url)
+  })
+  //mainWindow.webContents.openDevTools()
 }
 
 // This method will be called when Electron has finished
@@ -77,18 +71,10 @@ app.on('activate', function () {
 // code. You can also put them in separate files and require them here.
 
 // Allow to play audio automatically
-app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required');
+app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required')
 
 /**
  * Export functions
  */
-function showEnvelope() {
-  tray.setImage(__dirname + '/images/envelope.png')
-}
 
-function hideEnvelope() {
-  tray.setImage(__dirname + '/images/icon.png')
-}
-
-exports.showEnvelope = showEnvelope;
-exports.hideEnvelope = hideEnvelope;
+exports.trayService = trayService
