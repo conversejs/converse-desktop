@@ -35,7 +35,6 @@ angApp.factory('SettingsServise', () => {
     }
 
     settingsService.addCredentials = (bosh, login, password) => {
-        console.log('sdsad')
         let xmppService = login.split('@').pop()
         settings.set('bosh', bosh)
         settings.set('login', login)
@@ -96,8 +95,6 @@ angApp.factory('ChimeVerseService', (SettingsServise, SystemService) => {
     chimeverseService.settings = SettingsServise
     chimeverseService.system = SystemService
 
-    console.log(chimeverseService.system)
-
     chimeverseService._notifyMessage = (data) => {
         if (data.message.attributes.sender === 'me') {
             chimeverseService.system.hideEnvelope()
@@ -149,7 +146,7 @@ angApp.factory('ChimeVerseService', (SettingsServise, SystemService) => {
             whitelisted_plugins: ['chimeVerse'],
             i18n: lang,
             priority: 50,
-            debug: true,
+            //debug: true,
             auto_reconnect: true
         })
     }
@@ -172,10 +169,8 @@ angApp.controller('AppController', function ($scope, ChimeVerseService) {
     $scope.getCredentialsAndLogin = () => {
         let credentials = ChimeVerseService.settings.getCredentials()
         credentials.then((result) => {
-            console.log(credentials.bosh)
             ChimeVerseService.initConverse(result.bosh, result.login, result.password)
         }, (error) => {
-            console.log(error)
             $scope.showLoginForm = true
             $scope.$apply()
         })
