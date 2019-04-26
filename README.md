@@ -15,7 +15,7 @@ A very basic integration of [Converse.js](https://conversejs.org/) and Electron.
 - Permanent account storage
 - Tray icon
 - Tray notifications
-- All the best from Converse.js like system notifications, MAM, OMEMO etc. See details on [Converse.js](https://conversejs.org/)
+- All the best from Converse.js like system notifications, MAM, OMEMO etc. See details at [Converse.js](https://conversejs.org/)
 
 #### Changelog
 
