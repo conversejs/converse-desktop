@@ -7,6 +7,7 @@ let mainWindow
 
 // Require other app modules
 const trayService = require(__dirname+'/js/tray-service')
+const menuService = require(__dirname+'/js/menu-service')
 
 function initApp() {
     createWindow()
@@ -27,6 +28,9 @@ function createWindow () {
 
     // Init tray
     trayService.initTray(mainWindow)
+
+    // Init menu
+    menuService.createMenu()
 
     // Open the DevTools.
     // mainWindow.webContents.openDevTools()
