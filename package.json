@@ -1,24 +1,26 @@
 {
-  "name": "electron-quick-start",
-  "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "name": "Chimeverse",
+  "version": "0.0.14",
+  "description": "Jabber/XMPP client based on Converse.js and Electron",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
+    "Jabber",
+    "XMPP",
+    "Client",
+    "converse.js",
     "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
+    "Mac OS X"
   ],
   "author": "GitHub",
-  "license": "CC0-1.0",
+  "license": "GPL-3.0",
   "devDependencies": {
     "electron": "^4.1.4",
     "electron-builder": "^20.39.0",
+    "electron-packager": "^13.1.1",
     "electron-rebuild": "^1.8.4"
   },
   "dependencies": {
