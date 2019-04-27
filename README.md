@@ -19,7 +19,7 @@ A very basic integration of [Converse.js](https://conversejs.org/) and Electron.
 
 #### Changelog
 
-See CHANGES.md
+See [CHANGES.md](https://github.com/nick-denry/Chimeverse/blob/master/CHANGES.md)
 
 #### Latest release binaries
    - [Chimeverse-0.0.15-x64.dmg](https://github.com/nick-denry/Chimeverse/releases/download/0.0.15/Chimeverse-0.0.15-x64.dmg)
