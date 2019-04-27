@@ -6,7 +6,9 @@ const {app, Menu} = require('electron')
 
 let menuService = {}
 
+
 menuService.createMenu = () => {
+
     const application = {
         label: 'Chimeverse',
         submenu: [

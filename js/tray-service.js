@@ -30,5 +30,3 @@ trayService.hideEnvelope = () => {
 }
 
 module.exports = trayService
-
-
