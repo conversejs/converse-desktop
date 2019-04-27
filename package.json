@@ -1,6 +1,6 @@
 {
   "name": "Chimeverse",
-  "version": "0.0.14",
+  "version": "0.0.16",
   "description": "Jabber/XMPP client based on Converse.js and Electron",
   "main": "main.js",
   "scripts": {

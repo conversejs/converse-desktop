@@ -88,7 +88,7 @@ angApp.factory('SystemService', () => {
 })
 
 
-angApp.factory('ChimeVerseService', (SettingsServise, SystemService) => {
+angApp.factory('ChimeVerseService', ($rootScope, SettingsServise, SystemService) => {
 
     let chimeverseService = {}
 
@@ -114,6 +114,9 @@ angApp.factory('ChimeVerseService', (SettingsServise, SystemService) => {
                     _converse.api.waitUntil('rosterContactsFetched'),
                     _converse.api.waitUntil('chatBoxesFetched')
                 ]).then(() => {
+                    _converse.once('contactPresenceChanged', (data) => {
+                        $rootScope.$broadcast('ChimeVerseService:connected')
+                    })
                     _converse.api.listen.on('logout', () => {
                         let credentials = SettingsServise.getCredentials()
                         credentials.then((result) => {
@@ -146,7 +149,7 @@ angApp.factory('ChimeVerseService', (SettingsServise, SystemService) => {
             whitelisted_plugins: ['chimeVerse'],
             i18n: lang,
             priority: 50,
-            //debug: true,
+            // debug: true,
             auto_reconnect: true
         })
     }
@@ -156,11 +159,17 @@ angApp.factory('ChimeVerseService', (SettingsServise, SystemService) => {
 })
 
 
-angApp.controller('AppController', function ($scope, ChimeVerseService) {
+angApp.controller('AppController', function ($scope, $rootScope, ChimeVerseService) {
 
     $scope.showLoginForm = false
+    $scope.connectSpinner = true
 
-    $scope.addAccountAction = function() {
+    $rootScope.$on('ChimeVerseService:connected', function () {
+        $scope.connectSpinner = false
+        $scope.$apply()
+    })
+
+    $scope.addAccountAction = () => {
         ChimeVerseService.settings.addCredentials($scope.bosh, $scope.login, $scope.password)
         $scope.showLoginForm = false
         ChimeVerseService.initConverse($scope.bosh, $scope.login, $scope.password)
