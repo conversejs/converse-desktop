@@ -2,7 +2,7 @@
  * Module for Menu functions.
  */
 
-const {app, Menu} = require('electron')
+const {app, Menu, BrowserWindow} = require('electron')
 
 let menuService = {}
 
@@ -12,6 +12,25 @@ menuService.createMenu = () => {
     const application = {
         label: 'Chimeverse',
         submenu: [
+            {
+                label: 'Reconnect',
+                accelerator: 'CmdOrCtrl+R',
+                click: () => {
+                    let activeWindow = BrowserWindow.getFocusedWindow()
+                    activeWindow.reload()
+                }
+            },
+            {
+                label: 'Force logout',
+                accelerator: 'CmdOrCtrl+D',
+                click: () => {
+                    let activeWindow = BrowserWindow.getFocusedWindow()
+                    activeWindow.webContents.send('force-logout-event');
+                }
+            },
+            {
+                type: 'separator',
+            },
             {
                 label: 'Quit',
                 accelerator: 'Command+Q',
@@ -35,9 +54,7 @@ menuService.createMenu = () => {
                 accelerator: 'Shift+CmdOrCtrl+Z',
                 role: 'redo',
             },
-            {
-                type: 'separator',
-            },
+
             {
                 label: 'Cut',
                 accelerator: 'CmdOrCtrl+X',

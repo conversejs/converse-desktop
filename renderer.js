@@ -106,6 +106,16 @@ angApp.factory('ChimeVerseService', ($rootScope, SettingsServise, SystemService)
         }
     }
 
+    chimeverseService.logout = () => {
+        let credentials = SettingsServise.getCredentials()
+        credentials.then((result) => {
+            let remove = chimeverseService.settings.removeCredentials(result.login)
+            remove.then(() => {
+                chimeverseService.system.reloadWindow()
+            })
+        })
+    }
+
     chimeverseService.addChimeVersePluign = () => {
         converse.plugins.add('chimeVerse', {
             initialize: (event) => {
@@ -118,13 +128,7 @@ angApp.factory('ChimeVerseService', ($rootScope, SettingsServise, SystemService)
                         $rootScope.$broadcast('ChimeVerseService:connected')
                     })
                     _converse.api.listen.on('logout', () => {
-                        let credentials = SettingsServise.getCredentials()
-                        credentials.then((result) => {
-                            let remove = chimeverseService.settings.removeCredentials(result.login)
-                            remove.then(() => {
-                                chimeverseService.system.reloadWindow()
-                            })
-                        })
+                        chimeverseService.logout()
                     })
                     _converse.api.listen.on('messageAdded', (data) => {
                         chimeverseService._notifyMessage(data)
@@ -161,8 +165,15 @@ angApp.factory('ChimeVerseService', ($rootScope, SettingsServise, SystemService)
 
 angApp.controller('AppController', function ($scope, $rootScope, ChimeVerseService) {
 
+    const { ipcRenderer } = require('electron');
+
     $scope.showLoginForm = false
     $scope.connectSpinner = true
+
+    ipcRenderer.on('force-logout-event', () => {
+        ChimeVerseService.logout()
+        ipcRenderer.getCurrentWindow().reload()
+    })
 
     $rootScope.$on('ChimeVerseService:connected', function () {
         $scope.connectSpinner = false

@@ -6,8 +6,8 @@ const {app, BrowserWindow, shell} = require('electron')
 let mainWindow
 
 // Require other app modules
-const trayService = require(__dirname+'/js/tray-service')
-const menuService = require(__dirname+'/js/menu-service')
+const trayService = require(__dirname+'/modules/tray-service')
+const menuService = require(__dirname+'/modules/menu-service')
 
 function initApp() {
     createWindow()
@@ -33,7 +33,7 @@ function createWindow () {
     menuService.createMenu()
 
     // Open the DevTools.
-    // mainWindow.webContents.openDevTools()
+    mainWindow.webContents.openDevTools()
 
     // Emitted when the window is closed.
     mainWindow.on('closed', function () {
