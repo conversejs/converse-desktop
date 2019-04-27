@@ -2,7 +2,7 @@
 
 #### Jabber/XMPP client based on Converse.js and Electron
 
-It should happen once.   
+It should happen once.
 A very basic integration of [Converse.js](https://conversejs.org/) and Electron. With OMEMO.
 
 #### Screenshots and feautures
@@ -25,3 +25,12 @@ See [CHANGES.md](https://github.com/nick-denry/Chimeverse/blob/master/CHANGES.md
    - [Chimeverse-0.0.15-x64.dmg](https://github.com/nick-denry/Chimeverse/releases/download/0.0.15/Chimeverse-0.0.15-x64.dmg)
    - [All releases](https://github.com/nick-denry/Chimeverse/releases)
 
+#### Run with npm
+
+```
+git clone https://github.com/nick-denry/Chimeverse.git
+cd Chimeverse
+npm i
+$(npm bin)/electron-rebuild
+npm start
+```
