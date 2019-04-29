@@ -6,7 +6,7 @@
   "scripts": {
     "start": "electron ."
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "https://github.com/nick-denry/Chimeverse",
   "keywords": [
     "Jabber",
     "XMPP",
