@@ -16,7 +16,7 @@
     "Mac OS X",
     "OMEMO"
   ],
-  "author": "GitHub",
+  "author": "Nick Denry",
   "license": "GPL-3.0",
   "devDependencies": {
     "electron": "^4.1.4",
