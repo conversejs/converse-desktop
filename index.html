@@ -5,7 +5,6 @@
     <title>Chimeverse</title>
     <link rel="stylesheet" type="text/css" media="screen" href="node_modules/converse.js/css/converse.css">
     <link rel="stylesheet" type="text/css" href="node_modules/uikit/dist/css/uikit.min.css">
-    <link rel="stylesheet" type="text/css" href="css/spinner.css">
     <link rel="stylesheet" type="text/css" href="css/app.css">
   </head>
   <body ng-app="app">
@@ -57,14 +56,7 @@
           <div class="uk-text-center">
               <img src="images/logo.png" srcset="images/logo@2x.png 2x" alt="" />
               <h3 class="uk-heading-small uk-text-muted uk-margin-remove">Chimeverse</h3>
-              <div ng-show="connectSpinner">
-                <div class="spinner">
-                  <div class="bounce1"></div>
-                  <div class="bounce2"></div>
-                  <div class="bounce3"></div>
-                </div>
-              </div>
-              <div ng-show="!connectSpinner" class="uk-text-small uk-text-muted">0.0.16</div>
+              <div class="uk-text-small uk-text-muted">0.0.16</div>
           </div>
         </div>
     </div>

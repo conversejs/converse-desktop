@@ -88,7 +88,7 @@ angApp.factory('SystemService', () => {
 })
 
 
-angApp.factory('ChimeVerseService', ($rootScope, SettingsServise, SystemService) => {
+angApp.factory('ChimeVerseService', (SettingsServise, SystemService) => {
 
     let chimeverseService = {}
 
@@ -124,9 +124,6 @@ angApp.factory('ChimeVerseService', ($rootScope, SettingsServise, SystemService)
                     _converse.api.waitUntil('rosterContactsFetched'),
                     _converse.api.waitUntil('chatBoxesFetched')
                 ]).then(() => {
-                    _converse.once('contactPresenceChanged', (data) => {
-                        $rootScope.$broadcast('ChimeVerseService:connected')
-                    })
                     _converse.api.listen.on('logout', () => {
                         chimeverseService.logout()
                     })
@@ -163,21 +160,15 @@ angApp.factory('ChimeVerseService', ($rootScope, SettingsServise, SystemService)
 })
 
 
-angApp.controller('AppController', function ($scope, $rootScope, ChimeVerseService) {
+angApp.controller('AppController', function ($scope, ChimeVerseService) {
 
     const { ipcRenderer } = require('electron');
 
     $scope.showLoginForm = false
-    $scope.connectSpinner = true
 
     ipcRenderer.on('force-logout-event', () => {
         ChimeVerseService.logout()
         ipcRenderer.getCurrentWindow().reload()
-    })
-
-    $rootScope.$on('ChimeVerseService:connected', function () {
-        $scope.connectSpinner = false
-        $scope.$apply()
     })
 
     $scope.addAccountAction = () => {
