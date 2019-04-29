@@ -1,3 +1,7 @@
+## 0.0.16 (2019-04-29)
+
+- Add app menu entries for reconnect and force logout
+
 ## 0.0.15 (2019-04-26)
 
 - Bugfix: Open external links with system default browser
