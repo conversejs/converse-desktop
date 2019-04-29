@@ -1,5 +1,5 @@
 {
-  "name": "Chimeverse",
+  "name": "chimeverse",
   "version": "0.0.16",
   "description": "Jabber/XMPP client based on Converse.js and Electron",
   "main": "main.js",
@@ -13,7 +13,8 @@
     "Client",
     "converse.js",
     "Electron",
-    "Mac OS X"
+    "Mac OS X",
+    "OMEMO"
   ],
   "author": "GitHub",
   "license": "GPL-3.0",
