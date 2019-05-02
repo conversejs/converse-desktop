@@ -2,6 +2,13 @@
 
 #### Jabber/XMPP client based on Converse.js and Electron
 
+![Version](https://img.shields.io/npm/v/chimeverse/latest.svg)
+![Downloads](https://img.shields.io/npm/dt/chimeverse.svg)
+![License](https://img.shields.io/npm/l/chimeverse.svg)
+<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6MZ5YRYEDSVSQ&source=url" title="Donate once-off to this project using Paypal">
+        <img src="https://img.shields.io/badge/paypal-donate-yellow.svg" alt="PayPayl donate button" />
+    </a>
+
 It should happen once.
 A very basic integration of [Converse.js](https://conversejs.org/) and Electron. With OMEMO.
 
