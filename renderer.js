@@ -162,7 +162,7 @@ angApp.factory('ChimeVerseService', (SettingsServise, SystemService) => {
 
 angApp.controller('AppController', function ($scope, ChimeVerseService) {
 
-    const { ipcRenderer } = require('electron');
+    const { ipcRenderer } = require('electron')
 
     $scope.showLoginForm = false
 
