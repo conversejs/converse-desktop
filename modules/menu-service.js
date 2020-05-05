@@ -32,6 +32,17 @@ menuService.createMenu = () => {
                 type: 'separator',
             },
             {
+                label: 'Preferences',
+                accelerator: 'CmdOrCtrl+,',
+                click: () => {
+                    let activeWindow = BrowserWindow.getFocusedWindow()
+                    activeWindow.webContents.send('preferences-event');
+                }
+            },
+            {
+                type: 'separator',
+            },
+            {
                 label: 'Quit',
                 accelerator: 'Command+Q',
                 click: () => {
