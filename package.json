@@ -1,6 +1,6 @@
 {
   "name": "chimeverse",
-  "version": "0.0.16-npmfix",
+  "version": "0.1.52",
   "description": "Jabber/XMPP client based on Converse.js and Electron",
   "main": "main.js",
   "scripts": {
@@ -19,16 +19,18 @@
   "author": "Nick Denry",
   "license": "GPL-3.0",
   "devDependencies": {
-    "electron": "^4.1.4",
-    "electron-builder": "^20.39.0",
+    "electron": "^4.2.12",
+    "electron-builder": "^20.44.4",
     "electron-packager": "^13.1.1",
-    "electron-rebuild": "^1.8.4"
+    "electron-rebuild": "^1.10.1"
   },
   "dependencies": {
-    "angular": "^1.7.8",
-    "converse.js": "^4.2.0",
+    "angular": "^1.7.9",
+    "angular-route": "^1.7.9",
+    "converse.js": "^6.0.0",
     "electron-settings": "^3.2.0",
-    "keytar": "^4.4.1",
-    "uikit": "^3.1.4"
+    "keytar": "^4.13.0",
+    "n": "^6.5.1",
+    "uikit": "^3.4.2"
   }
 }
