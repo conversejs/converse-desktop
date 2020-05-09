@@ -1,0 +1,32 @@
+<div class="login-form">
+    <h3 class="login-form__title">Welcome to Chimeverse</h3>
+    <div class="login-form__description">Jabber/XMPP client based on Converse.js and Electron</div>
+    <div class="login-form__card">
+        <form name="accountForm" ng-controller="LoginController">
+            <div class="login-form__wrapper">
+                <div class="login-form__input-group">
+                    <span class="oi" data-glyph="link-intact"></span>
+                    <input ng-model="bosh" class="login-form__input" type="text" placeholder="Bosh service url" required>
+                </div>
+            </div>
+            <div class="login-form__wrapper">
+                <div class="login-form__input-group">
+                    <span class="oi" data-glyph="person"></span>
+                    <input ng-model="login" class="login-form__input" type="text" placeholder="jid@jabber.org" required>
+                </div>
+            </div>
+            <div class="login-form__wrapper">
+                <div class="login-form__input-group">
+                    <span class="oi" data-glyph="lock-locked"></span>
+                    <input ng-model="password" class="login-form__input" type="password" placeholder="Password" required>
+                </div>
+            </div>
+            <div class="login-form__wrapper">
+                <button class="login-form__button" ng-click="addAccountAndLoginAction()" ng-disabled="accountForm.$invalid" disabled>Add account</button>
+            </div>
+            <div class="uk-text-small uk-text-center">
+            Credentials stored via Keychain
+            </div>
+        </form>
+    </div>
+</div>

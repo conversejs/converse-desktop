@@ -19,7 +19,6 @@ angApp.factory('ChimeVerseService', ($window, SettingsServise, SystemService, Ap
             let remove = SettingsServise.removeCredentials(result.login)
             console.log('Remove credential on logout')
             remove.then(() => {
-                console.log('Switch to the login state')
                 AppStateService.set(AppStateService.APP_STATE_LOGIN)
             })
         })

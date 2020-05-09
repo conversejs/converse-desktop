@@ -20,6 +20,7 @@ angApp.controller('AppController', function ($scope, $timeout, ChimeVerseService
     const { ipcRenderer } = require('electron')
 
     ipcRenderer.on('force-logout-event', () => {
+        ChimeVerseService.logout()
         let event = new CustomEvent("converse-force-logout") // Dispatch to the plugin
         document.dispatchEvent(event)
         //remote.getCurrentWindow().reload()
@@ -31,7 +32,7 @@ angApp.controller('AppController', function ($scope, $timeout, ChimeVerseService
         // @see https://docs.angularjs.org/error/$rootScope/inprog
         $timeout(() => {
             $scope.state = data
-            console.log($scope.state)
+            console.log('Switch to the "' + $scope.state +'" state')
         }, 0)
     });
 

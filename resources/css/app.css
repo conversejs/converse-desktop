@@ -12,6 +12,8 @@
 
 body {
     background: #f8f8f8;
+	font: normal 14px/20px "Helvetica Neue",Helvetica,Arial,sans-serif;
+	-webkit-text-size-adjust: 100%;
 }
 
 .main-background {
