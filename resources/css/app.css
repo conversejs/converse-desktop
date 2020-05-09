@@ -1,0 +1,33 @@
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
+
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none;   /* Safari */
+    -khtml-user-select: none;    /* Konqueror HTML */
+    user-select: none;           /* Non-prefixed version, currently
+                                    supported by Chrome and Opera */
+}
+
+body {
+    background: #f8f8f8;
+}
+
+.main-background {
+    background: #f8f8f8;
+    height: 100%;
+    left: 0px;
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    z-index: -1;
+}
+
+.conversejs-adoption {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+}

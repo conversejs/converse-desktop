@@ -11,7 +11,7 @@ let trayService = {}
 
 trayService.initTray = (window) => {
     trayServiceWindow = window
-    let iconPath = __dirname + '/../images/icon.png'
+    let iconPath = __dirname + '/../resources/images/icon.png'
     tray = new Tray(iconPath)
     tray.setToolTip('Chimeverse')
 
@@ -22,11 +22,11 @@ trayService.initTray = (window) => {
 }
 
 trayService.showEnvelope = () => {
-    tray.setImage(__dirname + '/../images/envelope.png')
+    tray.setImage(__dirname + '/../resources/images/envelope.png')
 }
 
 trayService.hideEnvelope = () => {
-    tray.setImage(__dirname + '/../images/icon.png')
+    tray.setImage(__dirname + '/../resources/images/icon.png')
 }
 
 module.exports = trayService

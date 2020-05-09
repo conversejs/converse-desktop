@@ -26,11 +26,9 @@
   },
   "dependencies": {
     "angular": "^1.7.9",
-    "angular-route": "^1.7.9",
     "converse.js": "^6.0.0",
     "electron-settings": "^3.2.0",
     "keytar": "^4.13.0",
-    "n": "^6.5.1",
-    "uikit": "^3.4.2"
+    "n": "^6.5.1"
   }
 }
