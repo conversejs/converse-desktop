@@ -7,7 +7,7 @@ angApp.factory('SystemService', () => {
     let systemService = {}
 
     systemService.playAudio = () => {
-        var audio = new Audio(__dirname + '/sounds/graceful.ogg')
+        var audio = new Audio(__dirname + '/../../resources/sounds/graceful.ogg')
         audio.play()
     }
 

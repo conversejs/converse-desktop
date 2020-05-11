@@ -11,6 +11,7 @@ require('./app/services/chimeverse-service')
 require('./app/controllers/settings-controller')
 require('./app/controllers/login-controller')
 require('./app/controllers/default-controller')
+require('./app/controllers/about-controller')
 const chimeversePlugin = require('./libs/converse.js/3rdparty/chimeverse-plugin')
 chimeversePlugin.register()
 
@@ -19,15 +20,20 @@ angApp.controller('AppController', function ($scope, $timeout, ChimeVerseService
     //const { remote, ipcRenderer } = require('electron')
     const { ipcRenderer } = require('electron')
 
+    // Menu force logout event
     ipcRenderer.on('force-logout-event', () => {
         ChimeVerseService.logout()
         let event = new CustomEvent("converse-force-logout") // Dispatch to the plugin
         document.dispatchEvent(event)
         //remote.getCurrentWindow().reload()
     })
-
+    // Menu settings event
     ipcRenderer.on('preferences-event', () => {
         AppStateService.set(AppStateService.APP_STATE_SETTINGS)
+    })
+    // Menu about event
+    ipcRenderer.on('about-page-event', () => {
+        AppStateService.set(AppStateService.APP_STATE_ABOUT)
     })
 
     $scope.state = AppStateService.APP_STATE_DEFAULT

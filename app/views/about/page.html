@@ -1,0 +1,32 @@
+<div class="page-about" ng-controller="AboutController">
+    <div class="about-card">
+        <div class="about-card__content">
+            <div class="about-card__logo">
+                <img src="./resources/images/logo.png" srcset="./resources/images/logo@2x.png 2x" alt=""
+                    class="chimeverse-branding__img" />
+            </div>
+            <div class="about-card__description">
+                <h3 class="about__title">About Chimeverse v.0.1.52</h3>
+                <div class="about__description">Jabber/XMPP client based on Converse.js and Electron</div>
+                <div>&nbsp;</div>
+                <div class="about__converse-version">
+                    Version of <a href="https://conversejs.org/" target="_blank">converse.js</a> is 6.0.1
+                </div>
+                <div>&nbsp;</div>
+                <div class="about__thanks">
+                    Thanks to
+                    <a href="https://github.com/nick-denry/Chimeverse/graphs/contributors" target="_blank">all contributors</a>
+                </div>
+                <div>&nbsp;</div>
+            </div>
+        </div>
+
+        <div class="about__action">
+            <button class="about__close-button" ng-click="closeAbout()">OK</button>
+        </div>
+        <div>&nbsp;</div>
+        <div class="about__copyright">Copyright &copy; 2019-2020 Nick Denry</div>
+    </div>
+</div>
+
+<ng-include src="'./app/views/shared/_footer.html'"></ng-include>

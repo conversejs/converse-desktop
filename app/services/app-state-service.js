@@ -7,8 +7,10 @@ angApp.factory('AppStateService', [ '$rootScope', ($rootScope) => {
     stateService.APP_STATE_LOGIN = 'login'
     stateService.APP_STATE_DEFAULT = 'default'
     stateService.APP_STATE_SETTINGS = 'settings'
+    stateService.APP_STATE_ABOUT = 'about'
 
     stateService.set = (state) => {
+        stateService.previousState = stateService.state
         stateService.state = state
         $rootScope.$broadcast('app:state:changed', stateService.state);
     }

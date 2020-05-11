@@ -13,6 +13,13 @@ menuService.createMenu = () => {
         label: 'Chimeverse',
         submenu: [
             {
+                label: 'About Chimeverse',
+                click: () => {
+                    let activeWindow = BrowserWindow.getFocusedWindow()
+                    activeWindow.webContents.send('about-page-event');
+                }
+            },
+            {
                 label: 'Reconnect',
                 accelerator: 'CmdOrCtrl+R',
                 click: () => {
