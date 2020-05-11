@@ -43,6 +43,7 @@ function createWindow () {
         mainWindow = null
     })
 
+    // Open links on system default browser
     mainWindow.webContents.on('new-window', function(e, url) {
         e.preventDefault()
         shell.openExternal(url)

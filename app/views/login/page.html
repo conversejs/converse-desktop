@@ -6,27 +6,31 @@
             <div class="login-form__wrapper">
                 <div class="login-form__input-group">
                     <span class="oi" data-glyph="link-intact"></span>
-                    <input ng-model="bosh" class="login-form__input" type="text" placeholder="Bosh service url" required>
+                    <input ng-model="credentials.bosh" class="login-form__input" type="text" placeholder="Bosh service url" required>
                 </div>
             </div>
             <div class="login-form__wrapper">
                 <div class="login-form__input-group">
                     <span class="oi" data-glyph="person"></span>
-                    <input ng-model="login" class="login-form__input" type="text" placeholder="jid@jabber.org" required>
+                    <input ng-model="credentials.login" class="login-form__input" type="text" placeholder="jid@jabber.org" required>
                 </div>
             </div>
             <div class="login-form__wrapper">
                 <div class="login-form__input-group">
                     <span class="oi" data-glyph="lock-locked"></span>
-                    <input ng-model="password" class="login-form__input" type="password" placeholder="Password" required>
+                    <input ng-model="credentials.password" class="login-form__input" type="password" placeholder="Password" required>
                 </div>
             </div>
             <div class="login-form__wrapper">
                 <button class="login-form__button" ng-click="addAccountAndLoginAction()" ng-disabled="accountForm.$invalid" disabled>Add account</button>
             </div>
-            <div class="uk-text-small uk-text-center">
-            Credentials stored via Keychain
+            <div class="login-form__credentials-message">
+                Credentials stored via <a href="https://atom.github.io/node-keytar/" target="_blank">Keychain</a>
             </div>
         </form>
     </div>
+</div>
+<div class="login-form__footer">
+    <span class="footer__version">Chimeverse v0.1.52.</span>
+    <a class="github-button" href="https://github.com/nick-denry/Chimeverse" data-icon="octicon-star" aria-label="Star nick-denry/Chimeverse on GitHub">Star</a>
 </div>

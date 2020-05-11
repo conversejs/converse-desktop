@@ -1,6 +1,6 @@
 let angApp = require(__dirname+'/../init')
 
-angApp.factory('SettingsServise', () => {
+angApp.factory('CredentialsServise', () => {
 
     const keytar = require('keytar')
     const settings = require('electron-settings')

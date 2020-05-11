@@ -1,6 +1,6 @@
 let angApp = require(__dirname + '/../init')
 
-angApp.factory('ChimeVerseService', ($window, SettingsServise, SystemService, AppStateService) => {
+angApp.factory('ChimeVerseService', ($window, CredentialsServise, SystemService, AppStateService) => {
 
     let chimeverseService = {}
 
@@ -14,9 +14,9 @@ angApp.factory('ChimeVerseService', ($window, SettingsServise, SystemService, Ap
     }
 
     chimeverseService.logout = () => {
-        let credentials = SettingsServise.getCredentials()
+        let credentials = CredentialsServise.getCredentials()
         credentials.then((result) => {
-            let remove = SettingsServise.removeCredentials(result.login)
+            let remove = CredentialsServise.removeCredentials(result.login)
             console.log('Remove credential on logout')
             remove.then(() => {
                 AppStateService.set(AppStateService.APP_STATE_LOGIN)

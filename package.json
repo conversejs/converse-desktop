@@ -28,6 +28,7 @@
     "angular": "^1.7.9",
     "converse.js": "^6.0.0",
     "electron-settings": "^3.2.0",
+    "github-buttons": "^2.8.0",
     "keytar": "^4.13.0",
     "n": "^6.5.1",
     "open-iconic": "^1.1.1"

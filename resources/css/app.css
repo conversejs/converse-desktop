@@ -16,6 +16,10 @@ body {
 	-webkit-text-size-adjust: 100%;
 }
 
+a {
+    color: #777;
+}
+
 .main-background {
     background: #f8f8f8;
     height: 100%;

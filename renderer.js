@@ -4,7 +4,7 @@
 
 var angApp = require('./app/init')
 
-require('./app/services/settings-service')
+require('./app/services/credentials-service')
 require('./app/services/system-service')
 require('./app/services/app-state-service')
 require('./app/services/chimeverse-service')
@@ -14,7 +14,7 @@ require('./app/controllers/default-controller')
 const chimeversePlugin = require('./libs/converse.js/3rdparty/chimeverse-plugin')
 chimeversePlugin.register()
 
-angApp.controller('AppController', function ($scope, $timeout, ChimeVerseService, SettingsServise, AppStateService) {
+angApp.controller('AppController', function ($scope, $timeout, ChimeVerseService, CredentialsServise, AppStateService) {
 
     //const { remote, ipcRenderer } = require('electron')
     const { ipcRenderer } = require('electron')
@@ -24,6 +24,10 @@ angApp.controller('AppController', function ($scope, $timeout, ChimeVerseService
         let event = new CustomEvent("converse-force-logout") // Dispatch to the plugin
         document.dispatchEvent(event)
         //remote.getCurrentWindow().reload()
+    })
+
+    ipcRenderer.on('preferences-event', () => {
+        AppStateService.set(AppStateService.APP_STATE_SETTINGS)
     })
 
     $scope.state = AppStateService.APP_STATE_DEFAULT
@@ -37,7 +41,7 @@ angApp.controller('AppController', function ($scope, $timeout, ChimeVerseService
     });
 
     $scope.getCredentialsAndLogin = () => {
-        let credentials = SettingsServise.getCredentials()
+        let credentials = CredentialsServise.getCredentials()
         credentials.then((result) => {
             ChimeVerseService.initConverse(result.bosh, result.login, result.password)
         }, (error) => {
