@@ -5,9 +5,9 @@ angApp.factory('CredentialsServise', () => {
     const keytar = require('keytar')
     const settings = require('electron-settings')
 
-    let settingsService = {}
+    let credentialsService = {}
 
-    settingsService.getCredentials = () => {
+    credentialsService.getCredentials = () => {
         let credentials = {}
         credentials.login = settings.get('login')
         let promise = new Promise((resolve, reject) => {
@@ -27,14 +27,14 @@ angApp.factory('CredentialsServise', () => {
         return promise
     }
 
-    settingsService.addCredentials = (bosh, login, password) => {
+    credentialsService.addCredentials = (bosh, login, password) => {
         let xmppService = login.split('@').pop()
         settings.set('bosh', bosh)
         settings.set('login', login)
         keytar.setPassword(xmppService, login, password)
     }
 
-    settingsService.removeCredentials = (login) => {
+    credentialsService.removeCredentials = (login) => {
         let xmppService = login.split('@').pop()
         passwordDelete = keytar.deletePassword(xmppService, login)
         let promise = new Promise((resolve, reject) => {
@@ -49,6 +49,6 @@ angApp.factory('CredentialsServise', () => {
         return promise
     }
 
-    return settingsService
+    return credentialsService
 })
 

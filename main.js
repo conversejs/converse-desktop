@@ -1,5 +1,7 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow, shell} = require('electron')
+const { app, BrowserWindow, shell } = require('electron')
+
+const electronSettings = require('electron-settings')
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -14,14 +16,41 @@ function initApp() {
 }
 
 function createWindow () {
-    // Create the browser window.
-    mainWindow = new BrowserWindow({
+    // Main window options
+    let mainWindowOptions = {
         width: 800,
         height: 600,
+        minWidth: 780,
+        minHeight: 560,
         webPreferences: {
             nodeIntegration: true
         }
-    })
+    }
+
+    // Load app settings
+    let runMinimized = electronSettings.get('runMinimized')
+    if (typeof runMinimized !== 'undefined') {
+        mainWindowOptions.show = !runMinimized
+    }
+    let minimizeOnClose = electronSettings.get('minimizeOnClose')
+    let preserveWindowSize = electronSettings.get('preserveWindowSize')
+    if (preserveWindowSize) {
+        let width = electronSettings.get('windowWidth')
+        let height = electronSettings.get('windowHeight')
+        if (typeof width !== 'undefined') mainWindowOptions.width = width
+        if (typeof height !== 'undefined') mainWindowOptions.height = height
+    }
+
+    let preserveWindowPosition = electronSettings.get('preserveWindowPosition')
+    if (preserveWindowPosition !== 'undefined') {
+        let windowX = electronSettings.get('windowX')
+        let windowY = electronSettings.get('windowY')
+        if (typeof windowX !== 'undefined') mainWindowOptions.x = windowX
+        if (typeof windowY !== 'undefined') mainWindowOptions.y = windowY
+    }
+
+    // Create the browser window.
+    mainWindow = new BrowserWindow(mainWindowOptions)
 
     // and load the index.html of the app.
     mainWindow.loadFile('index.html')
@@ -34,6 +63,39 @@ function createWindow () {
 
     // Open the DevTools.
     mainWindow.webContents.openDevTools()
+
+    // Before close
+    if (minimizeOnClose !== 'undefined') {
+        mainWindow.on('close', (e) => {
+            if (!app.isQuitting) {
+                e.preventDefault()
+                mainWindow.hide()
+            }
+        })
+    }
+
+    // Save window size
+    if (preserveWindowSize !== 'undefined') {
+        mainWindow.on('resize', (e) => {
+            let newSize = mainWindow.getSize()
+            let width = newSize[0]
+            let height = newSize[1]
+            electronSettings.set('windowWidth', width)
+            electronSettings.set('windowHeight', height)
+        })
+    }
+
+    // Save window position
+    if (preserveWindowPosition !== 'undefined') {
+        mainWindow.on('move', (e) => {
+            let newPosition = mainWindow.getPosition()
+            let windowX = newPosition[0]
+            let windowY = newPosition[1]
+            electronSettings.set('windowX', windowX)
+            electronSettings.set('windowY', windowY)
+        })
+    }
+
 
     // Emitted when the window is closed.
     mainWindow.on('closed', function () {

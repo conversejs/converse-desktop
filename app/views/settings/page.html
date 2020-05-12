@@ -1,0 +1,23 @@
+<div class="settings-page" ng-controller="SettingsController">
+    <form name="settignsForm">
+    <h3 class="settings-page__title">Chimeverse settings</h3>
+    <div class="form-item" ng-repeat="(key, item) in settings.chimeverse">
+        <label>
+            <input type="checkbox" name="{{key}}" ng-model="item.value" /> {{item.title}}
+        </label>
+        <div class="form-item__hint">{{item.hint}}</div>
+    </div>
+    <h3 class="settings-page__title">Converse.js settings</h3>
+    <div class="form-item" ng-repeat="(key, item) in settings.conversejs">
+        <label>
+            <input type="checkbox" name="{{key}}" ng-model="item.value" /> {{item.title}}
+        </label>
+        <div class="form-item__hint">{{item.hint}}</div>
+    </div>
+    <div class="form-actions">
+        <button class="form-item__save-button" ng-click="saveSettings()">Save</button>
+        <button class="form-item__cancel-button" ng-click="closeSettings()">Cancel</button>
+    </div>
+</form>
+</div>
+<ng-include src="'./app/views/shared/_footer.html'"></ng-include>

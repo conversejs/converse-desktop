@@ -5,6 +5,7 @@
 var angApp = require('./app/init')
 
 require('./app/services/credentials-service')
+require('./app/services/settings-service')
 require('./app/services/system-service')
 require('./app/services/app-state-service')
 require('./app/services/chimeverse-service')
@@ -15,7 +16,7 @@ require('./app/controllers/about-controller')
 const chimeversePlugin = require('./libs/converse.js/3rdparty/chimeverse-plugin')
 chimeversePlugin.register()
 
-angApp.controller('AppController', function ($scope, $timeout, ChimeVerseService, CredentialsServise, AppStateService) {
+angApp.controller('AppController', function ($scope, $timeout, ChimeVerseService, CredentialsServise, SettingsService, AppStateService) {
 
     //const { remote, ipcRenderer } = require('electron')
     const { ipcRenderer } = require('electron')
@@ -45,6 +46,8 @@ angApp.controller('AppController', function ($scope, $timeout, ChimeVerseService
             console.log('Switch to the "' + $scope.state +'" state')
         }, 0)
     });
+
+    SettingsService.initDefaults()
 
     $scope.getCredentialsAndLogin = () => {
         let credentials = CredentialsServise.getCredentials()

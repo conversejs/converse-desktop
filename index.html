@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="resources/css/page-about.css">
     <link rel="stylesheet" type="text/css" href="resources/css/page-default.css">
     <link rel="stylesheet" type="text/css" href="resources/css/page-login.css">
+    <link rel="stylesheet" type="text/css" href="resources/css/page-settings.css">
 </head>
 <base href="./">
 <body ng-app="app">
@@ -25,7 +26,7 @@
             <ng-include src="'./app/views/about/page.html'"></ng-include>
         </div>
         <div ng-show="state == 'settings'">
-            settings
+            <ng-include src="'./app/views/settings/page.html'"></ng-include>
         </div>
     </div>
     <!--

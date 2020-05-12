@@ -15,7 +15,10 @@ menuService.createMenu = () => {
             {
                 label: 'About Chimeverse',
                 click: () => {
-                    let activeWindow = BrowserWindow.getFocusedWindow()
+                    // @see https://github.com/electron/electron/issues/16558#issuecomment-484460276
+                    // let activeWindow = BrowserWindow.getFocusedWindow()
+                    let activeWindow = BrowserWindow.getAllWindows()[0]
+                    activeWindow.show()
                     activeWindow.webContents.send('about-page-event');
                 }
             },
@@ -23,7 +26,8 @@ menuService.createMenu = () => {
                 label: 'Reconnect',
                 accelerator: 'CmdOrCtrl+R',
                 click: () => {
-                    let activeWindow = BrowserWindow.getFocusedWindow()
+                    let activeWindow = BrowserWindow.getAllWindows()[0]
+                    activeWindow.show()
                     activeWindow.reload()
                 }
             },
@@ -31,7 +35,8 @@ menuService.createMenu = () => {
                 label: 'Force logout',
                 accelerator: 'CmdOrCtrl+D',
                 click: () => {
-                    let activeWindow = BrowserWindow.getFocusedWindow()
+                    let activeWindow = BrowserWindow.getAllWindows()[0]
+                    activeWindow.show()
                     activeWindow.webContents.send('force-logout-event');
                 }
             },
@@ -42,7 +47,8 @@ menuService.createMenu = () => {
                 label: 'Preferences',
                 accelerator: 'CmdOrCtrl+,',
                 click: () => {
-                    let activeWindow = BrowserWindow.getFocusedWindow()
+                    let activeWindow = BrowserWindow.getAllWindows()[0]
+                    activeWindow.show()
                     activeWindow.webContents.send('preferences-event');
                 }
             },
@@ -53,6 +59,7 @@ menuService.createMenu = () => {
                 label: 'Quit',
                 accelerator: 'Command+Q',
                 click: () => {
+                    app.isQuitting = true
                     app.quit()
                 },
             },

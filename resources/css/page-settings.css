@@ -1,0 +1,12 @@
+.settings-page {
+    padding: 0px 20px 0px 20px;
+}
+
+.form-item {
+    margin-bottom: 15px;
+}
+
+.form-item__hint {
+    color: #777;
+    font-size: 13px;
+}

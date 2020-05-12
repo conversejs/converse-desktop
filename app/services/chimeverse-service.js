@@ -1,6 +1,6 @@
 let angApp = require(__dirname + '/../init')
 
-angApp.factory('ChimeVerseService', ($window, CredentialsServise, SystemService, AppStateService) => {
+angApp.factory('ChimeVerseService', ($window, CredentialsServise, SystemService, AppStateService, SettingsService) => {
 
     let chimeverseService = {}
 
@@ -27,8 +27,9 @@ angApp.factory('ChimeVerseService', ($window, CredentialsServise, SystemService,
     chimeverseService.initConverse = (bosh, login, password) => {
         AppStateService.set(AppStateService.APP_STATE_DEFAULT) // Always set to default state before init
         let lang = navigator.language
+        let allowBookmarks = SettingsService.get('allowBookmarks')
         converse.initialize({
-            allow_bookmarks: false,
+            allow_bookmarks: allowBookmarks,
             bosh_service_url: bosh,
             view_mode: 'embedded',
             jid: login + '/chimeverse',
