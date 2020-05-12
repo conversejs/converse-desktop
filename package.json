@@ -13,7 +13,6 @@
     "Client",
     "converse.js",
     "Electron",
-    "macOS",
     "OMEMO"
   ],
   "author": "Nick Denry",
