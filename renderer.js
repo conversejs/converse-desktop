@@ -14,11 +14,9 @@ require('./app/controllers/login-controller')
 require('./app/controllers/default-controller')
 require('./app/controllers/about-controller')
 const chimeversePlugin = require('./libs/converse.js/3rdparty/chimeverse-plugin')
-chimeversePlugin.register()
 
 angApp.controller('AppController', function ($scope, $timeout, ChimeVerseService, CredentialsServise, SettingsService, AppStateService) {
 
-    //const { remote, ipcRenderer } = require('electron')
     const { ipcRenderer } = require('electron')
 
     // Menu force logout event
@@ -26,15 +24,22 @@ angApp.controller('AppController', function ($scope, $timeout, ChimeVerseService
         ChimeVerseService.logout()
         let event = new CustomEvent("converse-force-logout") // Dispatch to the plugin
         document.dispatchEvent(event)
-        //remote.getCurrentWindow().reload()
     })
+
     // Menu settings event
     ipcRenderer.on('preferences-event', () => {
         AppStateService.set(AppStateService.APP_STATE_SETTINGS)
     })
+
     // Menu about event
     ipcRenderer.on('about-page-event', () => {
         AppStateService.set(AppStateService.APP_STATE_ABOUT)
+    })
+
+    // Menu about event
+    ipcRenderer.on('open-unread-chat', () => {
+        let event = new CustomEvent('conversejs-open-chat', {detail: ChimeVerseService.chatToOpen})
+        document.dispatchEvent(event)
     })
 
     $scope.state = AppStateService.APP_STATE_DEFAULT
@@ -45,7 +50,7 @@ angApp.controller('AppController', function ($scope, $timeout, ChimeVerseService
             $scope.state = data
             console.log('Switch to the "' + $scope.state +'" state')
         }, 0)
-    });
+    })
 
     SettingsService.initDefaults()
 
@@ -53,6 +58,7 @@ angApp.controller('AppController', function ($scope, $timeout, ChimeVerseService
         let credentials = CredentialsServise.getCredentials()
         credentials.then((result) => {
             ChimeVerseService.initConverse(result.bosh, result.login, result.password)
+            chimeversePlugin.register(result.login)
         }, (error) => {
             AppStateService.set(AppStateService.APP_STATE_LOGIN)
         })

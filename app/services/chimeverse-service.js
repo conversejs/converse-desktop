@@ -43,11 +43,15 @@ angApp.factory('ChimeVerseService', ($window, CredentialsServise, SystemService,
         })
     }
 
+    chimeverseService.chatToOpen = null
+
     $window.document.addEventListener('conversejs-logout', function (e) {
         chimeverseService.logout()
     });
 
     $window.document.addEventListener('conversejs-unread', function (e) {
+        let sender = e.detail
+        chimeverseService.chatToOpen = sender
         chimeverseService._notifyMessage()
     });
 

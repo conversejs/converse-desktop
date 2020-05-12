@@ -2,7 +2,7 @@
  * Module for Tray functions.
  */
 
-const {Tray} = require('electron')
+const  { BrowserWindow, Tray } = require('electron')
 
 let trayServiceWindow = null
 let tray = null
@@ -14,8 +14,10 @@ trayService.initTray = (window) => {
     let iconPath = __dirname + '/../resources/images/icon.png'
     tray = new Tray(iconPath)
     tray.setToolTip('Chimeverse')
-
     tray.on('click', function() {
+        // Sent open-related-chat event only on click
+        let activeWindow = BrowserWindow.getAllWindows()[0]
+        activeWindow.webContents.send('open-unread-chat')
         trayService.hideEnvelope()
         trayServiceWindow.show()
     })

@@ -19,7 +19,7 @@ menuService.createMenu = () => {
                     // let activeWindow = BrowserWindow.getFocusedWindow()
                     let activeWindow = BrowserWindow.getAllWindows()[0]
                     activeWindow.show()
-                    activeWindow.webContents.send('about-page-event');
+                    activeWindow.webContents.send('about-page-event')
                 }
             },
             {
@@ -37,7 +37,7 @@ menuService.createMenu = () => {
                 click: () => {
                     let activeWindow = BrowserWindow.getAllWindows()[0]
                     activeWindow.show()
-                    activeWindow.webContents.send('force-logout-event');
+                    activeWindow.webContents.send('force-logout-event')
                 }
             },
             {
@@ -49,7 +49,7 @@ menuService.createMenu = () => {
                 click: () => {
                     let activeWindow = BrowserWindow.getAllWindows()[0]
                     activeWindow.show()
-                    activeWindow.webContents.send('preferences-event');
+                    activeWindow.webContents.send('preferences-event')
                 }
             },
             {
