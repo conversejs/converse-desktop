@@ -4,6 +4,21 @@ chimeversePlugin.register = (login) => {
     converse.plugins.add('chimeVerse', {
         initialize: (event) => {
             let _converse = event.properties._converse
+
+            /**
+             * Check if message stanza has some body payload
+             * @param {*} stanzaNodes
+             */
+            let isBodyMessage = (stanzaNodes) => {
+                let result = false
+                Object.keys(stanzaNodes).some((key) => {
+                    if (stanzaNodes[key].nodeName == 'body') {
+                        result = true
+                    }
+                })
+                return result
+            }
+
             Promise.all([
                 _converse.api.waitUntil('rosterContactsFetched'),
                 _converse.api.waitUntil('chatBoxesFetched')
@@ -13,15 +28,18 @@ chimeversePlugin.register = (login) => {
                     document.dispatchEvent(event)
                 })
                 _converse.api.listen.on('message', (data) => {
-                    let sender = data.stanza.attributes.from.nodeValue
-                    let senderJid = sender
-                    if (sender.indexOf('/') !== -1) {
-                        senderJid = sender.substr(0, sender.lastIndexOf('/'))
-                    }
-                    if (senderJid != login) {
-                        console.log(senderJid)
-                        let event = new CustomEvent('conversejs-unread', {detail: senderJid})
-                        document.dispatchEvent(event)
+                    // Display notifications only for "payloaded" messages
+                    if (isBodyMessage(data.stanza.childNodes)) {
+                        let sender = data.stanza.attributes.from.nodeValue
+                        let senderJid = sender
+                        if (sender.indexOf('/') !== -1) {
+                            senderJid = sender.substr(0, sender.lastIndexOf('/'))
+                        }
+                        if (senderJid != login) {
+                            console.log(senderJid)
+                            let event = new CustomEvent('conversejs-unread', {detail: senderJid})
+                            document.dispatchEvent(event)
+                        }
                     }
                 })
                 _converse.api.listen.on('chatBoxFocused', () => {
