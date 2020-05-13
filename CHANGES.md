@@ -1,14 +1,14 @@
 ## 0.1.52 (2020-05-12)
 
 - Display notifications only for recieved messages (not contact typing, services messages, etc.)
-- Open chat with unread message by tray icon clicking
-- Add programm settings dialog
+- Open chat with unreaded message by clicking tray icon
+- Added settings dialog
    - Run minimized to tray
-   - Minimize window on close to tray
+   - Minimize window to tray instead of closing
    - Preserve window position
    - Preserve window size
-   - Allow or disalow conversejs server bookmarks
- - Add about dialog
+   - Allow or disallow Converse.js server bookmarks
+ - Added about dialog
 
 ## 0.0.16 (2019-04-29)
 
