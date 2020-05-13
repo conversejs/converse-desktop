@@ -7,9 +7,9 @@ angApp.controller('LoginController', function($scope, ChimeVerseService, Credent
             $scope.credentials.login,
             $scope.credentials.password
         )
-        ChimeVerseService.initConverse($scope.credentials.bosh, $scope.credentials.login, $scope.credentials.password)
+        ChimeVerseService.getCredentialsAndLogin()
         $scope.accountForm.$setPristine()
         $scope.accountForm.$setUntouched()
         $scope.credentials = {}
     }
-});
+})

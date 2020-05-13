@@ -13,9 +13,8 @@ require('./app/controllers/settings-controller')
 require('./app/controllers/login-controller')
 require('./app/controllers/default-controller')
 require('./app/controllers/about-controller')
-const chimeversePlugin = require('./libs/converse.js/3rdparty/chimeverse-plugin')
 
-angApp.controller('AppController', function ($scope, $timeout, ChimeVerseService, CredentialsServise, SettingsService, AppStateService) {
+angApp.controller('AppController', function ($scope, $timeout, ChimeVerseService, SettingsService, AppStateService) {
 
     const { ipcRenderer } = require('electron')
 
@@ -42,7 +41,7 @@ angApp.controller('AppController', function ($scope, $timeout, ChimeVerseService
         document.dispatchEvent(event)
     })
 
-    $scope.state = AppStateService.APP_STATE_DEFAULT
+    AppStateService.set(AppStateService.APP_STATE_DEFAULT)
 
     $scope.$on('app:state:changed', (event, data) => {
         // @see https://docs.angularjs.org/error/$rootScope/inprog
@@ -54,14 +53,6 @@ angApp.controller('AppController', function ($scope, $timeout, ChimeVerseService
 
     SettingsService.initDefaults()
 
-    $scope.getCredentialsAndLogin = () => {
-        let credentials = CredentialsServise.getCredentials()
-        credentials.then((result) => {
-            ChimeVerseService.initConverse(result.bosh, result.login, result.password)
-            chimeversePlugin.register(result.login)
-        }, (error) => {
-            AppStateService.set(AppStateService.APP_STATE_LOGIN)
-        })
-    }
+    ChimeVerseService.getCredentialsAndLogin()
 
 })

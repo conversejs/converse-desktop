@@ -17,7 +17,7 @@
     <div class="main-background"></div>
     <div class="main-window" ng-controller="AppController" ng-cloak>
         <div ng-show="state == 'default'">
-            <ng-include src="'./app/views/default/page.html'" onload="getCredentialsAndLogin()"></ng-include>
+            <ng-include src="'./app/views/default/page.html'"></ng-include>
         </div>
         <div ng-show="state == 'login'">
             <ng-include src="'./app/views/login/page.html'"></ng-include>
@@ -52,14 +52,14 @@
     </script>
     <script>
         function loadJs(url) {
-            var script = document.createElement('script');
-            script.src = url;
-            script.setAttribute('async', 'true');
-            document.documentElement.firstChild.appendChild(script);
+            var script = document.createElement('script')
+            script.src = url
+            script.setAttribute('async', 'true')
+            document.documentElement.firstChild.appendChild(script)
         }
         setTimeout(function () {
-            loadJs("./node_modules/github-buttons/dist/buttons.min.js");
-        }, 500);
+            loadJs("./node_modules/github-buttons/dist/buttons.min.js")
+        }, 500)
     </script>
 </body>
 </html>
