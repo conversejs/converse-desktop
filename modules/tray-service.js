@@ -4,7 +4,7 @@
 
 const  { BrowserWindow, Tray } = require('electron')
 
-const path = require('path');
+const path = require('path')
 
 let trayServiceWindow = null
 let tray = null

@@ -50,7 +50,7 @@ chimeversePlugin.register = (login) => {
                 window.document.addEventListener('converse-force-logout', function (e) {
                     console.log('Get converse-force-logout event')
                     console.log('Logout form plugin')
-                    _converse.api.user.logout();
+                    _converse.api.user.logout()
                     //chimeverseService.logout()
                 })
                 window.document.addEventListener('conversejs-open-chat', function (e) {

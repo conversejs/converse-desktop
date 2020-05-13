@@ -14,7 +14,7 @@ function initApp() {
     createWindow()
     // Set Windows platform notifications
     if (process.platform === 'win32') {
-        app.setAppUserModelId("com.denry.chimeverse");
+        app.setAppUserModelId("com.denry.chimeverse")
     }
 }
 

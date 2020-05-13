@@ -13,7 +13,7 @@ angApp.factory('AppStateService', [ '$rootScope', ($rootScope) => {
         stateService.previousState = typeof stateService.state !== 'undefined' ?
             stateService.state : stateService.APP_STATE_DEFAULT
         stateService.state = state
-        $rootScope.$broadcast('app:state:changed', stateService.state);
+        $rootScope.$broadcast('app:state:changed', stateService.state)
     }
 
     stateService.set(stateService.APP_STATE_DEFAULT)
