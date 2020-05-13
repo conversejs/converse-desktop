@@ -9,14 +9,15 @@
         <img src="https://img.shields.io/badge/paypal-donate-yellow.svg" alt="PayPayl donate button" />
     </a>
 
-It should happen once.
-A very basic integration of [Converse.js](https://conversejs.org/) and Electron. With OMEMO.
+It should happen once. A very basic integration of [Converse.js](https://conversejs.org/) and Electron. With OMEMO.
 
 #### Screenshots and feautures
 <p float="left">
 <img width="403" alt="Main window" src="https://user-images.githubusercontent.com/1450983/56779297-0758ad80-67e3-11e9-95af-f2c7b4264402.png">
 <img width="403" alt="Chat" src="https://user-images.githubusercontent.com/1450983/56779327-2fe0a780-67e3-11e9-8380-97af16e3f06b.png">
 <img width="403" alt="Account form" src="https://user-images.githubusercontent.com/1450983/56779344-41c24a80-67e3-11e9-8046-de6f68565cfd.png">
+<img width="403" alt="Settings screen" src="https://user-images.githubusercontent.com/1450983/81833419-59808400-9548-11ea-8059-a59448d1ff7d.png">
+
 </p>
 
 - Permanent account storage
