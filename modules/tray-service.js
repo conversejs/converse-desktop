@@ -4,6 +4,8 @@
 
 const  { BrowserWindow, Tray } = require('electron')
 
+const path = require('path');
+
 let trayServiceWindow = null
 let tray = null
 
@@ -11,7 +13,7 @@ let trayService = {}
 
 trayService.initTray = (window) => {
     trayServiceWindow = window
-    let iconPath = __dirname + '/../resources/images/icon.png'
+    let iconPath = path.join(__dirname, '/../resources/images/icon.png')
     tray = new Tray(iconPath)
     tray.setToolTip('Chimeverse')
     tray.on('click', function() {
@@ -24,11 +26,11 @@ trayService.initTray = (window) => {
 }
 
 trayService.showEnvelope = () => {
-    tray.setImage(__dirname + '/../resources/images/envelope.png')
+    tray.setImage(path.join(__dirname, '/../resources/images/envelope.png'))
 }
 
 trayService.hideEnvelope = () => {
-    tray.setImage(__dirname + '/../resources/images/icon.png')
+    tray.setImage(path.join(__dirname, '/../resources/images/icon.png'))
 }
 
 module.exports = trayService
