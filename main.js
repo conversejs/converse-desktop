@@ -12,6 +12,10 @@ const settingsService = require(__dirname+'/modules/settings-service')
 
 function initApp() {
     createWindow()
+    // Set Windows platform notifications
+    if (process.platform === 'win32') {
+        app.setAppUserModelId("com.denry.chimeverse");
+    }
 }
 
 function createWindow () {

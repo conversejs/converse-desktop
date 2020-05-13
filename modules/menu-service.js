@@ -57,7 +57,7 @@ menuService.createMenu = () => {
             },
             {
                 label: 'Quit',
-                accelerator: 'Command+Q',
+                accelerator: 'CmdOrCtrl+Q',
                 click: () => {
                     app.isQuitting = true
                     app.quit()

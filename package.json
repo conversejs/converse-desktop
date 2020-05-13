@@ -4,7 +4,12 @@
   "description": "Jabber/XMPP client based on Converse.js and Electron",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "postinstall": "electron-builder install-app-deps",
+    "start": "electron .",
+    "pack": "build --dir",
+    "dist": "build",
+    "dist:win64": "build --platform win --arch x64",
+    "dist:linux64deb": "build --platform linux --arch x64"
   },
   "repository": "https://github.com/nick-denry/Chimeverse",
   "keywords": [
@@ -15,7 +20,7 @@
     "Electron",
     "OMEMO"
   ],
-  "author": "Nick Denry",
+  "author": "Nick Denry <nick@denry.ru>",
   "license": "GPL-3.0",
   "devDependencies": {
     "electron": "^4.2.12",
@@ -31,5 +36,37 @@
     "keytar": "^4.13.0",
     "n": "^6.5.1",
     "open-iconic": "^1.1.1"
+  },
+  "build": {
+    "appId": "com.denry.chimeverse",
+    "productName": "Chimeverse",
+    "mac": {
+      "category": "public.app-category.social-networking",
+      "icon": "resources/images/logo.icns",
+      "target": "dmg"
+    },
+    "dmg": {
+      "contents": [
+        {
+          "x": 110,
+          "y": 150
+        },
+        {
+          "x": 240,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "linux": {
+      "target": [
+        "deb"
+      ]
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "resources/images/logo.ico"
+    }
   }
 }
