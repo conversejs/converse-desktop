@@ -1,15 +1,14 @@
 // Modules to control application life and create native browser window
 const { app, BrowserWindow, shell } = require('electron')
 
-const electronSettings = require('electron-settings')
-
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
 
 // Require other app modules
-const trayService = require(__dirname+'/modules/tray-service')
-const menuService = require(__dirname+'/modules/menu-service')
+const trayService     = require(__dirname+'/modules/tray-service')
+const menuService     = require(__dirname+'/modules/menu-service')
+const settingsService = require(__dirname+'/modules/settings-service')
 
 function initApp() {
     createWindow()
@@ -28,25 +27,24 @@ function createWindow () {
     }
 
     // Load app settings
-    let runMinimized = electronSettings.get('runMinimized')
-    if (typeof runMinimized !== 'undefined') {
+    let runMinimized = settingsService.get('runMinimized')
+    if (runMinimized) {
         mainWindowOptions.show = !runMinimized
     }
-    let minimizeOnClose = electronSettings.get('minimizeOnClose')
-    let preserveWindowSize = electronSettings.get('preserveWindowSize')
+    let preserveWindowSize = settingsService.get('preserveWindowSize')
     if (preserveWindowSize) {
-        let width = electronSettings.get('windowWidth')
-        let height = electronSettings.get('windowHeight')
-        if (typeof width !== 'undefined') mainWindowOptions.width = width
-        if (typeof height !== 'undefined') mainWindowOptions.height = height
+        let width = settingsService.get('windowWidth')
+        let height = settingsService.get('windowHeight')
+        if (width) mainWindowOptions.width = width
+        if (height) mainWindowOptions.height = height
     }
 
-    let preserveWindowPosition = electronSettings.get('preserveWindowPosition')
-    if (preserveWindowPosition !== 'undefined') {
-        let windowX = electronSettings.get('windowX')
-        let windowY = electronSettings.get('windowY')
-        if (typeof windowX !== 'undefined') mainWindowOptions.x = windowX
-        if (typeof windowY !== 'undefined') mainWindowOptions.y = windowY
+    let preserveWindowPosition = settingsService.get('preserveWindowPosition')
+    if (preserveWindowPosition) {
+        let windowX = settingsService.get('windowX')
+        let windowY = settingsService.get('windowY')
+        if (windowX) mainWindowOptions.x = windowX
+        if (windowY) mainWindowOptions.y = windowY
     }
 
     // Create the browser window.
@@ -65,7 +63,8 @@ function createWindow () {
     // mainWindow.webContents.openDevTools()
 
     // Before close
-    if (minimizeOnClose !== 'undefined') {
+    let minimizeOnClose = settingsService.get('minimizeOnClose')
+    if (minimizeOnClose) {
         mainWindow.on('close', (e) => {
             if (!app.isQuitting) {
                 e.preventDefault()
@@ -75,13 +74,13 @@ function createWindow () {
     }
 
     // Save window size
-    if (preserveWindowSize !== 'undefined') {
+    if (preserveWindowSize) {
         mainWindow.on('resize', (e) => {
             let newSize = mainWindow.getSize()
             let width = newSize[0]
             let height = newSize[1]
-            electronSettings.set('windowWidth', width)
-            electronSettings.set('windowHeight', height)
+            settingsService.set('windowWidth', width)
+            settingsService.set('windowHeight', height)
         })
     }
 
@@ -91,8 +90,8 @@ function createWindow () {
             let newPosition = mainWindow.getPosition()
             let windowX = newPosition[0]
             let windowY = newPosition[1]
-            electronSettings.set('windowX', windowX)
-            electronSettings.set('windowY', windowY)
+            settingsService.set('windowX', windowX)
+            settingsService.set('windowY', windowY)
         })
     }
 
