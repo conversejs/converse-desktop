@@ -31,12 +31,13 @@ angApp.factory('ChimeVerseService', ($window, $timeout, CredentialsServise, Syst
         chimeversePlugin.register(login)
         let lang = navigator.language
         let allowBookmarks = SettingsService.get('allowBookmarks')
+        let xmppResource = '.' + (Math.random().toString(36)+'00000000000000000').slice(2, 7); // Generate 5 char unique str
         $timeout(() => {
             converse.initialize({
                 allow_bookmarks: allowBookmarks,
                 bosh_service_url: bosh,
                 view_mode: 'embedded',
-                jid: login + '/chimeverse',
+                jid: login + '/Chimeverse'+xmppResource,
                 password: password,
                 auto_login: true,
                 whitelisted_plugins: ['chimeVerse'],
