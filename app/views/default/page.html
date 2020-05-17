@@ -1,9 +1,22 @@
-<div class="page-default">
-    <div class="chimeverse-branding">
+<div class="page-default" ng-controller="DefaultController">
+    <div class="chimeverse-branding noselect">
         <img src="./resources/images/logo.png" srcset="./resources/images/logo@2x.png 2x" alt=""
             class="chimeverse-branding__img" />
-        <h3 class="chimeverse-branding__header">Chimeverse</h3>
-        <div class="chimeverse-branding__version">v0.1.52</div>
+        <h3 class="chimeverse-branding__header">{{appInfo.APP_NAME}}</h3>
+        <div class="chimeverse-branding__version">
+            <span>{{appInfo.APP_VERSION}} </span>
+            <span class="chimeverse-branding__update">
+                <span class="update__checking" ng-show="checkingForUpdate == 'inProgress'">checking for update...</span>
+                <span class="update__error" ng-show="checkingForUpdate == 'checkErr'">
+                    &gt;_&lt; check for update failed <a href="#" ng-click="checkRetry($event)">retry</a>
+                </span>
+                <span class="update__latest" ng-show="checkingForUpdate == 'latest'">latest version</span>
+                <a class="update__available" href="{{appInfo.APP_RELEASES_URL}}" target="_blank"
+                    ng-show="checkingForUpdate == 'updateAvailable'">
+                    Update available
+                </a>
+            </span>
+        </div>
     </div>
     <div class="conversejs-adoption">
         <div id="conversejs"></div>

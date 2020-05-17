@@ -22,3 +22,23 @@
     color: #999;
     margin-top: 10px;
 }
+
+.update__latest {
+    background: #bbb;
+    color: #fff;
+    border-radius: 3px;
+    padding: 3px 5px;
+}
+
+.update__available {
+    background: rgb(5,93,228);
+    background: linear-gradient(0deg, rgba(5,93,228,1) 0%, rgba(76,145,255,1) 100%);
+    padding: 3px 5px;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 3px;
+}
+
+.update__error {
+    color: #da0000;
+}

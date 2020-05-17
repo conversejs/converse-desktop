@@ -31,9 +31,19 @@ a {
 }
 
 .conversejs-adoption {
+    background: transparent;
+    pointer-events: none;
     position: fixed;
     left: 0px;
     top: 0px;
     width: 100%;
     height: 100%;
+}
+
+#conversejs .converse-chatboxes {
+    pointer-events: none;
+}
+
+#conversejs .converse-chatboxes > * {
+    pointer-events: auto;
 }

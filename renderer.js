@@ -13,6 +13,7 @@ require('./app/controllers/settings-controller')
 require('./app/controllers/login-controller')
 require('./app/controllers/default-controller')
 require('./app/controllers/about-controller')
+require('./app/controllers/footer-controller')
 
 angApp.controller('AppController', function ($scope, $timeout, ChimeVerseService, SettingsService, AppStateService) {
 
