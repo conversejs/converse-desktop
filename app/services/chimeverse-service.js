@@ -31,6 +31,7 @@ angApp.factory('ChimeVerseService', ($window, $timeout, CredentialsServise, Syst
         chimeversePlugin.register(login)
         let lang = navigator.language
         let allowBookmarks = SettingsService.get('allowBookmarks')
+        let omemoDefault = SettingsService.get('omemoDefault')
         let xmppResource = '.' + (Math.random().toString(36)+'00000000000000000').slice(2, 7); // Generate 5 char unique str
         $timeout(() => {
             converse.initialize({
@@ -44,7 +45,8 @@ angApp.factory('ChimeVerseService', ($window, $timeout, CredentialsServise, Syst
                 i18n: lang,
                 priority: 50,
                 // debug: true,
-                auto_reconnect: true
+                auto_reconnect: true,
+                omemo_default: omemoDefault,
             })
         }, 50)
     }
