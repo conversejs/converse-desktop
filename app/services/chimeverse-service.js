@@ -36,17 +36,17 @@ angApp.factory('ChimeVerseService', ($window, $timeout, CredentialsServise, Syst
         $timeout(() => {
             converse.initialize({
                 allow_bookmarks: allowBookmarks,
-                bosh_service_url: bosh,
-                view_mode: 'embedded',
-                jid: login + '/Chimeverse'+xmppResource,
-                password: password,
                 auto_login: true,
-                whitelisted_plugins: ['chimeVerse'],
-                i18n: lang,
-                priority: 50,
-                // debug: true,
                 auto_reconnect: true,
+                bosh_service_url: bosh,
+                // debug: true,
+                i18n: lang,
+                jid: login + '/Chimeverse'+xmppResource,
                 omemo_default: omemoDefault,
+                password: password,
+                priority: 50,
+                view_mode: 'embedded',
+                whitelisted_plugins: ['chimeVerse'],
             })
         }, 50)
     }
