@@ -2,7 +2,7 @@
 
 - Improved tray icons for each platform
 - Improved login process stability
-- Auto-generate an unique xmpp resourse id for each Chimeverse instance
+- Auto-generate an unique xmpp resource id for each Chimeverse instance
 - Settings params for use OMEMO by default if available
 - Display a notification for a new release available
 
