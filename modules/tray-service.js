@@ -11,9 +11,23 @@ let tray = null
 
 let trayService = {}
 
+let getTrayServiceIcon = (iconName = 'icon') => {
+    let iconImage = ''
+    if (process.platform === 'darwin') {
+        iconImage = iconName
+    }
+    else if (process.platform === 'win32') {
+        iconImage = iconName+'-16x16'
+    }
+    else {
+        iconImage = iconName+'-48x48'
+    }
+    return path.join(__dirname, '/../resources/images/' + iconImage + '.png')
+}
+
 trayService.initTray = (window) => {
     trayServiceWindow = window
-    let iconPath = path.join(__dirname, '/../resources/images/icon.png')
+    let iconPath = getTrayServiceIcon()
     tray = new Tray(iconPath)
     tray.setToolTip('Chimeverse')
     tray.on('click', function() {
@@ -26,11 +40,13 @@ trayService.initTray = (window) => {
 }
 
 trayService.showEnvelope = () => {
-    tray.setImage(path.join(__dirname, '/../resources/images/envelope.png'))
+    let iconPath = getTrayServiceIcon('envelope')
+    tray.setImage(iconPath)
 }
 
 trayService.hideEnvelope = () => {
-    tray.setImage(path.join(__dirname, '/../resources/images/icon.png'))
+    let iconPath = getTrayServiceIcon()
+    tray.setImage(iconPath)
 }
 
 module.exports = trayService
