@@ -9,12 +9,14 @@ angApp.controller('DefaultController', function($scope, $timeout, $http, AppInfo
             url: $scope.appInfo.APP_RELEASES_CHECK_URL,
             method: 'GET'
         }).then((response) => {
-            let releaseVersion = response.data[0].tag_name
-            if (releaseVersion == $scope.appInfo.APP_VERSION) {
-                $scope.checkingForUpdate = 'latest'
+            let releaseTag = response.data[0].tag_name
+            let releaseVersion = parseInt(releaseTag.replace(/v|\./g, ''))
+            let appVersion = parseInt($scope.appInfo.APP_VERSION.replace(/v|\./g, ''))
+            if (appVersion < releaseVersion ) {
+                $scope.checkingForUpdate = 'updateAvailable'
             }
             else {
-                $scope.checkingForUpdate = 'updateAvailable'
+                $scope.checkingForUpdate = 'latest'
             }
         }, (error) => {
             $scope.checkingForUpdate = 'checkErr'
