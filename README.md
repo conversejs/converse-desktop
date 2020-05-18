@@ -30,10 +30,10 @@ It should happen once. A very basic integration of [Converse.js](https://convers
 See [CHANGES.md](https://github.com/nick-denry/Chimeverse/blob/master/CHANGES.md)
 
 #### Latest release installers 
-All installers are x64 builds.
-   - macOS: [Chimeverse-0.1.52.dmg](https://github.com/nick-denry/Chimeverse/releases/download/v0.1.52/Chimeverse-0.1.52.dmg)
-   - Windows: [Chimeverse.Setup.0.1.52.exe](https://github.com/nick-denry/Chimeverse/releases/download/v0.1.52/Chimeverse.Setup.0.1.52.exe)
-   - Linux DEB: [chimeverse_0.1.52_amd64.deb](https://github.com/nick-denry/Chimeverse/releases/download/v0.1.52/chimeverse_0.1.52_amd64.deb)
+
+   - macOS: [Chimeverse-0.1.53_x64.dmg](https://github.com/nick-denry/Chimeverse/releases/download/v0.1.53/Chimeverse-0.1.53_x64.dmg)
+   - Windows: [Chimeverse.Setup.0.1.53_x64.exe](https://github.com/nick-denry/Chimeverse/releases/download/v0.1.53/Chimeverse.Setup.0.1.53_x64.exe)
+   - Linux DEB: [chimeverse_0.1.53_amd64.deb](https://github.com/nick-denry/Chimeverse/releases/download/v0.1.53/chimeverse_0.1.53_amd64.deb)
    - [All releases](https://github.com/nick-denry/Chimeverse/releases)
 
 #### Run with npm
