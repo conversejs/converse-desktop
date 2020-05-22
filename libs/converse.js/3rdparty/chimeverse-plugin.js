@@ -4,6 +4,7 @@ chimeversePlugin.register = (login) => {
     converse.plugins.add('chimeVerse', {
         initialize: (event) => {
             let _converse = event.properties._converse
+            let Strophe = converse.env.Strophe
 
             /**
              * Check if message stanza has some body payload
@@ -31,11 +32,9 @@ chimeversePlugin.register = (login) => {
                     // Display notifications only for "payloaded" messages
                     if (isBodyMessage(data.stanza.childNodes)) {
                         let sender = data.stanza.attributes.from.nodeValue
-                        let senderJid = sender
-                        if (sender.indexOf('/') !== -1) {
-                            senderJid = sender.substr(0, sender.lastIndexOf('/'))
-                        }
-                        if (senderJid != login) {
+                        let senderJid = Strophe.getBareJidFromJid(sender)
+                        let loginJid = Strophe.getBareJidFromJid(login)
+                        if (senderJid != loginJid) {
                             console.log(senderJid)
                             let event = new CustomEvent('conversejs-unread', {detail: senderJid})
                             document.dispatchEvent(event)
