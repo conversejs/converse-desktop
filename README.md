@@ -31,9 +31,12 @@ See [CHANGES.md](https://github.com/nick-denry/Chimeverse/blob/master/CHANGES.md
 
 #### Latest release installers 
 
-   - macOS: [Chimeverse-0.1.53_x64.dmg](https://github.com/nick-denry/Chimeverse/releases/download/v0.1.53/Chimeverse-0.1.53_x64.dmg)
-   - Windows: [Chimeverse.Setup.0.1.53_x64.exe](https://github.com/nick-denry/Chimeverse/releases/download/v0.1.53/Chimeverse.Setup.0.1.53_x64.exe)
-   - Linux DEB: [chimeverse_0.1.53_amd64.deb](https://github.com/nick-denry/Chimeverse/releases/download/v0.1.53/chimeverse_0.1.53_amd64.deb)
+| Operation System | Download link |
+-------------------|----------------
+| macOS            | [Chimeverse-0.1.53_x64.dmg](https://github.com/nick-denry/Chimeverse/releases/download/v0.1.53/Chimeverse-0.1.53_x64.dmg) |
+| Windows          | [Chimeverse.Setup.0.1.53_x64.exe](https://github.com/nick-denry/Chimeverse/releases/download/v0.1.53/Chimeverse.Setup.0.1.53_x64.exe) |
+| Linux DEB        | [chimeverse_0.1.53_amd64.deb](https://github.com/nick-denry/Chimeverse/releases/download/v0.1.53/chimeverse_0.1.53_amd64.deb) |
+
    - [All releases](https://github.com/nick-denry/Chimeverse/releases)
 
 #### Run with npm
