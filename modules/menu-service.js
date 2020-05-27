@@ -9,19 +9,23 @@ let menuService = {}
 
 menuService.createMenu = () => {
 
+    const isMac = process.platform === 'darwin'
+
+    const about = {
+        label: 'About Chimeverse',
+        click: () => {
+            // @see https://github.com/electron/electron/issues/16558#issuecomment-484460276
+            // let activeWindow = BrowserWindow.getFocusedWindow()
+            let activeWindow = BrowserWindow.getAllWindows()[0]
+            activeWindow.show()
+            activeWindow.webContents.send('about-page-event')
+        }
+    }
+
     const application = {
         label: 'Chimeverse',
         submenu: [
-            {
-                label: 'About Chimeverse',
-                click: () => {
-                    // @see https://github.com/electron/electron/issues/16558#issuecomment-484460276
-                    // let activeWindow = BrowserWindow.getFocusedWindow()
-                    let activeWindow = BrowserWindow.getAllWindows()[0]
-                    activeWindow.show()
-                    activeWindow.webContents.send('about-page-event')
-                }
-            },
+            ... isMac ? [about] : [],
             {
                 label: 'Reconnect',
                 accelerator: 'CmdOrCtrl+R',
@@ -103,7 +107,12 @@ menuService.createMenu = () => {
       ],
     }
 
-    const template = [application, edit]
+    const help = {
+        label: 'Help',
+        submenu: [about]
+    }
+
+    const template = [application, edit, ... !isMac ? help : []]
 
     Menu.setApplicationMenu(Menu.buildFromTemplate(template))
 }
