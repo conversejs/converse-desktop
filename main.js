@@ -10,10 +10,13 @@ const trayService     = require(__dirname+'/modules/tray-service')
 const menuService     = require(__dirname+'/modules/menu-service')
 const settingsService = require(__dirname+'/modules/settings-service')
 
+const isMac = process.platform === 'darwin'
+const isWin = process.platform === 'win32'
+
 function initApp() {
     createWindow()
     // Set Windows platform notifications
-    if (process.platform === 'win32') {
+    if (isWin) {
         app.setAppUserModelId("com.denry.chimeverse")
     }
 }
@@ -75,6 +78,18 @@ function createWindow () {
                 mainWindow.hide()
             }
         })
+    }
+
+    // Handle shutdown event on Mac with minimizeOnClose
+    // to prevent shutdown interrupt
+    if (isMac) {
+        if (minimizeOnClose) {
+            const { powerMonitor } = require('electron')
+            powerMonitor.on('shutdown', () => {
+                app.isQuitting = true
+                app.quit()
+            })
+        }
     }
 
     // Save window size
