@@ -10,3 +10,7 @@
     color: #777;
     font-size: 13px;
 }
+
+.form-item__save-button.active {
+    color: blue;
+}

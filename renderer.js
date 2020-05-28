@@ -52,6 +52,10 @@ angApp.controller('AppController', function ($scope, $timeout, ChimeVerseService
         }, 0)
     })
 
+    $scope.$on('app:restart', (event, data) => {
+        ipcRenderer.send('app-restart')
+    })
+
     SettingsService.initDefaults()
 
     ChimeVerseService.getCredentialsAndLogin()

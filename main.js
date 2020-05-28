@@ -1,5 +1,5 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, shell } = require('electron')
+const { app, BrowserWindow, ipcMain, shell } = require('electron')
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -80,16 +80,6 @@ function createWindow () {
         })
     }
 
-    // Handle shutdown event on Mac with minimizeOnClose
-    // to prevent shutdown interrupt
-    if (isMac && minimizeOnClose) {
-        const { powerMonitor } = require('electron')
-        powerMonitor.on('shutdown', () => {
-            app.isQuitting = true
-            app.quit()
-        })
-    }
-
     // Save window size
     if (preserveWindowSize) {
         mainWindow.on('resize', (e) => {
@@ -111,6 +101,23 @@ function createWindow () {
             settingsService.set('windowY', windowY)
         })
     }
+
+    // Handle shutdown event on Mac with minimizeOnClose
+    // to prevent shutdown interrupt
+    if (isMac && minimizeOnClose) {
+        const { powerMonitor } = require('electron')
+        powerMonitor.on('shutdown', () => {
+            app.isQuitting = true
+            app.quit()
+        })
+    }
+
+    // Handle restart
+    ipcMain.on('app-restart', (evt, arg) => {
+        app.isQuitting = true
+        app.relaunch()
+        app.exit()
+    })
 
     // Emitted when the window is closed.
     mainWindow.on('closed', function () {
