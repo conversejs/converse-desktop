@@ -112,7 +112,7 @@ menuService.createMenu = () => {
         submenu: [about]
     }
 
-    const template = [application, edit, ... !isMac ? help : []]
+    const template = [application, edit, ... !isMac ? [help] : []]
 
     Menu.setApplicationMenu(Menu.buildFromTemplate(template))
 }
