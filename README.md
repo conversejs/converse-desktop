@@ -29,7 +29,7 @@ It should happen once. A very basic integration of [Converse.js](https://convers
 
 See [CHANGES.md](https://github.com/nick-denry/Chimeverse/blob/master/CHANGES.md)
 
-#### Latest release installers 
+#### Latest release installers
 
 | Operation System | Download link |
 -------------------|----------------
@@ -48,3 +48,23 @@ npm i
 $(npm bin)/electron-rebuild
 npm start
 ```
+
+### Development
+
+Prepeare
+```
+git clone https://github.com/nick-denry/Chimeverse.git
+cd Chimeverse
+npm i
+$(npm bin)/electron-rebuild
+```
+
+Build targets
+
+| Operation System | Download link |
+-------------------|----------------
+| macOS            | `npm run dist` |
+| Windows          | `npm run dist:win64` |
+| Linux DEB        | `npm run dist:linux64deb` |
+
+More targets could be added via `package.json`. See [electron builder docs](https://www.electron.build/configuration/configuration).
