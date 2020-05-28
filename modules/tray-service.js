@@ -14,7 +14,7 @@ let trayService = {}
 let getTrayServiceIcon = (iconName = 'icon') => {
     let iconImage = ''
     if (process.platform === 'darwin') {
-        iconImage = iconName
+        iconImage = iconName+'Template'
     }
     else if (process.platform === 'win32') {
         iconImage = iconName+'-16x16'
