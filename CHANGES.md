@@ -1,3 +1,11 @@
+## 0.1.54 (2020-05-28)
+
+- Fix interrupting macOS shutdown with minimizeOnClose setting enabled
+- Add tray icons for macOS dark mode
+- Improve macOS tray icons
+- Display menu items according to typical usability for each platform
+- Add restart action to the settings dialog
+
 ## 0.1.53 (2020-05-18)
 
 - Improved tray icons for each platform
