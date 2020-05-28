@@ -82,14 +82,12 @@ function createWindow () {
 
     // Handle shutdown event on Mac with minimizeOnClose
     // to prevent shutdown interrupt
-    if (isMac) {
-        if (minimizeOnClose) {
-            const { powerMonitor } = require('electron')
-            powerMonitor.on('shutdown', () => {
-                app.isQuitting = true
-                app.quit()
-            })
-        }
+    if (isMac && minimizeOnClose) {
+        const { powerMonitor } = require('electron')
+        powerMonitor.on('shutdown', () => {
+            app.isQuitting = true
+            app.quit()
+        })
     }
 
     // Save window size
