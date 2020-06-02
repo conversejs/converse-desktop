@@ -51,7 +51,7 @@ npm start
 
 ### Development
 
-Prepeare
+Prepare
 ```
 git clone https://github.com/nick-denry/Chimeverse.git
 cd Chimeverse
