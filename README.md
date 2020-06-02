@@ -61,7 +61,7 @@ $(npm bin)/electron-rebuild
 
 Build targets
 
-| Operation System | Download link |
+| Operation System | Target |
 -------------------|----------------
 | macOS            | `npm run dist` |
 | Windows          | `npm run dist:win64` |
