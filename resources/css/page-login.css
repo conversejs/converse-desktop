@@ -41,10 +41,19 @@
     border: 1px solid #aaa;
 }
 
-.login-form__input-group span {
+.login-form__input-group .group-prepend {
     position: absolute;
     left: 15px;
     top: 12px;
+}
+
+.login-form__input-group .group-append--backgrounded {
+    background: #f2f2f2;
+    cursor: pointer;
+    padding: 12px;
+    position: absolute;
+    right: 0px;
+    top: 0  px;
 }
 
 .login-form__input {
@@ -57,7 +66,16 @@
 }
 
 .login-form__input::placeholder { /* Most modern browsers support this now. */
-    color:  #ddd;
+    color:  #ccc;
+ }
+
+ .login-form__input--with-append {
+    width: 260px;
+ }
+
+ .login-form__input-help {
+    font-size: 13px;
+    margin: 4px;
  }
 
  .login-form__button {

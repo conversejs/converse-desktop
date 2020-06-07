@@ -12,7 +12,7 @@ angApp.factory('CredentialsServise', () => {
         credentials.login = settings.get('login')
         let promise = new Promise((resolve, reject) => {
             if (credentials.login) {
-                credentials.bosh = settings.get('bosh')
+                credentials.connectionManager = settings.get('connectionManager')
                 credentials.xmppService = credentials.login.split('@').pop()
                 let password = keytar.getPassword(credentials.xmppService, credentials.login)
                 password.then((result) => {
@@ -27,9 +27,9 @@ angApp.factory('CredentialsServise', () => {
         return promise
     }
 
-    credentialsService.addCredentials = (bosh, login, password) => {
+    credentialsService.addCredentials = (connectionManager, login, password) => {
         let xmppService = login.split('@').pop()
-        settings.set('bosh', bosh)
+        settings.set('connectionManager', connectionManager)
         settings.set('login', login)
         keytar.setPassword(xmppService, login, password)
     }
@@ -40,7 +40,7 @@ angApp.factory('CredentialsServise', () => {
         let promise = new Promise((resolve, reject) => {
             passwordDelete.then((result) => {
                 settings.delete('login')
-                settings.delete('bosh')
+                settings.delete('connectionManager')
                 resolve()
             }, (error) => {
                 reject(error)

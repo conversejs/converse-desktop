@@ -83,6 +83,11 @@ angApp.factory('SettingsService', () => {
      */
     settingsService.initDefaults = () => {
         iterateSettings(saveDefault)
+        // Logout for versions with BOSH only
+        if (electronSettings.has('bosh')) {
+            electronSettings.delete('bosh')
+            electronSettings.delete('login')
+        }
     }
 
     settingsService.get = (key) => {

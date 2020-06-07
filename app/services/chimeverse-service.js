@@ -19,42 +19,47 @@ angApp.factory('ChimeVerseService', ($window, $timeout, CredentialsServise, Syst
         let credentials = CredentialsServise.getCredentials()
         credentials.then((result) => {
             let remove = CredentialsServise.removeCredentials(result.login)
-            console.log('Remove credential on logout')
+            console.log('Remove credentials on logout')
             remove.then(() => {
                 AppStateService.set(AppStateService.APP_STATE_LOGIN)
             })
         })
     }
 
-    chimeverseService.initConverse = (bosh, login, password) => {
+    chimeverseService.initConverse = (connectionManager, login, password) => {
         AppStateService.set(AppStateService.APP_STATE_DEFAULT) // Always set to default state before init
         chimeversePlugin.register(login)
         let lang = navigator.language
         let allowBookmarks = SettingsService.get('allowBookmarks')
         let omemoDefault = SettingsService.get('omemoDefault')
         let xmppResource = '.' + (Math.random().toString(36)+'00000000000000000').slice(2, 7); // Generate 5 char unique str
+        let conversejsParams = {
+            allow_bookmarks: allowBookmarks,
+            auto_login: true,
+            auto_reconnect: true,
+            // debug: true,
+            i18n: lang,
+            jid: login + '/Chimeverse'+xmppResource,
+            omemo_default: omemoDefault,
+            password: password,
+            priority: 50,
+            view_mode: 'embedded',
+            whitelisted_plugins: ['chimeVerse'],
+        }
+        if (connectionManager.startsWith('ws')) {
+            conversejsParams.websocket_url = connectionManager
+        } else {
+            conversejsParams.bosh_service_url = connectionManager
+        }
         $timeout(() => {
-            converse.initialize({
-                allow_bookmarks: allowBookmarks,
-                auto_login: true,
-                auto_reconnect: true,
-                bosh_service_url: bosh,
-                // debug: true,
-                i18n: lang,
-                jid: login + '/Chimeverse'+xmppResource,
-                omemo_default: omemoDefault,
-                password: password,
-                priority: 50,
-                view_mode: 'embedded',
-                whitelisted_plugins: ['chimeVerse'],
-            })
+            converse.initialize(conversejsParams)
         }, 50)
     }
 
     chimeverseService.getCredentialsAndLogin = () => {
         let credentials = CredentialsServise.getCredentials()
         credentials.then((result) => {
-            chimeverseService.initConverse(result.bosh, result.login, result.password)
+            chimeverseService.initConverse(result.connectionManager, result.login, result.password)
         }, (error) => {
             AppStateService.set(AppStateService.APP_STATE_LOGIN)
         })
