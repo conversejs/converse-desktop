@@ -34,6 +34,7 @@ angApp.factory('ChimeVerseService', ($window, $timeout, CredentialsServise, Syst
         let omemoDefault = SettingsService.get('omemoDefault')
         let xmppResource = '.' + (Math.random().toString(36)+'00000000000000000').slice(2, 7); // Generate 5 char unique str
         let conversejsParams = {
+            assets_path: './node_modules/converse.js/dist/',
             allow_bookmarks: allowBookmarks,
             auto_login: true,
             auto_reconnect: true,
@@ -42,6 +43,7 @@ angApp.factory('ChimeVerseService', ($window, $timeout, CredentialsServise, Syst
             jid: login + '/Chimeverse'+xmppResource,
             omemo_default: omemoDefault,
             password: password,
+            play_sounds: false,
             priority: 50,
             view_mode: 'embedded',
             whitelisted_plugins: ['chimeVerse'],
