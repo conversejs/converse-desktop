@@ -1,4 +1,4 @@
-## 0.1.54 (2020-06-17)
+## 0.1.55 (2020-06-17)
 
 - Fix Chimeverse fails to load due to missing locale files [#24](https://github.com/nick-denry/Chimeverse/issues/24)
 - Added websocket connection to the login form [#18](https://github.com/nick-denry/Chimeverse/issues/18)
