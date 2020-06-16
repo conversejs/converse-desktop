@@ -109,10 +109,20 @@ menuService.createMenu = () => {
 
     const help = {
         label: 'Help',
-        submenu: [about]
+        submenu: [
+            ... !isMac ? [help] : [],
+            {
+                label: 'Debug info',
+                accelerator: 'F12',
+                click: () => {
+                    let activeWindow = BrowserWindow.getAllWindows()[0]
+                    activeWindow.webContents.openDevTools()
+                }
+            }
+        ]
     }
 
-    const template = [application, edit, ... !isMac ? [help] : []]
+    const template = [application, edit, help]
 
     Menu.setApplicationMenu(Menu.buildFromTemplate(template))
 }
