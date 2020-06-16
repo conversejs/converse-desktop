@@ -2,7 +2,10 @@ let angApp = require(__dirname + '/../init')
 
 const chimeversePlugin = require(__dirname +'/../../libs/converse.js/3rdparty/chimeverse-plugin')
 
-angApp.factory('ChimeVerseService', ($window, $timeout, CredentialsServise, SystemService, AppStateService, SettingsService) => {
+angApp.factory('ChimeVerseService', (
+        $window, $timeout, CredentialsServise, SystemService, AppStateService,
+        SettingsService, XmppHelperService
+    ) => {
 
     let chimeverseService = {}
 
@@ -32,7 +35,11 @@ angApp.factory('ChimeVerseService', ($window, $timeout, CredentialsServise, Syst
         let lang = navigator.language
         let allowBookmarks = SettingsService.get('allowBookmarks')
         let omemoDefault = SettingsService.get('omemoDefault')
-        let xmppResource = '.' + (Math.random().toString(36)+'00000000000000000').slice(2, 7); // Generate 5 char unique str
+        let xmppResource = XmppHelperService.getResourceFromJid(login)
+        if (!xmppResource) {
+            xmppResource = '.' + (Math.random().toString(36)+'00000000000000000').slice(2, 7) // Generate 5 char unique str
+            login = login + '/Chimeverse'+xmppResource
+        }
         let conversejsParams = {
             assets_path: './node_modules/converse.js/dist/',
             allow_bookmarks: allowBookmarks,
@@ -40,7 +47,7 @@ angApp.factory('ChimeVerseService', ($window, $timeout, CredentialsServise, Syst
             auto_reconnect: true,
             // debug: true,
             i18n: lang,
-            jid: login + '/Chimeverse'+xmppResource,
+            jid: login,
             omemo_default: omemoDefault,
             password: password,
             play_sounds: false,
