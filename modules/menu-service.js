@@ -110,7 +110,7 @@ menuService.createMenu = () => {
     const help = {
         label: 'Help',
         submenu: [
-            ... !isMac ? [help] : [],
+            ... !isMac ? [about] : [],
             {
                 label: 'Debug info',
                 accelerator: 'F12',
