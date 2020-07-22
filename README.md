@@ -1,4 +1,6 @@
-# Chimeverse
+# Converse Desktop 
+
+This project started as a fork of Nick Denry's [Chimeverse](https://github.com/conversejs/converse-desktop).
 
 #### Jabber/XMPP client based on Converse.js and Electron
 
@@ -27,22 +29,12 @@ It should happen once. A very basic integration of [Converse.js](https://convers
 
 #### Changelog
 
-See [CHANGES.md](https://github.com/nick-denry/Chimeverse/blob/master/CHANGES.md)
-
-#### Latest release installers
-
-| Operation System | Download link |
--------------------|----------------
-| macOS            | [Chimeverse-0.1.55_x64.dmg](https://github.com/nick-denry/Chimeverse/releases/download/v0.1.55/Chimeverse-0.1.55_x64.dmg) |
-| Windows          | [Chimeverse.Setup.0.1.55_x64.exe](https://github.com/nick-denry/Chimeverse/releases/download/v0.1.55/Chimeverse.Setup.0.1.55_x64.exe) |
-| Linux DEB        | [chimeverse_0.1.55_amd64.deb](https://github.com/nick-denry/Chimeverse/releases/download/v0.1.55/chimeverse_0.1.55_amd64.deb) |
-
-   - [All releases](https://github.com/nick-denry/Chimeverse/releases)
+See [CHANGES.md](https://github.com/conversejs/converse-desktop/blob/master/CHANGES.md)
 
 #### Run with npm
 
 ```
-git clone https://github.com/nick-denry/Chimeverse.git
+git clone https://github.com/conversejs/converse-desktop.git
 cd Chimeverse
 npm i
 $(npm bin)/electron-rebuild
@@ -53,7 +45,7 @@ npm start
 
 Prepare
 ```
-git clone https://github.com/nick-denry/Chimeverse.git
+git clone https://github.com/conversejs/converse-desktop.git
 cd Chimeverse
 npm i
 $(npm bin)/electron-rebuild

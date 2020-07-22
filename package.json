@@ -1,7 +1,7 @@
 {
-  "name": "chimeverse",
-  "version": "0.1.55",
-  "description": "Jabber/XMPP client based on Converse.js and Electron",
+  "name": "@converse/desktop",
+  "version": "0.0.1",
+  "description": "Desktop Jabber/XMPP client based on Converse.js and Electron",
   "main": "main.js",
   "scripts": {
     "postinstall": "electron-builder install-app-deps",
@@ -11,7 +11,7 @@
     "dist:win64": "build --platform win --arch x64",
     "dist:linux64deb": "build --platform linux --arch x64"
   },
-  "repository": "https://github.com/nick-denry/Chimeverse",
+  "repository": "https://github.com/conversejs/converse-desktop",
   "keywords": [
     "Jabber",
     "XMPP",
@@ -38,8 +38,8 @@
     "open-iconic": "^1.1.1"
   },
   "build": {
-    "appId": "com.denry.chimeverse",
-    "productName": "Chimeverse",
+    "appId": "com.denry.converse-desktop",
+    "productName": "Converse Desktop",
     "mac": {
       "category": "public.app-category.social-networking",
       "icon": "resources/images/logo.icns",
