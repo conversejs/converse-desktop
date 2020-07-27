@@ -1,6 +1,6 @@
 let angApp = require(__dirname + '/../init')
 
-const chimeversePlugin = require(__dirname +'/../../libs/converse.js/3rdparty/chimeverse-plugin')
+const chimeversePlugin = require(__dirname +'/../../libs/converse.js/converse-desktop/chimeverse-plugin')
 
 angApp.factory('ChimeVerseService', (
         $window, $timeout, CredentialsServise, SystemService, AppStateService,
