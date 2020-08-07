@@ -1,6 +1,6 @@
 {
   "name": "@converse/desktop",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Desktop Jabber/XMPP client based on Converse.js and Electron",
   "main": "main.js",
   "scripts": {
@@ -21,7 +21,7 @@
     "OMEMO"
   ],
   "author": "Nick Denry <nick@denry.ru>",
-  "license": "GPL-3.0",
+  "license": "MPL-2.0",
   "devDependencies": {
     "electron": "^4.2.12",
     "electron-builder": "^20.44.4",
