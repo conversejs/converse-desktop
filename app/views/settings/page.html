@@ -1,7 +1,7 @@
 <div class="settings-page" ng-controller="SettingsController">
     <form name="settignsForm">
     <h3 class="settings-page__title">Chimeverse settings</h3>
-    <div class="form-item" ng-repeat="(key, item) in settings.chimeverse">
+    <div class="form-item" ng-repeat="(key, item) in settings.converseDesktop">
         <label>
             <input type="checkbox" name="{{key}}" ng-model="item.value" /> {{item.title}}
         </label>

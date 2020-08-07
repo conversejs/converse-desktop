@@ -29,7 +29,7 @@ trayService.initTray = (window) => {
     trayServiceWindow = window
     let iconPath = getTrayServiceIcon()
     tray = new Tray(iconPath)
-    tray.setToolTip('Chimeverse')
+    tray.setToolTip('Converse Desktop')
     tray.on('click', function() {
         // Sent open-related-chat event only on click
         let activeWindow = BrowserWindow.getAllWindows()[0]

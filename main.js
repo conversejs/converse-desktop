@@ -17,7 +17,7 @@ function initApp() {
     createWindow()
     // Set Windows platform notifications
     if (isWin) {
-        app.setAppUserModelId("com.denry.chimeverse")
+        app.setAppUserModelId("com.denry.converseDesktop")
     }
 }
 
@@ -67,7 +67,7 @@ function createWindow () {
     menuService.createMenu()
 
     // Open the DevTools.
-    // mainWindow.webContents.openDevTools()
+    mainWindow.webContents.openDevTools()
 
     // Before close
     let minimizeOnClose = settingsService.get('minimizeOnClose')

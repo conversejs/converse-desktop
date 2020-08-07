@@ -1,24 +1,24 @@
 let angApp = require(__dirname + '/../init')
 
-const chimeversePlugin = require(__dirname +'/../../libs/converse.js/converse-desktop/chimeverse-plugin')
+const desktopPlugin = require(__dirname +'/../../libs/converse.js/converse-desktop/desktop-plugin')
 
-angApp.factory('ChimeVerseService', (
+angApp.factory('DesktopService', (
         $window, $timeout, CredentialsServise, SystemService, AppStateService,
         SettingsService, XmppHelperService
     ) => {
 
-    let chimeverseService = {}
+    let desktopService = {}
 
-    chimeverseService._notifyMessage = () => {
+    desktopService._notifyMessage = () => {
         SystemService.playAudio()
         SystemService.showEnvelope()
     }
 
-    chimeverseService._hideNotifyMessage = () => {
+    desktopService._hideNotifyMessage = () => {
         SystemService.hideEnvelope()
     }
 
-    chimeverseService.logout = () => {
+    desktopService.logout = () => {
         let credentials = CredentialsServise.getCredentials()
         credentials.then((result) => {
             let remove = CredentialsServise.removeCredentials(result.login)
@@ -29,16 +29,16 @@ angApp.factory('ChimeVerseService', (
         })
     }
 
-    chimeverseService.initConverse = (connectionManager, login, password) => {
+    desktopService.initConverse = (connectionManager, login, password) => {
         AppStateService.set(AppStateService.APP_STATE_DEFAULT) // Always set to default state before init
-        chimeversePlugin.register(login)
+        desktopPlugin.register(login)
         let lang = navigator.language
         let allowBookmarks = SettingsService.get('allowBookmarks')
         let omemoDefault = SettingsService.get('omemoDefault')
         let xmppResource = XmppHelperService.getResourceFromJid(login)
         if (!xmppResource) {
             xmppResource = '.' + (Math.random().toString(36)+'00000000000000000').slice(2, 7) // Generate 5 char unique str
-            login = login + '/Chimeverse'+xmppResource
+            login = login + '/converseDesktop'+xmppResource
         }
         let conversejsParams = {
             assets_path: './node_modules/converse.js/dist/',
@@ -53,7 +53,7 @@ angApp.factory('ChimeVerseService', (
             play_sounds: false,
             priority: 50,
             view_mode: 'embedded',
-            whitelisted_plugins: ['chimeVerse'],
+            whitelisted_plugins: ['converseDesktop'],
         }
         if (connectionManager.startsWith('ws')) {
             conversejsParams.websocket_url = connectionManager
@@ -65,32 +65,32 @@ angApp.factory('ChimeVerseService', (
         }, 50)
     }
 
-    chimeverseService.getCredentialsAndLogin = () => {
+    desktopService.getCredentialsAndLogin = () => {
         let credentials = CredentialsServise.getCredentials()
         credentials.then((result) => {
-            chimeverseService.initConverse(result.connectionManager, result.login, result.password)
+            desktopService.initConverse(result.connectionManager, result.login, result.password)
         }, (error) => {
             AppStateService.set(AppStateService.APP_STATE_LOGIN)
         })
     }
 
 
-    chimeverseService.chatToOpen = null
+    desktopService.chatToOpen = null
 
     $window.document.addEventListener('conversejs-logout', function (e) {
-        chimeverseService.logout()
+        desktopService.logout()
     })
 
     $window.document.addEventListener('conversejs-unread', function (e) {
         let sender = e.detail
-        chimeverseService.chatToOpen = sender
-        chimeverseService._notifyMessage()
+        desktopService.chatToOpen = sender
+        desktopService._notifyMessage()
     })
 
     $window.document.addEventListener('conversejs-no-unread', function (e) {
-        chimeverseService._hideNotifyMessage()
+        desktopService._hideNotifyMessage()
     })
 
-    return chimeverseService
+    return desktopService
 
 })

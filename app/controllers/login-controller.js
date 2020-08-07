@@ -1,6 +1,6 @@
 let angApp = require(__dirname+'/../init')
 
-angApp.controller('LoginController', function($scope, ChimeVerseService, CredentialsServise) {
+angApp.controller('LoginController', function($scope, DesktopService, CredentialsServise) {
 
     $scope.help = {}
 
@@ -13,7 +13,7 @@ angApp.controller('LoginController', function($scope, ChimeVerseService, Credent
             $scope.credentials.login,
             $scope.credentials.password
         )
-        ChimeVerseService.getCredentialsAndLogin()
+        DesktopService.getCredentialsAndLogin()
         $scope.accountForm.$setPristine()
         $scope.accountForm.$setUntouched()
         $scope.credentials = {}

@@ -1,7 +1,7 @@
-let chimeversePlugin = {}
+let desktopPlugin = {}
 
-chimeversePlugin.register = (login) => {
-    converse.plugins.add('chimeVerse', {
+desktopPlugin.register = (login) => {
+    converse.plugins.add('converseDesktop', {
         initialize: (event) => {
             let _converse = event.properties._converse
             let Strophe = converse.env.Strophe
@@ -64,4 +64,4 @@ chimeversePlugin.register = (login) => {
     })
 }
 
-module.exports = chimeversePlugin
+module.exports = desktopPlugin

@@ -7,16 +7,16 @@ angApp.factory('SettingsService', () => {
     const electronSettings = require('electron-settings')
 
     const settings = {
-        chimeverse: {
+        converseDesktop: {
             runMinimized: {
                 default: false,
                 title: 'Run minimized',
-                hint: 'Default: false. Whether run Chimeverse minimized to tray or not.'
+                hint: 'Default: false. Whether run Converse Desktop minimized to tray or not.'
             },
             minimizeOnClose: {
                 default: false,
                 title: 'Minimize on close',
-                hint: 'Default: false. Minimize or close Chimeverse window.'
+                hint: 'Default: false. Minimize or close Converse Desktop window.'
             },
             preserveWindowSize: {
                 default: true,

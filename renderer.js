@@ -9,20 +9,20 @@ require('./app/services/settings-service')
 require('./app/services/system-service')
 require('./app/services/app-state-service')
 require('./app/services/xmpp-helper-service')
-require('./app/services/chimeverse-service')
+require('./app/services/desktop-service')
 require('./app/controllers/settings-controller')
 require('./app/controllers/login-controller')
 require('./app/controllers/default-controller')
 require('./app/controllers/about-controller')
 require('./app/controllers/footer-controller')
 
-angApp.controller('AppController', function ($scope, $timeout, ChimeVerseService, SettingsService, AppStateService) {
+angApp.controller('AppController', function ($scope, $timeout, DesktopService, SettingsService, AppStateService) {
 
     const { ipcRenderer } = require('electron')
 
     // Menu force logout event
     ipcRenderer.on('force-logout-event', () => {
-        ChimeVerseService.logout()
+        DesktopService.logout()
         let event = new CustomEvent("converse-force-logout") // Dispatch to the plugin
         document.dispatchEvent(event)
     })
@@ -39,7 +39,7 @@ angApp.controller('AppController', function ($scope, $timeout, ChimeVerseService
 
     // Menu about event
     ipcRenderer.on('open-unread-chat', () => {
-        let event = new CustomEvent('conversejs-open-chat', {detail: ChimeVerseService.chatToOpen})
+        let event = new CustomEvent('conversejs-open-chat', {detail: DesktopService.chatToOpen})
         document.dispatchEvent(event)
     })
 
@@ -59,6 +59,6 @@ angApp.controller('AppController', function ($scope, $timeout, ChimeVerseService
 
     SettingsService.initDefaults()
 
-    ChimeVerseService.getCredentialsAndLogin()
+    DesktopService.getCredentialsAndLogin()
 
 })
