@@ -60,8 +60,10 @@
       ]
     },
     "linux": {
+      "artifactName": "converse_desktop-${version}_${arch}.${ext}",
       "target": [
-        "deb"
+        "deb",
+        "tar.gz"
       ]
     },
     "win": {
