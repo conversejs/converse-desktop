@@ -15,10 +15,10 @@ It should happen once. A very basic integration of [Converse.js](https://convers
 
 #### Screenshots and feautures
 <p float="left">
-<img width="403" alt="Main window" src="https://user-images.githubusercontent.com/1450983/56779297-0758ad80-67e3-11e9-95af-f2c7b4264402.png">
-<img width="403" alt="Chat" src="https://user-images.githubusercontent.com/1450983/56779327-2fe0a780-67e3-11e9-8380-97af16e3f06b.png">
-<img width="403" alt="Account form" src="https://user-images.githubusercontent.com/1450983/84831577-41fb5600-b034-11ea-8774-8d8632391a49.png">
-<img width="403" alt="Settings screen" src="https://user-images.githubusercontent.com/1450983/81833419-59808400-9548-11ea-8059-a59448d1ff7d.png">
+<img width="403" alt="Account form" src="https://user-images.githubusercontent.com/1450983/89672948-33bc0e80-d8ee-11ea-983f-21bbb707b45d.png">
+<img width="403" alt="Main window" src="https://user-images.githubusercontent.com/1450983/89673019-4f271980-d8ee-11ea-8058-0ac6269983aa.png">
+<img width="403" alt="Chat" src="https://user-images.githubusercontent.com/1450983/89673064-68c86100-d8ee-11ea-86c4-137e1b95dae7.png">
+<img width="403" alt="Settings screen" src="https://user-images.githubusercontent.com/1450983/89673104-7847aa00-d8ee-11ea-8d30-8f84e7709e7c.png">
 
 </p>
 
