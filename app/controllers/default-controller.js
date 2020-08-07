@@ -18,7 +18,7 @@ angApp.controller('DefaultController', function($scope, $timeout, $http, AppInfo
             else {
                 $scope.checkingForUpdate = 'latest'
             }
-        }, (error) => {
+        }).catch((error) => {
             $scope.checkingForUpdate = 'checkErr'
         })
     }
