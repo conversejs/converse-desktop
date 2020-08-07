@@ -1,4 +1,4 @@
-# Converse Desktop 
+# Converse Desktop
 
 This project started as a fork of Nick Denry's [Chimeverse](https://github.com/conversejs/converse-desktop).
 
@@ -35,7 +35,7 @@ See [CHANGES.md](https://github.com/conversejs/converse-desktop/blob/master/CHAN
 
 ```
 git clone https://github.com/conversejs/converse-desktop.git
-cd Chimeverse
+cd converse-desktop
 npm i
 $(npm bin)/electron-rebuild
 npm start
@@ -46,7 +46,7 @@ npm start
 Prepare
 ```
 git clone https://github.com/conversejs/converse-desktop.git
-cd Chimeverse
+cd converse-desktop
 npm i
 $(npm bin)/electron-rebuild
 ```

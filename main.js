@@ -67,7 +67,7 @@ function createWindow () {
     menuService.createMenu()
 
     // Open the DevTools.
-    mainWindow.webContents.openDevTools()
+    // mainWindow.webContents.openDevTools()
 
     // Before close
     let minimizeOnClose = settingsService.get('minimizeOnClose')
