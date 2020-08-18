@@ -27,21 +27,17 @@ It should happen once. A very basic integration of [Converse.js](https://convers
 - All the best from Converse.js like system notifications, MAM, OMEMO etc. See details at [Converse.js](https://conversejs.org/)
 
 
-#### License
+#### License information
 
-Like Converse.js, Converse-Desktop's files are released under the Mozilla
+Like Converse.js, Converse Desktop's files are released under the Mozilla
 Public License version 2 (MPLv2).
 
-The gist of this license is that the covered files must stay open source, and
-modifications to them need to be released under the same license, but new files
-(for example for your own plugin) don't have to be released under the same
-license.
-
-However, libsignal, which is required for OMEMO support is released under the
-GPLv3. The MPLv2 is compatible with GPLv3 and when GPLv3 code is included, the
+However, libsignal library, which is required for OMEMO support is released under the
+GPLv3. The MPLv2 license is compatible with GPLv3 and when GPLv3 code is included, the
 entire project effectively is licensed under the GPLv3.
 
-Any custom build of Converse-Desktop which removes libsignal will again be licensed under the MPLv2.
+Any custom build of Converse Desktop without libsignal included will again be licensed 
+under the MPLv2.
 
 
 #### Changelog
