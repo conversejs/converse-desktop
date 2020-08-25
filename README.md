@@ -6,7 +6,6 @@ This project started as a fork of Nick Denry's [Chimeverse](https://github.com/c
 
 ![Version](https://img.shields.io/npm/v/chimeverse/latest.svg)
 ![Downloads](https://img.shields.io/npm/dt/chimeverse.svg)
-![License](https://img.shields.io/npm/l/chimeverse.svg)
 <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6MZ5YRYEDSVSQ&source=url" title="Donate once-off to this project using Paypal">
         <img src="https://img.shields.io/badge/paypal-donate-yellow.svg" alt="PayPayl donate button" />
     </a>
@@ -26,6 +25,17 @@ It should happen once. A very basic integration of [Converse.js](https://convers
 - Tray icon
 - Tray notifications
 - All the best from Converse.js like system notifications, MAM, OMEMO etc. See details at [Converse.js](https://conversejs.org/)
+
+
+#### License information
+
+Like Converse.js, Converse Desktop's files are released under the Mozilla Public License version 2 (MPLv2). The gist of this license is that the covered files must stay open source, and modifications to them need to be released under the same license, but new files (for example for your own plugin) don't have to be released under the same license.
+
+However, libsignal library, which is required for OMEMO support is released under the GPLv3. The MPLv2 license is compatible with GPLv3 and when GPLv3 code is included, the entire project effectively is licensed under the GPLv3.
+
+Any custom build of Converse Desktop without libsignal included will again be licensed 
+under the MPLv2.
+
 
 #### Changelog
 
