@@ -1,6 +1,6 @@
 let angApp = require(__dirname+'/../init')
 
-angApp.controller('LoginController', function($scope, DesktopService, CredentialsServise) {
+angApp.controller('LoginController', function($scope, DesktopService, CredentialsService) {
 
     $scope.help = {}
 
@@ -9,7 +9,7 @@ angApp.controller('LoginController', function($scope, DesktopService, Credential
     }
 
     $scope.addAccountAndLoginAction = () => {
-        CredentialsServise.addCredentials($scope.credentials.connectionManager,
+        CredentialsService.addCredentials($scope.credentials.connectionManager,
             $scope.credentials.login,
             $scope.credentials.password
         )

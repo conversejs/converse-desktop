@@ -29,7 +29,9 @@ function createWindow () {
         minWidth: 780,
         minHeight: 560,
         webPreferences: {
-            nodeIntegration: true
+            nodeIntegration: true,
+            contextIsolation: false,
+            enableRemoteModule: true
         }
     }
 

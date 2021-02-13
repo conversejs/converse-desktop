@@ -1,6 +1,6 @@
 let angApp = require(__dirname+'/../init')
 
-angApp.factory('CredentialsServise', () => {
+angApp.factory('CredentialsService', () => {
 
     const keytar = require('keytar')
     const settings = require('electron-settings')
@@ -9,10 +9,10 @@ angApp.factory('CredentialsServise', () => {
 
     credentialsService.getCredentials = () => {
         let credentials = {}
-        credentials.login = settings.get('login')
+        credentials.login = settings.getSync('login')
         let promise = new Promise((resolve, reject) => {
             if (credentials.login) {
-                credentials.connectionManager = settings.get('connectionManager')
+                credentials.connectionManager = settings.getSync('connectionManager')
                 credentials.xmppService = credentials.login.split('@').pop()
                 let password = keytar.getPassword(credentials.xmppService, credentials.login)
                 password.then((result) => {
@@ -29,8 +29,8 @@ angApp.factory('CredentialsServise', () => {
 
     credentialsService.addCredentials = (connectionManager, login, password) => {
         let xmppService = login.split('@').pop()
-        settings.set('connectionManager', connectionManager)
-        settings.set('login', login)
+        settings.setSync('connectionManager', connectionManager)
+        settings.setSync('login', login)
         keytar.setPassword(xmppService, login, password)
     }
 
@@ -39,8 +39,8 @@ angApp.factory('CredentialsServise', () => {
         passwordDelete = keytar.deletePassword(xmppService, login)
         let promise = new Promise((resolve, reject) => {
             passwordDelete.then((result) => {
-                settings.delete('login')
-                settings.delete('connectionManager')
+                settings.unsetSync('login')
+                settings.unsetSync('connectionManager')
                 resolve()
             }, (error) => {
                 reject(error)
