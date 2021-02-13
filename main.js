@@ -29,7 +29,9 @@ function createWindow () {
         minWidth: 780,
         minHeight: 560,
         webPreferences: {
-            nodeIntegration: true
+            nodeIntegration: true,
+            contextIsolation: false,
+            enableRemoteModule: true
         }
     }
 
@@ -150,9 +152,11 @@ app.on('window-all-closed', function () {
 })
 
 app.on('activate', function () {
-    // On macOS it's common to re-create a window in the app when the
-    // dock icon is clicked and there are no other windows open.
-    if (mainWindow === null) createWindow()
+    if (mainWindow === null){
+        createWindow()
+    } else {
+        mainWindow.show();
+    }
 })
 
 // In this file you can include the rest of your app's specific main process

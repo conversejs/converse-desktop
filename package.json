@@ -6,10 +6,10 @@
   "scripts": {
     "postinstall": "electron-builder install-app-deps",
     "start": "electron .",
-    "pack": "build --dir",
-    "dist": "build",
-    "dist:win64": "build --platform win --arch x64",
-    "dist:linux64deb": "build --platform linux --arch x64"
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder --mac",
+    "dist:win64": "electron-builder --win --x64",
+    "dist:linux64deb": "electron-builder --linux --x64"
   },
   "repository": "https://github.com/conversejs/converse-desktop",
   "keywords": [
@@ -23,18 +23,16 @@
   "author": "Nick Denry <nick@denry.ru>",
   "license": "MPL-2.0",
   "devDependencies": {
-    "electron": "^4.2.12",
-    "electron-builder": "^20.44.4",
-    "electron-packager": "^13.1.1",
-    "electron-rebuild": "^1.10.1"
+    "electron": "11.2.3",
+    "electron-builder": "^22.9.1",
+    "electron-packager": "^15.2.0"
   },
   "dependencies": {
     "angular": "^1.7.9",
-    "converse.js": "^6.0.0",
-    "electron-settings": "^3.2.0",
+    "converse.js": "7.0.4",
+    "electron-settings": "^4.0.2",
     "github-buttons": "^2.8.0",
-    "keytar": "^4.13.0",
-    "n": "^6.5.1",
+    "keytar": "^7.3.0",
     "open-iconic": "^1.1.1"
   },
   "build": {
@@ -61,6 +59,7 @@
     },
     "linux": {
       "artifactName": "converse_desktop-${version}_${arch}.${ext}",
+      "icon": "resources/images/logo@2x.png",
       "target": [
         "deb",
         "tar.gz"

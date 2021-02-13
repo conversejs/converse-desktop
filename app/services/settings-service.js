@@ -59,23 +59,23 @@ angApp.factory('SettingsService', () => {
     // Callback
     // TODO: replace with promise?
     const saveDefault = (key, value) => {
-        if (!electronSettings.has(key)) {
-            electronSettings.set(key, value)
+        if (!electronSettings.hasSync(key)) {
+            electronSettings.setSync(key, value)
         }
     }
 
     // Callback
     const save = (key, defaultValue, settingsList) => {
         let value = settingsList[key]['value']
-        electronSettings.set(key, value)
+        electronSettings.setSync(key, value)
     }
 
     // Callback
     const loadAll = (key, defaultValue, settingsList) => {
-        if (!electronSettings.has(key)) {
+        if (!electronSettings.hasSync(key)) {
             settingsList[key]['value'] = defaultValue
         }
-        settingsList[key]['value'] = electronSettings.get(key)
+        settingsList[key]['value'] = electronSettings.getSync(key)
     }
 
     /**
@@ -84,14 +84,14 @@ angApp.factory('SettingsService', () => {
     settingsService.initDefaults = () => {
         iterateSettings(saveDefault)
         // Logout for versions with BOSH only
-        if (electronSettings.has('bosh')) {
-            electronSettings.delete('bosh')
-            electronSettings.delete('login')
+        if (electronSettings.hasSync('bosh')) {
+            electronSettings.unsetSync('bosh')
+            electronSettings.unsetSync('login')
         }
     }
 
     settingsService.get = (key) => {
-        return electronSettings.get(key)
+        return electronSettings.getSync(key)
     }
 
     settingsService.loadAll = () => {

@@ -7,7 +7,7 @@ const electronSettings = require('electron-settings')
 let settingsService = {}
 
 settingsService.get = (itemKey) => {
-    settingValue = electronSettings.get(itemKey)
+    settingValue = electronSettings.getSync(itemKey)
     if (typeof settingValue === 'undefined' || settingValue === null) {
         return false
     }
@@ -15,7 +15,7 @@ settingsService.get = (itemKey) => {
 }
 
 settingsService.set = (itemKey, settingValue) => {
-    electronSettings.set(itemKey, settingValue)
+    electronSettings.setSync(itemKey, settingValue)
 }
 
 module.exports = settingsService

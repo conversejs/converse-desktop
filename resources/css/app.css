@@ -47,3 +47,12 @@ a {
 #conversejs .converse-chatboxes > * {
     pointer-events: auto;
 }
+
+.chat-body {
+    overflow: hidden;
+ }
+
+#conversejs.converse-embedded .chatbox {
+    flex-grow: 1 !important;
+    flex-shrink: 1 !important;
+}

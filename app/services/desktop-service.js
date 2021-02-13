@@ -3,7 +3,7 @@ let angApp = require(__dirname + '/../init')
 const desktopPlugin = require(__dirname +'/../../libs/converse.js/converse-desktop/desktop-plugin')
 
 angApp.factory('DesktopService', (
-        $window, $timeout, CredentialsServise, SystemService, AppStateService,
+        $window, $timeout, CredentialsService, SystemService, AppStateService,
         SettingsService, XmppHelperService
     ) => {
 
@@ -19,9 +19,9 @@ angApp.factory('DesktopService', (
     }
 
     desktopService.logout = () => {
-        let credentials = CredentialsServise.getCredentials()
+        let credentials = CredentialsService.getCredentials()
         credentials.then((result) => {
-            let remove = CredentialsServise.removeCredentials(result.login)
+            let remove = CredentialsService.removeCredentials(result.login)
             console.log('Remove credentials on logout')
             remove.then(() => {
                 AppStateService.set(AppStateService.APP_STATE_LOGIN)
@@ -66,7 +66,7 @@ angApp.factory('DesktopService', (
     }
 
     desktopService.getCredentialsAndLogin = () => {
-        let credentials = CredentialsServise.getCredentials()
+        let credentials = CredentialsService.getCredentials()
         credentials.then((result) => {
             desktopService.initConverse(result.connectionManager, result.login, result.password)
         }, (error) => {
