@@ -6,10 +6,10 @@
   "scripts": {
     "postinstall": "electron-builder install-app-deps",
     "start": "electron .",
-    "pack": "build --dir",
-    "dist": "build",
-    "dist:win64": "build --platform win --arch x64",
-    "dist:linux64deb": "build --platform linux --arch x64"
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder --mac",
+    "dist:win64": "electron-builder --win --x64",
+    "dist:linux64deb": "electron-builder --linux --x64"
   },
   "repository": "https://github.com/conversejs/converse-desktop",
   "keywords": [
@@ -59,6 +59,7 @@
     },
     "linux": {
       "artifactName": "converse_desktop-${version}_${arch}.${ext}",
+      "icon": "resources/images/logo@2x.png",
       "target": [
         "deb",
         "tar.gz"
