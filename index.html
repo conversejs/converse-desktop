@@ -7,28 +7,17 @@
     <link rel="stylesheet" type="text/css" media="screen" href="node_modules/converse.js/dist/converse.min.css">
     <link rel="stylesheet" type="text/css" href="resources/css/app.css">
     <link rel="stylesheet" type="text/css" href="resources/css/_footer.css">
-    <link rel="stylesheet" type="text/css" href="resources/css/page-about.css">
     <link rel="stylesheet" type="text/css" href="resources/css/page-default.css">
-    <link rel="stylesheet" type="text/css" href="resources/css/page-login.css">
     <link rel="stylesheet" type="text/css" href="resources/css/page-settings.css">
 </head>
 <base href="./">
-<body ng-app="app">
-    <div class="main-background"></div>
-    <div class="main-window" ng-controller="AppController" ng-cloak>
-        <div ng-show="state == 'default'">
-            <ng-include src="'./app/views/default/page.html'"></ng-include>
-        </div>
-        <div ng-show="state == 'login'">
-            <ng-include src="'./app/views/login/page.html'"></ng-include>
-        </div>
-        <div ng-show="state == 'about'">
-            <ng-include src="'./app/views/about/page.html'"></ng-include>
-        </div>
-        <div ng-show="state == 'settings'">
-            <ng-include src="'./app/views/settings/page.html'"></ng-include>
+<body class="converse-fullscreen" ng-app="app">
+    <div class="main-window">
+        <div class="page-default">
+            <div id="conversejs-bg"></div>
         </div>
     </div>
+
     <!--
       @see comment https://github.com/signalapp/libsignal-protocol-javascript/issues/6#issuecomment-247208665
     -->
@@ -37,27 +26,15 @@
         delete window.require
     </script>
     <!-- Place libsignal at libs dir as it's no more distributed with converse.js -->
-    <script src="libs/converse.js/3rdparty/libsignal-protocol.js"></script>
+    <script src="./3rdparty/libsignal-protocol.js"></script>
     <script>
         window.require = window.nodeRequire
         delete window.nodeRequire
     </script>
     <script>
         // You can also require other files to run in this process
-        require('./node_modules/converse.js/dist/emojis.js')
         require('./node_modules/converse.js/dist/converse.js')
-        require('./renderer.js')
-    </script>
-    <script>
-        function loadJs(url) {
-            var script = document.createElement('script')
-            script.src = url
-            script.setAttribute('async', 'true')
-            document.documentElement.firstChild.appendChild(script)
-        }
-        setTimeout(function () {
-            loadJs("./node_modules/github-buttons/dist/buttons.min.js")
-        }, 500)
+        require('./setup.js')
     </script>
 </body>
 </html>

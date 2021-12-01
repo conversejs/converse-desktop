@@ -7,7 +7,7 @@ const electronSettings = require('electron-settings')
 let settingsService = {}
 
 settingsService.get = (itemKey) => {
-    settingValue = electronSettings.getSync(itemKey)
+    const settingValue = electronSettings.getSync(itemKey)
     if (typeof settingValue === 'undefined' || settingValue === null) {
         return false
     }
