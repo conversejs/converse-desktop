@@ -9,17 +9,15 @@ const path = require('path')
 let trayServiceWindow = null
 let tray = null
 
-let trayService = {}
+const trayService = {}
 
-let getTrayServiceIcon = (iconName = 'icon') => {
+const getTrayServiceIcon = (iconName = 'icon') => {
     let iconImage = ''
     if (process.platform === 'darwin') {
         iconImage = iconName+'Template'
-    }
-    else if (process.platform === 'win32') {
+    } else if (process.platform === 'win32') {
         iconImage = iconName+'-16x16'
-    }
-    else {
+    } else {
         iconImage = iconName+'-48x48'
     }
     return path.join(__dirname, '/../resources/images/' + iconImage + '.png')
@@ -27,12 +25,12 @@ let getTrayServiceIcon = (iconName = 'icon') => {
 
 trayService.initTray = (window) => {
     trayServiceWindow = window
-    let iconPath = getTrayServiceIcon()
+    const iconPath = getTrayServiceIcon()
     tray = new Tray(iconPath)
     tray.setToolTip('Converse Desktop')
     tray.on('click', function() {
         // Sent open-related-chat event only on click
-        let activeWindow = BrowserWindow.getAllWindows()[0]
+        const activeWindow = BrowserWindow.getAllWindows()[0]
         activeWindow.webContents.send('open-unread-chat')
         trayService.hideEnvelope()
         trayServiceWindow.show()
@@ -40,12 +38,12 @@ trayService.initTray = (window) => {
 }
 
 trayService.showEnvelope = () => {
-    let iconPath = getTrayServiceIcon('envelope')
+    const iconPath = getTrayServiceIcon('envelope')
     tray.setImage(iconPath)
 }
 
 trayService.hideEnvelope = () => {
-    let iconPath = getTrayServiceIcon()
+    const iconPath = getTrayServiceIcon()
     tray.setImage(iconPath)
 }
 

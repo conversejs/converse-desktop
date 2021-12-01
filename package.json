@@ -20,16 +20,16 @@
     "Electron",
     "OMEMO"
   ],
-  "author": "Nick Denry <nick@denry.ru>",
   "license": "MPL-2.0",
   "devDependencies": {
     "electron": "11.2.3",
     "electron-builder": "^22.9.1",
-    "electron-packager": "^15.2.0"
+    "electron-packager": "^15.2.0",
+    "electron-rebuild": "^3.2.5",
+    "eslint": "^8.4.1"
   },
   "dependencies": {
-    "angular": "^1.7.9",
-    "converse.js": "7.0.4",
+    "converse.js": "conversejs/converse.js#6ee3ddbc8c41608cf56d86566d6460bb423892b0",
     "electron-settings": "^4.0.2",
     "github-buttons": "^2.8.0",
     "keytar": "^7.3.0",
@@ -59,7 +59,7 @@
     },
     "linux": {
       "artifactName": "converse_desktop-${version}_${arch}.${ext}",
-      "icon": "resources/images/logo@2x.png",
+      "icon": "resources/images/logo.png",
       "target": [
         "deb",
         "tar.gz"

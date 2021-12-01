@@ -8,7 +8,7 @@ let mainWindow
 // Require other app modules
 const trayService     = require(__dirname+'/modules/tray-service')
 const menuService     = require(__dirname+'/modules/menu-service')
-const settingsService = require(__dirname+'/modules/settings-service')
+// const settingsService = require(__dirname+'/modules/settings-service')
 
 const isMac = process.platform === 'darwin'
 const isWin = process.platform === 'win32'
@@ -23,41 +23,19 @@ function initApp() {
 
 function createWindow () {
     // Main window options
-    let mainWindowOptions = {
-        width: 800,
-        height: 600,
-        minWidth: 780,
-        minHeight: 560,
+    const mainWindowOptions = {
+        zoomToPageWidth: true,
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false,
             enableRemoteModule: true
-        }
-    }
-
-    // Load app settings
-    let runMinimized = settingsService.get('runMinimized')
-    if (runMinimized) {
-        mainWindowOptions.show = !runMinimized
-    }
-    let preserveWindowSize = settingsService.get('preserveWindowSize')
-    if (preserveWindowSize) {
-        let width = settingsService.get('windowWidth')
-        let height = settingsService.get('windowHeight')
-        if (width) mainWindowOptions.width = width
-        if (height) mainWindowOptions.height = height
-    }
-
-    let preserveWindowPosition = settingsService.get('preserveWindowPosition')
-    if (preserveWindowPosition) {
-        let windowX = settingsService.get('windowX')
-        let windowY = settingsService.get('windowY')
-        if (windowX) mainWindowOptions.x = windowX
-        if (windowY) mainWindowOptions.y = windowY
+        },
+        icon: './resources/images/logo.png',
     }
 
     // Create the browser window.
     mainWindow = new BrowserWindow(mainWindowOptions)
+    mainWindow.maximize();
 
     // and load the index.html of the app.
     mainWindow.loadFile('index.html')
@@ -72,35 +50,15 @@ function createWindow () {
     // mainWindow.webContents.openDevTools()
 
     // Before close
-    let minimizeOnClose = settingsService.get('minimizeOnClose')
+    // const minimizeOnClose = settingsService.get('minimizeOnClose');
+    const minimizeOnClose = false; // XXX: this doesn't seem to work
     if (minimizeOnClose) {
         mainWindow.on('close', (e) => {
             if (!app.isQuitting) {
                 e.preventDefault()
                 mainWindow.hide()
             }
-        })
-    }
-
-    // Save window size
-    if (preserveWindowSize) {
-        mainWindow.on('resize', (e) => {
-            let newSize = mainWindow.getSize()
-            let width = newSize[0]
-            let height = newSize[1]
-            settingsService.set('windowWidth', width)
-            settingsService.set('windowHeight', height)
-        })
-    }
-
-    // Save window position
-    if (preserveWindowPosition !== 'undefined') {
-        mainWindow.on('move', (e) => {
-            let newPosition = mainWindow.getPosition()
-            let windowX = newPosition[0]
-            let windowY = newPosition[1]
-            settingsService.set('windowX', windowX)
-            settingsService.set('windowY', windowY)
+            return false;
         })
     }
 
@@ -115,7 +73,7 @@ function createWindow () {
     }
 
     // Handle restart
-    ipcMain.on('app-restart', (evt, arg) => {
+    ipcMain.on('app-restart', () => {
         app.isQuitting = true
         app.relaunch()
         app.exit()
