@@ -20,39 +20,43 @@ a {
     color: #777;
 }
 
-.main-background {
+.main-window {
     background: #f8f8f8;
     height: 100%;
-    left: 0px;
+    left: 0;
     position: fixed;
-    top: 0px;
+    top: 0;
     width: 100%;
     z-index: -1;
 }
 
-.conversejs-adoption {
-    background: transparent;
-    pointer-events: none;
-    position: fixed;
-    left: 0px;
-    top: 0px;
+.main-window > div {
     width: 100%;
     height: 100%;
 }
 
-#conversejs .converse-chatboxes {
-    pointer-events: none;
+
+.conversejs converse-chats.converse-embedded .chat-body {
+    height: 50%;
+    flex-grow: 1;
 }
 
-#conversejs .converse-chatboxes > * {
-    pointer-events: auto;
+.conversejs converse-chats.converse-embedded .chatbox {
+    width: 100%;
 }
 
-.chat-body {
-    overflow: hidden;
- }
+.conversejs converse-chats.converse-embedded .flyout  {
+    position: static;
+}
 
-#conversejs.converse-embedded .chatbox {
-    flex-grow: 1 !important;
-    flex-shrink: 1 !important;
+.conversejs .chatbox .bottom-panel .sendXMPPMessage .chat-textarea {
+    margin-bottom: 0;
+}
+
+.conversejs converse-chats.converse-embedded #controlbox {
+    padding: 0;
+}
+
+.conversejs converse-chats.converse-embedded .chatbox {
+    margin-left: 0;
 }

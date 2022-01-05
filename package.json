@@ -23,13 +23,13 @@
   "author": "Nick Denry <nick@denry.ru>",
   "license": "MPL-2.0",
   "devDependencies": {
-    "electron": "11.2.3",
+    "electron": "^13.0.0",
     "electron-builder": "^22.9.1",
     "electron-packager": "^15.2.0"
   },
   "dependencies": {
     "angular": "^1.7.9",
-    "converse.js": "7.0.4",
+    "converse.js": "^9.0.0",
     "electron-settings": "^4.0.2",
     "github-buttons": "^2.8.0",
     "keytar": "^7.3.0",
