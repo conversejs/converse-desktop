@@ -1,14 +1,16 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, ipcMain, shell } = require('electron')
+const {app, BrowserWindow, ipcMain, shell} = require('electron')
+const path = require('path');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
 
 // Require other app modules
-const trayService     = require(__dirname+'/modules/tray-service')
-const menuService     = require(__dirname+'/modules/menu-service')
-const settingsService = require(__dirname+'/modules/settings-service')
+const trayService = require(__dirname + '/modules/tray-service')
+const menuService = require(__dirname + '/modules/menu-service')
+const settingsService = require(__dirname + '/modules/settings-service')
+const electronSettings = require("electron-settings");
 
 const isMac = process.platform === 'darwin'
 const isWin = process.platform === 'win32'
@@ -21,7 +23,7 @@ function initApp() {
     }
 }
 
-function createWindow () {
+function createWindow() {
     // Main window options
     let mainWindowOptions = {
         width: 800,
@@ -29,9 +31,7 @@ function createWindow () {
         minWidth: 780,
         minHeight: 560,
         webPreferences: {
-            nodeIntegration: true,
-            contextIsolation: false,
-            enableRemoteModule: true
+            preload: path.join(__dirname, 'preload.js')
         }
     }
 
@@ -107,7 +107,7 @@ function createWindow () {
     // Handle shutdown event on Mac with minimizeOnClose
     // to prevent shutdown interrupt
     if (isMac && minimizeOnClose) {
-        const { powerMonitor } = require('electron')
+        const {powerMonitor} = require('electron')
         powerMonitor.on('shutdown', () => {
             app.isQuitting = true
             app.quit()
@@ -121,6 +121,32 @@ function createWindow () {
         app.exit()
     })
 
+    ipcMain.on('electron-settings', (event, method, ...args) => {
+        switch (method) {
+            case 'hasSync':
+                event.returnValue = electronSettings.hasSync(...args);
+                break;
+            case 'getSync':
+                event.returnValue = electronSettings.getSync(...args);
+                break;
+            case 'setSync':
+                electronSettings.setSync(...args);
+                break;
+            case 'unsetSync':
+                electronSettings.unsetSync(...args);
+        }
+
+        return event.returnValue;
+    })
+
+    ipcMain.on('tray-service', (event, method) => {
+        return trayService[method].call();
+    })
+
+    ipcMain.on('reload', () => {
+        return mainWindow.reload();
+    })
+
     // Emitted when the window is closed.
     mainWindow.on('closed', function () {
         // Dereference the window object, usually you would store windows
@@ -130,7 +156,7 @@ function createWindow () {
     })
 
     // Open links on system default browser
-    mainWindow.webContents.on('new-window', function(e, url) {
+    mainWindow.webContents.on('new-window', function (e, url) {
         e.preventDefault()
         shell.openExternal(url)
     })
@@ -152,7 +178,7 @@ app.on('window-all-closed', function () {
 })
 
 app.on('activate', function () {
-    if (mainWindow === null){
+    if (mainWindow === null) {
         createWindow()
     } else {
         mainWindow.show();

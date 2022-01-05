@@ -1,6 +1,5 @@
-let angApp = require(__dirname + '/../init')
-
-const desktopPlugin = require(__dirname +'/../../libs/converse.js/converse-desktop/desktop-plugin')
+const angApp = (await import('../init.js')).default;
+const desktopPlugin = (await import('../../libs/converse.js/converse-desktop/desktop-plugin.js')).desktopPlugin;
 
 angApp.factory('DesktopService', (
         $window, $timeout, CredentialsService, SystemService, AppStateService,

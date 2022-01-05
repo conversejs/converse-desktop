@@ -23,7 +23,7 @@
   "author": "Nick Denry <nick@denry.ru>",
   "license": "MPL-2.0",
   "devDependencies": {
-    "electron": "^13.0.0",
+    "electron": "^16.0.0",
     "electron-builder": "^22.9.1",
     "electron-packager": "^15.2.0"
   },

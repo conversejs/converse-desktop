@@ -1,9 +1,6 @@
-let angApp = require(__dirname + '/../init')
+const angApp = (await import('../init.js')).default;
 
 angApp.factory('SystemService', () => {
-
-    const remote = require('electron').remote
-
     let systemService = {}
 
     systemService.playAudio = () => {
@@ -12,15 +9,15 @@ angApp.factory('SystemService', () => {
     }
 
     systemService.showEnvelope = () => {
-        remote.require('./main').trayService.showEnvelope()
+        api.trayService.showEnvelope()
     }
 
     systemService.hideEnvelope = () => {
-        remote.require('./main').trayService.hideEnvelope()
+        api.trayService.hideEnvelope()
     }
 
     systemService.reloadWindow = () => {
-        remote.getCurrentWindow().reload()
+        api.reload()
     }
 
     return systemService

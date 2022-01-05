@@ -1,11 +1,8 @@
-let angApp = require(__dirname+'/../init')
+const angApp = (await import('../init.js')).default;
 
 angApp.factory('SettingsService', () => {
 
     let settingsService = {}
-
-    const electronSettings = require('electron-settings')
-
     const settings = {
         converseDesktop: {
             runMinimized: {
@@ -44,7 +41,7 @@ angApp.factory('SettingsService', () => {
     }
 
     const iterateSettings = (callback, settingsObj) => {
-        if(typeof settingsObj === "undefined") {
+        if (typeof settingsObj === "undefined") {
             settingsObj = settings
         }
         angular.forEach(settingsObj, (value, key) => {
@@ -59,23 +56,23 @@ angApp.factory('SettingsService', () => {
     // Callback
     // TODO: replace with promise?
     const saveDefault = (key, value) => {
-        if (!electronSettings.hasSync(key)) {
-            electronSettings.setSync(key, value)
+        if (!api.electronSettings.hasSync(key)) {
+            api.electronSettings.setSync(key, value)
         }
     }
 
     // Callback
     const save = (key, defaultValue, settingsList) => {
         let value = settingsList[key]['value']
-        electronSettings.setSync(key, value)
+        api.electronSettings.setSync(key, value)
     }
 
     // Callback
     const loadAll = (key, defaultValue, settingsList) => {
-        if (!electronSettings.hasSync(key)) {
+        if (!api.electronSettings.hasSync(key)) {
             settingsList[key]['value'] = defaultValue
         }
-        settingsList[key]['value'] = electronSettings.getSync(key)
+        settingsList[key]['value'] = api.electronSettings.getSync(key)
     }
 
     /**
@@ -84,14 +81,14 @@ angApp.factory('SettingsService', () => {
     settingsService.initDefaults = () => {
         iterateSettings(saveDefault)
         // Logout for versions with BOSH only
-        if (electronSettings.hasSync('bosh')) {
-            electronSettings.unsetSync('bosh')
-            electronSettings.unsetSync('login')
+        if (api.electronSettings.hasSync('bosh')) {
+            api.electronSettings.unsetSync('bosh')
+            api.electronSettings.unsetSync('login')
         }
     }
 
     settingsService.get = (key) => {
-        return electronSettings.getSync(key)
+        return api.electronSettings.getSync(key)
     }
 
     settingsService.loadAll = () => {

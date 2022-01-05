@@ -1,4 +1,4 @@
-let desktopPlugin = {}
+const desktopPlugin = {}
 
 desktopPlugin.register = (login) => {
     converse.plugins.add('converseDesktop', {
@@ -64,4 +64,4 @@ desktopPlugin.register = (login) => {
     })
 }
 
-module.exports = desktopPlugin
+export default desktopPlugin;

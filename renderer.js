@@ -1,44 +1,42 @@
 // This file is required by the index.html file and will
 // be executed in the renderer process for that window.
-// All of the Node.js APIs are available in this process.
 
-var angApp = require('./app/init')
+const angApp = (await import('./app/init.js')).default;
 
-require('./app/services/credentials-service')
-require('./app/services/settings-service')
-require('./app/services/system-service')
-require('./app/services/app-state-service')
-require('./app/services/xmpp-helper-service')
-require('./app/services/desktop-service')
-require('./app/controllers/settings-controller')
-require('./app/controllers/login-controller')
-require('./app/controllers/default-controller')
-require('./app/controllers/about-controller')
-require('./app/controllers/footer-controller')
+await import('./app/services/credentials-service.js')
+await import('./app/services/settings-service.js')
+await import('./app/services/system-service.js')
+await import('./app/services/app-state-service.js')
+await import('./app/services/xmpp-helper-service.js')
+await import('./app/services/desktop-service.js')
+await import('./app/controllers/settings-controller.js')
+await import('./app/controllers/login-controller.js')
+await import('./app/controllers/default-controller.js')
+await import('./app/controllers/about-controller.js')
+await import('./app/controllers/footer-controller.js')
+
 
 angApp.controller('AppController', function ($scope, $timeout, DesktopService, SettingsService, AppStateService) {
 
-    const { ipcRenderer } = require('electron')
-
     // Menu force logout event
-    ipcRenderer.on('force-logout-event', () => {
+    api.receive('force-logout-event', () => {
         DesktopService.logout()
         let event = new CustomEvent("converse-force-logout") // Dispatch to the plugin
         document.dispatchEvent(event)
     })
 
     // Menu settings event
-    ipcRenderer.on('preferences-event', () => {
+    api.receive('preferences-event', () => {
         AppStateService.set(AppStateService.APP_STATE_SETTINGS)
     })
 
     // Menu about event
-    ipcRenderer.on('about-page-event', () => {
+    api.receive('about-page-event', () => {
         AppStateService.set(AppStateService.APP_STATE_ABOUT)
     })
 
     // Menu about event
-    ipcRenderer.on('open-unread-chat', () => {
+    api.receive('open-unread-chat', () => {
         let event = new CustomEvent('conversejs-open-chat', {detail: DesktopService.chatToOpen})
         document.dispatchEvent(event)
     })
@@ -54,11 +52,13 @@ angApp.controller('AppController', function ($scope, $timeout, DesktopService, S
     })
 
     $scope.$on('app:restart', (event, data) => {
-        ipcRenderer.send('app-restart')
+        api.send('app-restart')
     })
 
     SettingsService.initDefaults()
 
     DesktopService.getCredentialsAndLogin()
 
-})
+});
+
+angular.bootstrap(document.body, ['app']);

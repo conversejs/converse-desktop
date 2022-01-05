@@ -1,5 +1,5 @@
 /**
- * Module for getting settigns in Main process.
+ * Module for getting settings in Main process.
  */
 
 const electronSettings = require('electron-settings')
@@ -7,7 +7,7 @@ const electronSettings = require('electron-settings')
 let settingsService = {}
 
 settingsService.get = (itemKey) => {
-    settingValue = electronSettings.getSync(itemKey)
+    let settingValue = electronSettings.getSync(itemKey)
     if (typeof settingValue === 'undefined' || settingValue === null) {
         return false
     }

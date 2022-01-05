@@ -1,6 +1,4 @@
-const angular = require('angular')
-let angApp = angular.module('app', [])
-
+const angApp = angular.module('app', [])
 angApp.constant('AppInfo', {
     APP_NAME: 'Converse Desktop',
     APP_VERSION: 'v0.1.0',
@@ -11,4 +9,4 @@ angApp.constant('AppInfo', {
     ELECTRON_VERSION: '13.6.6'
 });
 
-module.exports = angApp
+export default angApp;

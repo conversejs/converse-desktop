@@ -1,4 +1,4 @@
-let angApp = require(__dirname + '/../init')
+const angApp = (await import('../init.js')).default;
 
 angApp.factory('AppStateService', [ '$rootScope', ($rootScope) => {
 
