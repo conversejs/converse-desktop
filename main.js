@@ -135,8 +135,6 @@ function createWindow() {
             case 'unsetSync':
                 electronSettings.unsetSync(...args);
         }
-
-        return event.returnValue;
     })
 
     ipcMain.on('tray-service', (event, method) => {

@@ -1,4 +1,6 @@
 const {ipcRenderer, contextBridge} = require('electron');
+const keytar = require('keytar');
+
 contextBridge.exposeInMainWorld('api', {
     send(channel, ...data) {
         return ipcRenderer.send(channel, ...data);
@@ -33,5 +35,6 @@ contextBridge.exposeInMainWorld('api', {
         hideEnvelope() {
             ipcRenderer.send('tray-service', 'hideEnvelope')
         }
-    }
+    },
+    keytar: keytar
 });

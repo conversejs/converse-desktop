@@ -9,7 +9,7 @@ angApp.factory('CredentialsService', () => {
             if (credentials.login) {
                 credentials.connectionManager = api.electronSettings.getSync('connectionManager')
                 credentials.xmppService = credentials.login.split('@').pop()
-                let password = keytar.getPassword(credentials.xmppService, credentials.login)
+                let password = api.keytar.getPassword(credentials.xmppService, credentials.login)
                 password.then((result) => {
                     credentials.password = result
                     resolve(credentials)
@@ -25,12 +25,12 @@ angApp.factory('CredentialsService', () => {
         let xmppService = login.split('@').pop()
         api.electronSettings.setSync('connectionManager', connectionManager)
         api.electronSettings.setSync('login', login)
-        keytar.setPassword(xmppService, login, password)
+        return api.keytar.setPassword(xmppService, login, password)
     }
 
     credentialsService.removeCredentials = (login) => {
         let xmppService = login.split('@').pop()
-        keytar.deletePassword(xmppService, login)
+        let passwordDelete = api.keytar.deletePassword(xmppService, login)
         let promise = new Promise((resolve, reject) => {
             passwordDelete.then((result) => {
                 api.electronSettings.unsetSync('login')

@@ -12,8 +12,9 @@ angApp.controller('LoginController', function($scope, DesktopService, Credential
         CredentialsService.addCredentials($scope.credentials.connectionManager,
             $scope.credentials.login,
             $scope.credentials.password
-        )
-        DesktopService.getCredentialsAndLogin()
+        ).then(()=>{
+            DesktopService.getCredentialsAndLogin()
+        });
         $scope.accountForm.$setPristine()
         $scope.accountForm.$setUntouched()
         $scope.credentials = {}

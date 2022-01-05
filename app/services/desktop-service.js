@@ -1,5 +1,5 @@
 const angApp = (await import('../init.js')).default;
-const desktopPlugin = (await import('../../libs/converse.js/converse-desktop/desktop-plugin.js')).desktopPlugin;
+const desktopPlugin = (await import('../../libs/converse.js/converse-desktop/desktop-plugin.js')).default;
 
 angApp.factory('DesktopService', (
         $window, $timeout, CredentialsService, SystemService, AppStateService,
