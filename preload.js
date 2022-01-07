@@ -15,6 +15,14 @@ contextBridge.exposeInMainWorld('api', {
         ipcRenderer.send('reload')
     },
 
+    getApplicationVersion() {
+        return ipcRenderer.invoke('getApplicationVersion');
+    },
+
+    getElectronVersion() {
+        return ipcRenderer.invoke('getElectronVersion');
+    },
+
     electronSettings: {
         hasSync(setting) {
             return ipcRenderer.sendSync('electron-settings', 'hasSync', setting)

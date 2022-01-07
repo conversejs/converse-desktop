@@ -141,6 +141,14 @@ function createWindow() {
         return mainWindow.reload();
     })
 
+    ipcMain.handle('getApplicationVersion', () => {
+        return app.getVersion();
+    });
+
+    ipcMain.handle('getElectronVersion', () => {
+        return process.versions.electron;
+    });
+
     // Emitted when the window is closed.
     mainWindow.on('closed', function () {
         // Dereference the window object, usually you would store windows
