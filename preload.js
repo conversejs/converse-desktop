@@ -1,6 +1,5 @@
 const {ipcRenderer, contextBridge} = require('electron');
 const keytar = require('keytar');
-const trayService = require(__dirname + '/modules/tray-service');
 
 contextBridge.exposeInMainWorld('api', {
     send(channel, ...data) {
@@ -39,10 +38,10 @@ contextBridge.exposeInMainWorld('api', {
     },
     trayService: {
         showEnvelope() {
-            trayService.showEnvelope();
+            ipcRenderer.invoke('trayService.showEnvelope')
         },
         hideEnvelope() {
-            trayService.hideEnvelope();
+            ipcRenderer.invoke('trayService.hideEnvelope')
         }
     },
     keytar: {

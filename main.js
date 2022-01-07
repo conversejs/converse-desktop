@@ -149,6 +149,9 @@ function createWindow() {
         return process.versions.electron;
     });
 
+    ipcMain.handle('trayService.showEnvelope', () => trayService.showEnvelope());
+    ipcMain.handle('trayService.hideEnvelope', () => trayService.hideEnvelope());
+
     // Emitted when the window is closed.
     mainWindow.on('closed', function () {
         // Dereference the window object, usually you would store windows
