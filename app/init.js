@@ -5,7 +5,6 @@ angApp.constant('AppInfo', {
     APP_HOME: 'https://github.com/conversejs/converse-desktop',
     APP_RELEASES_CHECK_URL: 'https://api.github.com/repos/conversejs/converse-desktop/releases',
     APP_RELEASES_URL: 'https://github.com/conversejs/converse-desktop/releases',
-    CONVERSE_VERSION: 'v9.0.0',
     ELECTRON_VERSION: '13.6.6'
 });
 

@@ -6,6 +6,10 @@ desktopPlugin.register = (login) => {
             let _converse = event.properties._converse
             let Strophe = converse.env.Strophe
 
+            converse.getVersion = function () {
+                return _converse.VERSION_NAME;
+            };
+
             /**
              * Check if message stanza has some body payload
              * @param {*} stanzaNodes
@@ -13,7 +17,7 @@ desktopPlugin.register = (login) => {
             let isBodyMessage = (stanzaNodes) => {
                 let result = false
                 Object.keys(stanzaNodes).some((key) => {
-                    if (stanzaNodes[key].nodeName == 'body') {
+                    if (stanzaNodes[key].nodeName === 'body') {
                         result = true
                     }
                 })
@@ -34,7 +38,7 @@ desktopPlugin.register = (login) => {
                         let sender = data.stanza.attributes.from.nodeValue
                         let senderJid = Strophe.getBareJidFromJid(sender)
                         let loginJid = Strophe.getBareJidFromJid(login)
-                        if (senderJid != loginJid) {
+                        if (senderJid !== loginJid) {
                             console.log(senderJid)
                             let event = new CustomEvent('conversejs-unread', {detail: senderJid})
                             document.dispatchEvent(event)
@@ -54,7 +58,7 @@ desktopPlugin.register = (login) => {
                 })
                 window.document.addEventListener('conversejs-open-chat', function (e) {
                     let chatToOpen = e.detail
-                    console.log('Get open-unread-chat event: '+chatToOpen)
+                    console.log('Get open-unread-chat event: ' + chatToOpen)
                     if (chatToOpen !== null) {
                         _converse.api.chats.open(chatToOpen)
                     }

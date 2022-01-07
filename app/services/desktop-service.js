@@ -2,11 +2,26 @@ const angApp = (await import('../init.js')).default;
 const desktopPlugin = (await import('../../libs/converse.js/converse-desktop/desktop-plugin.js')).default;
 
 angApp.factory('DesktopService', (
-        $window, $timeout, CredentialsService, SystemService, AppStateService,
-        SettingsService, XmppHelperService
-    ) => {
+    $window, $timeout, CredentialsService, SystemService, AppStateService,
+    SettingsService, XmppHelperService
+) => {
 
     let desktopService = {}
+    let promise = new Promise((resolve) => {
+        function checkVersion() {
+            if (converse.getVersion) {
+                resolve(converse.getVersion());
+            } else {
+                $timeout(checkVersion, 50);
+            }
+        }
+
+        $timeout(checkVersion, 50);
+    });
+
+    desktopService.getConverseVersion = () => {
+        return promise;
+    };
 
     desktopService._notifyMessage = () => {
         SystemService.playAudio()
@@ -36,8 +51,8 @@ angApp.factory('DesktopService', (
         let omemoDefault = SettingsService.get('omemoDefault')
         let xmppResource = XmppHelperService.getResourceFromJid(login)
         if (!xmppResource) {
-            xmppResource = '.' + (Math.random().toString(36)+'00000000000000000').slice(2, 7) // Generate 5 char unique str
-            login = login + '/converseDesktop'+xmppResource
+            xmppResource = '.' + (Math.random().toString(36) + '00000000000000000').slice(2, 7) // Generate 5 char unique str
+            login = login + '/converseDesktop' + xmppResource
         }
         let conversejsParams = {
             assets_path: './node_modules/converse.js/dist/',
@@ -60,7 +75,7 @@ angApp.factory('DesktopService', (
             conversejsParams.bosh_service_url = connectionManager
         }
         $timeout(() => {
-            converse.initialize(conversejsParams)
+            converse.initialize(conversejsParams);
         }, 50)
     }
 
