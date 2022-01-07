@@ -137,10 +137,6 @@ function createWindow() {
         }
     })
 
-    ipcMain.on('tray-service', (event, method) => {
-        return trayService[method].call();
-    })
-
     ipcMain.on('reload', () => {
         return mainWindow.reload();
     })

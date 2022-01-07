@@ -1,5 +1,6 @@
 const {ipcRenderer, contextBridge} = require('electron');
 const keytar = require('keytar');
+const trayService = require(__dirname + '/modules/tray-service');
 
 contextBridge.exposeInMainWorld('api', {
     send(channel, ...data) {
@@ -30,11 +31,21 @@ contextBridge.exposeInMainWorld('api', {
     },
     trayService: {
         showEnvelope() {
-            ipcRenderer.send('tray-service', 'showEnvelope')
+            trayService.showEnvelope();
         },
         hideEnvelope() {
-            ipcRenderer.send('tray-service', 'hideEnvelope')
+            trayService.hideEnvelope();
         }
     },
-    keytar: keytar
+    keytar: {
+        getPassword(service, login) {
+            return keytar.getPassword(service, login);
+        },
+        setPassword(service, login, password) {
+            return keytar.setPassword(service, login, password);
+        },
+        deletePassword(service, login) {
+            return keytar.deletePassword(service, login);
+        }
+    }
 });
