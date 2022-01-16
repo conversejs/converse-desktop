@@ -8,7 +8,7 @@ let mainWindow
 // Require other app modules
 const trayService     = require(__dirname+'/modules/tray-service')
 const menuService     = require(__dirname+'/modules/menu-service')
-// const settingsService = require(__dirname+'/modules/settings-service')
+const settingsService = require(__dirname+'/modules/settings-service')
 
 const isMac = process.platform === 'darwin'
 const isWin = process.platform === 'win32'
@@ -50,21 +50,17 @@ function createWindow () {
     // mainWindow.webContents.openDevTools()
 
     // Before close
-    // const minimizeOnClose = settingsService.get('minimizeOnClose');
-    const minimizeOnClose = false; // XXX: this doesn't seem to work
-    if (minimizeOnClose) {
-        mainWindow.on('close', (e) => {
-            if (!app.isQuitting) {
-                e.preventDefault()
-                mainWindow.hide()
-            }
-            return false;
-        })
-    }
+    mainWindow.on('close', (e) => {
+        if (!app.isQuitting && settingsService.get('minimizeOnClose')) {
+            e.preventDefault()
+            mainWindow.hide()
+        }
+        return false;
+    })
 
     // Handle shutdown event on Mac with minimizeOnClose
     // to prevent shutdown interrupt
-    if (isMac && minimizeOnClose) {
+    if (isMac) {
         const { powerMonitor } = require('electron')
         powerMonitor.on('shutdown', () => {
             app.isQuitting = true
