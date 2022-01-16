@@ -2,6 +2,7 @@
  * Module for Menu functions.
  */
 const {app, Menu, BrowserWindow} = require('electron')
+const settingsService = require(__dirname + '/../modules/settings-service')
 
 const menuService = {}
 
@@ -20,6 +21,15 @@ menuService.createMenu = () => {
                 }
             },
             {
+                label: 'Minimize on close',
+                type: 'checkbox',
+                checked: settingsService.get('minimizeOnClose'),
+                click: () => {
+                    this.checked = !this.checked;
+                    settingsService.set('minimizeOnClose', this.checked);
+                }
+            },
+            {
                 type: 'separator',
             },
             {
@@ -30,7 +40,7 @@ menuService.createMenu = () => {
                     app.quit()
                 },
             },
-      ],
+        ],
     }
 
     const edit = {
@@ -67,7 +77,7 @@ menuService.createMenu = () => {
                 accelerator: 'CmdOrCtrl+A',
                 role: 'selectAll',
             },
-      ],
+        ],
     }
 
     const help = {
