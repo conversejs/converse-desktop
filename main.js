@@ -1,5 +1,6 @@
 // Modules to control application life and create native browser window
 const { app, BrowserWindow, ipcMain, shell } = require('electron')
+const path = require('path');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -26,9 +27,7 @@ function createWindow () {
     const mainWindowOptions = {
         zoomToPageWidth: true,
         webPreferences: {
-            nodeIntegration: true,
-            contextIsolation: false,
-            enableRemoteModule: true
+            preload: path.join(__dirname, 'preload.js')
         },
         icon: './resources/images/logo.png',
     }
@@ -88,6 +87,14 @@ function createWindow () {
         e.preventDefault()
         shell.openExternal(url)
     })
+
+    ipcMain.handle('settings', (e, method, ...args) => {
+        return settingsService[method].apply(settingsService, args);
+    });
+
+    ipcMain.handle('trayService', (e, method, ...args) => {
+        return trayService[method].apply(trayService, args);
+    });
 }
 
 // This method will be called when Electron has finished

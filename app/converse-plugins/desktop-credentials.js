@@ -1,5 +1,4 @@
-const { addCredentials } = require('../credentials.js');
-const { getCredentials, removeCredentials } = require('../credentials.js');
+const credentials = await import('../credentials.js');
 
 converse.plugins.add('converse-desktop-credentials', {
 
@@ -9,7 +8,7 @@ converse.plugins.add('converse-desktop-credentials', {
 
         api.listen.on('afterResourceBinding', () => {
             if (_converse.connection.pass) {
-                addCredentials(
+                credentials.addCredentials(
                     converse.connectionManager,
                     _converse.bare_jid,
                     _converse.connection.pass
@@ -18,7 +17,7 @@ converse.plugins.add('converse-desktop-credentials', {
         });
 
         api.listen.on('logout', () => {
-            getCredentials().then((result) => removeCredentials(result.login))
+            credentials.getCredentials().then((result) => credentials.removeCredentials(result.login))
         });
     }
 });

@@ -1,5 +1,5 @@
 /**
- * Module for getting settigns in Main process.
+ * Module for getting settings in Main process.
  */
 
 const electronSettings = require('electron-settings')
@@ -17,5 +17,9 @@ settingsService.get = (itemKey) => {
 settingsService.set = (itemKey, settingValue) => {
     electronSettings.setSync(itemKey, settingValue)
 }
+
+settingsService.has = (itemKey) => electronSettings.hasSync(itemKey);
+
+settingsService.unset = (itemKey) => electronSettings.unsetSync(itemKey);
 
 module.exports = settingsService

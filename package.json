@@ -22,7 +22,7 @@
   ],
   "license": "MPL-2.0",
   "devDependencies": {
-    "electron": "11.2.3",
+    "electron": "^16.0.0",
     "electron-builder": "^22.9.1",
     "electron-packager": "^15.2.0",
     "electron-rebuild": "^3.2.5",
@@ -67,7 +67,7 @@
     },
     "win": {
       "target": "nsis",
-      "icon": "resources/images/logo.ico"
+      "icon": "resources/images/logo.png"
     }
   }
 }

@@ -1,16 +1,18 @@
 /**
  * Module for Menu functions.
  */
-const {app, Menu, BrowserWindow} = require('electron')
+const {app, Menu, MenuItem, BrowserWindow} = require('electron')
 const settingsService = require(__dirname + '/../modules/settings-service')
 
 const menuService = {}
 
 
 menuService.createMenu = () => {
-    const application = {
-        label: 'Converse Desktop',
-        submenu: [
+    let converse;
+    const application = new Menu();
+    application.append(new MenuItem({
+        label: 'Converse Desktop'
+        , submenu: converse = Menu.buildFromTemplate([
             {
                 label: 'Reconnect',
                 accelerator: 'CmdOrCtrl+R',
@@ -23,10 +25,10 @@ menuService.createMenu = () => {
             {
                 label: 'Minimize on close',
                 type: 'checkbox',
+                id: 'minimize-on-close',
                 checked: settingsService.get('minimizeOnClose'),
                 click: () => {
-                    this.checked = !this.checked;
-                    settingsService.set('minimizeOnClose', this.checked);
+                    settingsService.set('minimizeOnClose', converse.getMenuItemById('minimize-on-close').checked);
                 }
             },
             {
@@ -40,12 +42,11 @@ menuService.createMenu = () => {
                     app.quit()
                 },
             },
-        ],
-    }
-
-    const edit = {
-        label: 'Edit',
-        submenu: [
+        ])
+    }));
+    application.append(new MenuItem({
+        label: 'Edit'
+        , submenu: Menu.buildFromTemplate([
             {
                 label: 'Undo',
                 accelerator: 'CmdOrCtrl+Z',
@@ -77,12 +78,11 @@ menuService.createMenu = () => {
                 accelerator: 'CmdOrCtrl+A',
                 role: 'selectAll',
             },
-        ],
-    }
-
-    const help = {
-        label: 'Help',
-        submenu: [
+        ])
+    }));
+    application.append(new MenuItem({
+        label: 'Help'
+        , submenu: Menu.buildFromTemplate([
             {
                 label: 'Debug info',
                 accelerator: 'F12',
@@ -91,12 +91,10 @@ menuService.createMenu = () => {
                     activeWindow.webContents.openDevTools()
                 }
             }
-        ]
-    }
+        ])
+    }));
 
-    const template = [application, edit, help]
-
-    Menu.setApplicationMenu(Menu.buildFromTemplate(template))
+    Menu.setApplicationMenu(application);
 }
 
 module.exports = menuService

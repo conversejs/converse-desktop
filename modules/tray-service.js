@@ -14,13 +14,13 @@ const trayService = {}
 const getTrayServiceIcon = (iconName = 'icon') => {
     let iconImage = ''
     if (process.platform === 'darwin') {
-        iconImage = iconName+'Template'
+        iconImage = iconName
     } else if (process.platform === 'win32') {
         iconImage = iconName+'-16x16'
     } else {
         iconImage = iconName+'-48x48'
     }
-    return path.join(__dirname, '/../resources/images/' + iconImage + '.png')
+    return path.join(__dirname, '..','resources','images', iconImage + '.png')
 }
 
 trayService.initTray = (window) => {
