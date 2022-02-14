@@ -33,7 +33,7 @@ function createWindow () {
     }
 
     // Create the browser window.
-    mainWindow = new BrowserWindow(mainWindowOptions)
+    app.mainWindow = mainWindow = new BrowserWindow(mainWindowOptions)
     mainWindow.maximize();
 
     // and load the index.html of the app.

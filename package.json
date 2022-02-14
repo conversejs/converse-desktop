@@ -33,7 +33,8 @@
     "electron-settings": "^4.0.2",
     "github-buttons": "^2.8.0",
     "keytar": "^7.3.0",
-    "open-iconic": "^1.1.1"
+    "open-iconic": "^1.1.1",
+    "electron-prompt": "^1.7.0"
   },
   "build": {
     "appId": "com.denry.converse-desktop",
