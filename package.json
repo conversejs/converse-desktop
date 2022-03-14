@@ -29,7 +29,7 @@
     "eslint": "^8.4.1"
   },
   "dependencies": {
-    "converse.js": "conversejs/converse.js#ba6da97416b912a35060a4c5667bc77f76852780",
+    "converse.js": "conversejs/converse.js#cb0b176",
     "electron-settings": "^4.0.2",
     "github-buttons": "^2.8.0",
     "keytar": "^7.3.0",
