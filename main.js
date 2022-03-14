@@ -36,9 +36,6 @@ function createWindow () {
     app.mainWindow = mainWindow = new BrowserWindow(mainWindowOptions)
     mainWindow.maximize();
 
-    // and load the index.html of the app.
-    mainWindow.loadFile('index.html')
-
     // Init tray
     trayService.initTray(mainWindow)
 
@@ -95,6 +92,9 @@ function createWindow () {
     ipcMain.handle('trayService', (e, method, ...args) => {
         return trayService[method].apply(trayService, args);
     });
+
+    // and load the index.html of the app.
+    mainWindow.loadFile('index.html')
 }
 
 // This method will be called when Electron has finished
