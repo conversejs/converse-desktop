@@ -1,48 +1,32 @@
-/* global require, module */
+/* global api */
 
-const settings = require('electron-settings');
-const keytar = require('keytar')
-
-function addCredentials (connectionManager, login, password) {
+async function addCredentials(connectionManager, login, password) {
     const xmppService = login.split('@').pop()
-    settings.setSync('connectionManager', connectionManager)
-    settings.setSync('login', login)
-    keytar.setPassword(xmppService, login, password)
+    await api.settings.set('connectionManager', connectionManager)
+    await api.settings.set('login', login)
+    await api.keytar.setPassword(xmppService, login, password)
 }
 
-function getCredentials () {
+async function getCredentials() {
     const credentials = {}
-    credentials.login = settings.getSync('login')
-    return new Promise((resolve) => {
-        if (credentials.login) {
-            credentials.connectionManager = settings.getSync('connectionManager')
-            credentials.xmppService = credentials.login.split('@').pop()
-            let password = keytar.getPassword(credentials.xmppService, credentials.login)
-            password.then((result) => {
-                credentials.password = result
-                resolve(credentials)
-            })
-        } else {
-            resolve({});
-        }
-    });
+    credentials.login = await api.settings.get('login')
+    if (credentials.login) {
+        credentials.connectionManager = await api.settings.get('connectionManager') || null
+        credentials.xmppService = credentials.login.split('@').pop()
+        credentials.password = await api.keytar.getPassword(credentials.xmppService, credentials.login)
+    }
+
+    return credentials;
 }
 
-function removeCredentials (login) {
-    const xmppService = login.split('@').pop()
-    const passwordDelete = keytar.deletePassword(xmppService, login)
-    return new Promise((resolve, reject) => {
-        passwordDelete.then(() => {
-            settings.unsetSync('login')
-            settings.unsetSync('connectionManager')
-            resolve()
-        }, (error) => {
-            reject(error)
-        })
-    })
+async function removeCredentials(login) {
+    const xmppService = login.split('@').pop();
+    await api.keytar.deletePassword(xmppService, login);
+    await api.settings.unset('login');
+    await api.settings.unset('connectionManager');
 }
 
-module.exports = {
+export {
     addCredentials,
     getCredentials,
     removeCredentials

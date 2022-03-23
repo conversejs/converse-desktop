@@ -11,30 +11,15 @@
     <link rel="stylesheet" type="text/css" href="resources/css/page-settings.css">
 </head>
 <base href="./">
-<body class="converse-fullscreen" ng-app="app">
+<body class="converse-fullscreen">
     <div class="main-window">
         <div class="page-default">
             <div id="conversejs-bg"></div>
         </div>
     </div>
-
-    <!--
-      @see comment https://github.com/signalapp/libsignal-protocol-javascript/issues/6#issuecomment-247208665
-    -->
-    <script>
-        window.nodeRequire = require
-        delete window.require
-    </script>
     <!-- Place libsignal at libs dir as it's no more distributed with converse.js -->
     <script src="./3rdparty/libsignal-protocol.js"></script>
-    <script>
-        window.require = window.nodeRequire
-        delete window.nodeRequire
-    </script>
-    <script>
-        // You can also require other files to run in this process
-        require('./node_modules/converse.js/dist/converse.js')
-        require('./setup.js')
-    </script>
+    <script src="./node_modules/converse.js/dist/converse.min.js"></script>
+    <script type="module" src="./setup.js"></script>
 </body>
 </html>

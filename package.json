@@ -22,18 +22,19 @@
   ],
   "license": "MPL-2.0",
   "devDependencies": {
-    "electron": "11.2.3",
+    "electron": "^16.0.0",
     "electron-builder": "^22.9.1",
     "electron-packager": "^15.2.0",
     "electron-rebuild": "^3.2.5",
     "eslint": "^8.4.1"
   },
   "dependencies": {
-    "converse.js": "conversejs/converse.js#ba6da97416b912a35060a4c5667bc77f76852780",
+    "converse.js": "conversejs/converse.js#cb0b176",
     "electron-settings": "^4.0.2",
     "github-buttons": "^2.8.0",
     "keytar": "^7.3.0",
-    "open-iconic": "^1.1.1"
+    "open-iconic": "^1.1.1",
+    "electron-prompt": "^1.7.0"
   },
   "build": {
     "appId": "com.denry.converse-desktop",
@@ -67,7 +68,7 @@
     },
     "win": {
       "target": "nsis",
-      "icon": "resources/images/logo.ico"
+      "icon": "resources/images/logo.png"
     }
   }
 }

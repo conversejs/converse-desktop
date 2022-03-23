@@ -1,5 +1,6 @@
-require('./app/converse-plugins/desktop-credentials.js');
-const{ getCredentials } = require('./app/credentials.js')
+await import('./app/converse-plugins/desktop-credentials.js')
+await import('./app/converse-plugins/desktop-trayicon.js')
+const getCredentials = (await import('./app/credentials.js')).getCredentials;
 
 
 async function initialize () {
@@ -39,7 +40,7 @@ async function initialize () {
         theme: 'concord',
         view_mode: 'fullscreen',
         websocket_url,
-        whitelisted_plugins: ['converse-debug', 'converse-desktop-credentials'],
+        whitelisted_plugins: ['converse-debug', 'converse-desktop-credentials', 'converse-desktop-trayicon'],
     });
 }
 
