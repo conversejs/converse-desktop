@@ -7,8 +7,6 @@ async function initialize () {
     let websocket_url, bosh_service_url;
     const { connectionManager, login, password } = await getCredentials()
 
-    converse.connectionManager = connectionManager;
-
     if (connectionManager?.startsWith('ws')) {
         websocket_url = connectionManager
     } else if (connectionManager?.startsWith('http')) {
@@ -41,6 +39,7 @@ async function initialize () {
         view_mode: 'fullscreen',
         websocket_url,
         whitelisted_plugins: ['converse-debug', 'converse-desktop-credentials', 'converse-desktop-trayicon'],
+        show_connection_url_input: true
     });
 }
 

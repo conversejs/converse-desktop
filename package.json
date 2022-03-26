@@ -29,12 +29,11 @@
     "eslint": "^8.4.1"
   },
   "dependencies": {
-    "converse.js": "conversejs/converse.js#cb0b176",
+    "converse.js": "conversejs/converse.js#d570b60",
     "electron-settings": "^4.0.2",
     "github-buttons": "^2.8.0",
     "keytar": "^7.3.0",
-    "open-iconic": "^1.1.1",
-    "electron-prompt": "^1.7.0"
+    "open-iconic": "^1.1.1"
   },
   "build": {
     "appId": "com.denry.converse-desktop",

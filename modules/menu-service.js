@@ -3,7 +3,6 @@
  */
 const {app, Menu, MenuItem, BrowserWindow} = require('electron')
 const settingsService = require(__dirname + '/../modules/settings-service')
-const prompt = require('electron-prompt');
 
 const menuService = {}
 
@@ -30,26 +29,6 @@ menuService.createMenu = () => {
                 checked: settingsService.get('minimizeOnClose'),
                 click: () => {
                     settingsService.set('minimizeOnClose', converse.getMenuItemById('minimize-on-close').checked);
-                }
-            },
-            {
-                label: 'Connection Manager...',
-                click: () => {
-                    let currentValue = settingsService.get('connectionManager') || '';
-                    prompt({
-                        title: 'Connection manager'
-                        , label: 'Connection manager URL:'
-                        , value: currentValue
-                        , resizable: true
-                        , width: 620
-                        , height: 180
-                    }, app.mainWindow).then(function (newValue) {
-                        if (newValue !== null && newValue !== currentValue) {
-                            settingsService.set('connectionManager', newValue === '' ? null : newValue);
-                            app.mainWindow.reload()
-                        }
-                    }).catch(function (ex) {
-                    });
                 }
             },
             {

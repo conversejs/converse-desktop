@@ -33,7 +33,7 @@ function createWindow () {
     }
 
     // Create the browser window.
-    app.mainWindow = mainWindow = new BrowserWindow(mainWindowOptions)
+    mainWindow = new BrowserWindow(mainWindowOptions)
     mainWindow.maximize();
 
     // Init tray

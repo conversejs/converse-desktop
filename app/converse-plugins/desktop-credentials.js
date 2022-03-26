@@ -9,7 +9,7 @@ converse.plugins.add('converse-desktop-credentials', {
         api.listen.on('afterResourceBinding', () => {
             if (_converse.connection.pass) {
                 credentials.addCredentials(
-                    converse.connectionManager,
+                    _converse.connection.service,
                     _converse.bare_jid,
                     _converse.connection.pass
                 );
