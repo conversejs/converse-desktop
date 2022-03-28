@@ -6,9 +6,9 @@ converse.plugins.add('converse-desktop-trayicon', {
         const {_converse} = this;
         let envelopeIsShowing = false;
 
-        function hideEnvelope() {
+        async function hideEnvelope() {
             if (envelopeIsShowing) {
-                api.trayService.hideEnvelope();
+                await api.trayService.hideEnvelope();
                 envelopeIsShowing = false;
             }
         }
@@ -16,8 +16,8 @@ converse.plugins.add('converse-desktop-trayicon', {
         window.addEventListener('focus', hideEnvelope);
         _converse.api.listen.on('chatBoxInitialized', hideEnvelope);
         _converse.api.listen.on('chatBoxFocused', hideEnvelope);
-        _converse.api.listen.on('messageNotification', () => {
-            api.trayService.showEnvelope();
+        _converse.api.listen.on('messageNotification', async () => {
+            await api.trayService.showEnvelope();
             envelopeIsShowing = true;
         });
     }

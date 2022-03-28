@@ -9,7 +9,7 @@ async function addCredentials(connectionManager, login, password) {
 
 async function getCredentials() {
     const credentials = {}
-    credentials.login = await api.settings.get('login')
+    credentials.login = (await api.settings.get('login')) || '';
     if (credentials.login) {
         credentials.connectionManager = await api.settings.get('connectionManager') || null
         credentials.xmppService = credentials.login.split('@').pop()

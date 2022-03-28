@@ -1,4 +1,4 @@
-<h2 align="center">
+<h2 style="text-align: center">
   <a href="https://conversejs.org" target="_blank" rel="noopener">
     <img alt="Converse-Desktop" src="https://github.com/conversejs/converse.js/blob/master/logo/readme.png" width="480">
   </a>
@@ -12,9 +12,9 @@
 
 A basic integration of [Converse.js](https://conversejs.org/) and Electron. With OMEMO.
 
-## Screenshots and feautures
+## Screenshots and features
 
-<p float="left">
+<p>
 <img width="403" alt="Account form" src="https://user-images.githubusercontent.com/1450983/89672948-33bc0e80-d8ee-11ea-983f-21bbb707b45d.png">
 <img width="403" alt="Main window" src="https://user-images.githubusercontent.com/1450983/89673019-4f271980-d8ee-11ea-8058-0ac6269983aa.png">
 <img width="403" alt="Chat" src="https://user-images.githubusercontent.com/1450983/89673064-68c86100-d8ee-11ea-86c4-137e1b95dae7.png">
@@ -33,12 +33,12 @@ See [CHANGES.md](https://github.com/conversejs/converse-desktop/blob/master/CHAN
 
 #### Latest release installers
 
-| Operation System | Download link |
--------------------|----------------
-| macOS            | [Converse_Desktop-0.1.0_x64.dmg](https://github.com/conversejs/converse-desktop/releases/download/v0.1.0/Converse_Desktop-0.1.0_x64.dmg) |
+| Operation System | Download link                                                                                                                                        |
+|------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
+| macOS            | [Converse_Desktop-0.1.0_x64.dmg](https://github.com/conversejs/converse-desktop/releases/download/v0.1.0/Converse_Desktop-0.1.0_x64.dmg)             |
 | Windows          | [Converse_Desktop_Setup-0.1.0_x64.exe](https://github.com/conversejs/converse-desktop/releases/download/v0.1.0/Converse_Desktop_Setup-0.1.0_x64.exe) |
-| Linux DEB        | [converse_desktop-0.1.0_amd64.deb](https://github.com/conversejs/converse-desktop/releases/download/v0.1.0/converse_desktop-0.1.0_amd64.deb) |
-| Linux other        | [converse_desktop-0.1.0_x64.tar.gz](https://github.com/conversejs/converse-desktop/releases/download/v0.1.0/converse_desktop-0.1.0_x64.tar.gz) |
+| Linux DEB        | [converse_desktop-0.1.0_amd64.deb](https://github.com/conversejs/converse-desktop/releases/download/v0.1.0/converse_desktop-0.1.0_amd64.deb)         |
+| Linux other      | [converse_desktop-0.1.0_x64.tar.gz](https://github.com/conversejs/converse-desktop/releases/download/v0.1.0/converse_desktop-0.1.0_x64.tar.gz)       |
 
    - [All releases](https://github.com/conversejs/converse-desktop/releases)
 
@@ -60,10 +60,10 @@ npm start
 
 ### Build targets:
 
-| Operation System | Target |
--------------------|----------------
-| macOS            | `npm run dist` |
-| Windows          | `npm run dist:win64` |
+| Operation System | Target                    |
+|------------------|---------------------------|
+| macOS            | `npm run dist`            |
+| Windows          | `npm run dist:win64`      |
 | Linux DEB        | `npm run dist:linux64deb` |
 
 More targets could be added via `package.json`. See [electron builder docs](https://www.electron.build/configuration/configuration).
@@ -84,5 +84,5 @@ under the MPLv2.
 This project started as a fork of Nick Denry's [Chimeverse](https://github.com/conversejs/converse-desktop).
 
 <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6MZ5YRYEDSVSQ&source=url" title="Donate once-off to this project using Paypal">
-   <img src="https://img.shields.io/badge/paypal-donate-yellow.svg" alt="PayPayl donate button" />
+   <img src="https://img.shields.io/badge/paypal-donate-yellow.svg" alt="PayPal donate button" />
 </a>

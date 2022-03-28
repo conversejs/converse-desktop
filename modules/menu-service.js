@@ -1,13 +1,13 @@
 /**
  * Module for Menu functions.
  */
-const {app, Menu, MenuItem, BrowserWindow} = require('electron')
+const {app, Menu, MenuItem} = require('electron')
 const settingsService = require(__dirname + '/../modules/settings-service')
 
 const menuService = {}
 
 
-menuService.createMenu = () => {
+menuService.createMenu = (window) => {
     let converse;
     const application = new Menu();
     application.append(new MenuItem({
@@ -17,9 +17,8 @@ menuService.createMenu = () => {
                 label: 'Reconnect',
                 accelerator: 'CmdOrCtrl+R',
                 click: () => {
-                    const activeWindow = BrowserWindow.getAllWindows()[0]
-                    activeWindow.show()
-                    activeWindow.reload()
+                    window.show()
+                    window.reload()
                 }
             },
             {
@@ -87,8 +86,7 @@ menuService.createMenu = () => {
                 label: 'Debug info',
                 accelerator: 'F12',
                 click: () => {
-                    const activeWindow = BrowserWindow.getAllWindows()[0]
-                    activeWindow.webContents.openDevTools()
+                    window.webContents.openDevTools()
                 }
             }
         ])

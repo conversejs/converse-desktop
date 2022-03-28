@@ -1,5 +1,5 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, ipcMain, shell } = require('electron')
+const {app, BrowserWindow, ipcMain, shell} = require('electron')
 const path = require('path');
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -7,9 +7,9 @@ const path = require('path');
 let mainWindow
 
 // Require other app modules
-const trayService     = require(__dirname+'/modules/tray-service')
-const menuService     = require(__dirname+'/modules/menu-service')
-const settingsService = require(__dirname+'/modules/settings-service')
+const trayService = require(__dirname + '/modules/tray-service')
+const menuService = require(__dirname + '/modules/menu-service')
+const settingsService = require(__dirname + '/modules/settings-service')
 
 const isMac = process.platform === 'darwin'
 const isWin = process.platform === 'win32'
@@ -26,10 +26,11 @@ function initApp() {
     }
 }
 
-function createWindow () {
+function createWindow() {
     // Main window options
     const mainWindowOptions = {
         zoomToPageWidth: true,
+        show: false,
         webPreferences: {
             preload: path.join(__dirname, 'preload.js')
         },
@@ -38,13 +39,12 @@ function createWindow () {
 
     // Create the browser window.
     mainWindow = new BrowserWindow(mainWindowOptions)
-    mainWindow.maximize();
 
     // Init tray
     trayService.initTray(mainWindow)
 
     // Init menu
-    menuService.createMenu()
+    menuService.createMenu(mainWindow)
 
     // Open the DevTools.
     // mainWindow.webContents.openDevTools()
@@ -61,7 +61,7 @@ function createWindow () {
     // Handle shutdown event on Mac with minimizeOnClose
     // to prevent shutdown interrupt
     if (isMac) {
-        const { powerMonitor } = require('electron')
+        const {powerMonitor} = require('electron')
         powerMonitor.on('shutdown', () => {
             app.isQuitting = true
             app.quit()
@@ -69,10 +69,9 @@ function createWindow () {
     }
 
     // Handle restart
-    ipcMain.on('app-restart', () => {
+    ipcMain.on('app-quit', () => {
         app.isQuitting = true
-        app.relaunch()
-        app.exit()
+        app.quit();
     })
 
     // Emitted when the window is closed.
@@ -84,9 +83,11 @@ function createWindow () {
     })
 
     // Open links on system default browser
-    mainWindow.webContents.on('new-window', function(e, url) {
-        e.preventDefault()
-        shell.openExternal(url)
+    mainWindow.webContents.setWindowOpenHandler(function (details) {
+        shell.openExternal(details.url).catch((reason) => {
+            console.log(reason);
+        });
+        return {action: 'deny'};
     })
 
     ipcMain.handle('settings', (e, method, ...args) => {
@@ -97,8 +98,16 @@ function createWindow () {
         return trayService[method].apply(trayService, args);
     });
 
+    mainWindow.on('ready-to-show', () => {
+        mainWindow.maximize();
+    });
+
     // and load the index.html of the app.
-    mainWindow.loadFile('index.html')
+    mainWindow.loadFile('index.html').catch((reason) => {
+        console.log(reason);
+        app.isQuitting = true;
+        app.quit();
+    });
 }
 
 // This method will be called when Electron has finished
@@ -108,7 +117,7 @@ app.on('ready', initApp)
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
-    // On macOS it is common for applications and their menu bar
+    // On macOS, it is common for applications and their menu bar
     // to stay active until the user quits explicitly with Cmd + Q
     // if (process.platform !== 'darwin')
     // ^^^^ NOPE ;)
@@ -117,7 +126,7 @@ app.on('window-all-closed', function () {
 })
 
 app.on('activate', function () {
-    if (mainWindow === null){
+    if (mainWindow === null) {
         createWindow()
     } else {
         mainWindow.show();
@@ -131,11 +140,5 @@ app.on('second-instance', function () {
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
 
-// Allow to play audio automatically
+// Allow audio to play automatically
 app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required')
-
-/**
- * Export functions
- */
-
-exports.trayService = trayService
