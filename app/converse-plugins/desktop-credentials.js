@@ -2,9 +2,9 @@ const credentials = await import('../credentials.js');
 
 converse.plugins.add('converse-desktop-credentials', {
 
-    initialize() {
-        const {_converse} = this;
-        const {api} = _converse;
+    initialize () {
+        const { _converse } = this;
+        const { api } = _converse;
 
         api.listen.on('afterResourceBinding', () => {
             if (_converse.connection.pass) {

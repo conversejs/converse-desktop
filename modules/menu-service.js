@@ -1,7 +1,7 @@
 /**
  * Module for Menu functions.
  */
-const {app, Menu, MenuItem} = require('electron')
+const { app, Menu, MenuItem } = require('electron')
 const settingsService = require(__dirname + '/../modules/settings-service')
 
 const menuService = {}

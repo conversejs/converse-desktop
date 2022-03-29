@@ -1,5 +1,5 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow, ipcMain, shell} = require('electron')
+const { app, BrowserWindow, ipcMain, shell } = require('electron')
 const path = require('path');
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -14,7 +14,7 @@ const settingsService = require(__dirname + '/modules/settings-service')
 const isMac = process.platform === 'darwin'
 const isWin = process.platform === 'win32'
 
-function initApp() {
+function initApp () {
     if (!app.requestSingleInstanceLock()) {
         app.quit();
     }
@@ -26,7 +26,7 @@ function initApp() {
     }
 }
 
-function createWindow() {
+function createWindow () {
     // Main window options
     const mainWindowOptions = {
         zoomToPageWidth: true,
@@ -61,7 +61,7 @@ function createWindow() {
     // Handle shutdown event on Mac with minimizeOnClose
     // to prevent shutdown interrupt
     if (isMac) {
-        const {powerMonitor} = require('electron')
+        const { powerMonitor } = require('electron')
         powerMonitor.on('shutdown', () => {
             app.isQuitting = true
             app.quit()
@@ -87,7 +87,7 @@ function createWindow() {
         shell.openExternal(details.url).catch((reason) => {
             console.log(reason);
         });
-        return {action: 'deny'};
+        return { action: 'deny' };
     })
 
     ipcMain.handle('settings', (e, method, ...args) => {

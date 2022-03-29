@@ -2,11 +2,11 @@
 
 converse.plugins.add('converse-desktop-trayicon', {
 
-    initialize() {
-        const {_converse} = this;
+    initialize () {
+        const { _converse } = this;
         let envelopeIsShowing = false;
 
-        async function hideEnvelope() {
+        async function hideEnvelope () {
             if (envelopeIsShowing) {
                 await api.trayService.hideEnvelope();
                 envelopeIsShowing = false;

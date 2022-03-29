@@ -6,7 +6,7 @@ const getCredentials = (await import('./app/credentials.js')).getCredentials;
 
 
 let websocket_url, bosh_service_url;
-const {connectionManager, login, password} = await getCredentials()
+const { connectionManager, login, password } = await getCredentials()
 
 if (connectionManager?.startsWith('ws')) {
     websocket_url = connectionManager
@@ -15,8 +15,8 @@ if (connectionManager?.startsWith('ws')) {
 }
 
 converse.plugins.add('converse-debug', {
-    initialize() {
-        const {_converse} = this;
+    initialize () {
+        const { _converse } = this;
         window._converse = _converse;
     }
 });
