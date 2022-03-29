@@ -11,8 +11,6 @@ async function initialize () {
         websocket_url = connectionManager
     } else if (connectionManager?.startsWith('http')) {
         bosh_service_url = connectionManager
-    } else {
-        bosh_service_url = 'https://conversejs.org/http-bind/';
     }
 
     converse.plugins.add('converse-debug', {
