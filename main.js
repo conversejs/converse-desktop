@@ -15,6 +15,10 @@ const isMac = process.platform === 'darwin'
 const isWin = process.platform === 'win32'
 
 function initApp() {
+    if (!app.requestSingleInstanceLock()) {
+        app.quit();
+    }
+
     createWindow()
     // Set Windows platform notifications
     if (isWin) {
@@ -119,6 +123,10 @@ app.on('activate', function () {
         mainWindow.show();
     }
 })
+
+app.on('second-instance', function () {
+    mainWindow.show();
+});
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
