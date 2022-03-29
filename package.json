@@ -4,6 +4,7 @@
   "description": "Desktop Jabber/XMPP client based on Converse.js and Electron",
   "main": "main.js",
   "scripts": {
+    "clean": "rm -rf node_modules",
     "postinstall": "electron-builder install-app-deps",
     "start": "electron .",
     "pack": "electron-builder --dir",
