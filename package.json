@@ -1,6 +1,6 @@
 {
   "name": "@converse/desktop",
-  "version": "0.1.0",
+  "version": "9.1.0",
   "description": "Desktop Jabber/XMPP client based on Converse.js and Electron",
   "main": "main.js",
   "scripts": {
@@ -23,18 +23,15 @@
   ],
   "license": "MPL-2.0",
   "devDependencies": {
-    "electron": "^16.0.0",
-    "electron-builder": "^22.9.1",
+    "electron": "^18.0.0",
+    "electron-builder": "^22.14.0",
     "electron-packager": "^15.2.0",
-    "electron-rebuild": "^3.2.5",
-    "eslint": "^8.4.1"
+    "eslint": "^8.12.0"
   },
   "dependencies": {
-    "converse.js": "conversejs/converse.js#d570b60",
+    "converse.js": "^9.1.0",
     "electron-settings": "^4.0.2",
-    "github-buttons": "^2.8.0",
-    "keytar": "^7.3.0",
-    "open-iconic": "^1.1.1"
+    "keytar": "^7.9.0"
   },
   "build": {
     "appId": "com.denry.converse-desktop",
@@ -59,6 +56,7 @@
       ]
     },
     "linux": {
+      "maintainer": "Keith Maika <keithm@aoeex.com>",
       "artifactName": "converse_desktop-${version}_${arch}.${ext}",
       "icon": "resources/images/logo.png",
       "target": [

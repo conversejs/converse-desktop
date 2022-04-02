@@ -1,3 +1,9 @@
+## 9.1.0 (unreleased)
+
+- Update to converse.js 9.1.0
+- Update to Electron to 18.0.1
+- Remove angularjs and simplify application
+
 ## 0.1.0 (2020-08-07)
 
 - Fix error handling for version check

@@ -14,12 +14,10 @@ A basic integration of [Converse.js](https://conversejs.org/) and Electron. With
 
 ## Screenshots and features
 
-<p>
-<img width="403" alt="Account form" src="https://user-images.githubusercontent.com/1450983/89672948-33bc0e80-d8ee-11ea-983f-21bbb707b45d.png">
-<img width="403" alt="Main window" src="https://user-images.githubusercontent.com/1450983/89673019-4f271980-d8ee-11ea-8058-0ac6269983aa.png">
-<img width="403" alt="Chat" src="https://user-images.githubusercontent.com/1450983/89673064-68c86100-d8ee-11ea-86c4-137e1b95dae7.png">
-<img width="403" alt="Settings screen" src="https://user-images.githubusercontent.com/1450983/89673104-7847aa00-d8ee-11ea-8d30-8f84e7709e7c.png">
-</p>
+[![Login screen](https://user-images.githubusercontent.com/6234547/161444310-ed1157fe-4f09-4334-b133-f16a8b1ead86.jpg)](https://user-images.githubusercontent.com/6234547/161444142-87008557-a0ae-414d-ab81-9740502dab30.jpg)
+[![One-to-one chat](https://user-images.githubusercontent.com/6234547/161444320-62179698-d4cb-4522-8ee4-5fd727bbff0d.jpg)](https://user-images.githubusercontent.com/6234547/161444152-8a44b284-48a6-4c8e-a16e-95399b4def16.jpg)
+[![Multi-user chat](https://user-images.githubusercontent.com/6234547/161444323-5fe7e478-1923-47c3-9e99-84020fb44009.jpg)](https://user-images.githubusercontent.com/6234547/161444156-eb2224a7-6082-4fe7-aa55-44eec093e04d.jpg)
+
 
 - Permanent account storage
 - Tray icon
