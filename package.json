@@ -12,6 +12,7 @@
     "dist:win64": "electron-builder --win --x64",
     "dist:linux64deb": "electron-builder --linux --x64"
   },
+  "author": "The Converse Desktop Developers",
   "repository": "https://github.com/conversejs/converse-desktop",
   "keywords": [
     "Jabber",

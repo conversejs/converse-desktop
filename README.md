@@ -29,14 +29,15 @@ A basic integration of [Converse.js](https://conversejs.org/) and Electron. With
 
 See [CHANGES.md](https://github.com/conversejs/converse-desktop/blob/master/CHANGES.md)
 
+
 #### Latest release installers
 
-| Operation System | Download link                                                                                                                                        |
-|------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
-| macOS            | [Converse_Desktop-0.1.0_x64.dmg](https://github.com/conversejs/converse-desktop/releases/download/v0.1.0/Converse_Desktop-0.1.0_x64.dmg)             |
-| Windows          | [Converse_Desktop_Setup-0.1.0_x64.exe](https://github.com/conversejs/converse-desktop/releases/download/v0.1.0/Converse_Desktop_Setup-0.1.0_x64.exe) |
-| Linux DEB        | [converse_desktop-0.1.0_amd64.deb](https://github.com/conversejs/converse-desktop/releases/download/v0.1.0/converse_desktop-0.1.0_amd64.deb)         |
-| Linux other      | [converse_desktop-0.1.0_x64.tar.gz](https://github.com/conversejs/converse-desktop/releases/download/v0.1.0/converse_desktop-0.1.0_x64.tar.gz)       |
+| Operation System | Download link                                                                                                                                    |
+|------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
+| macOS            | [Converse_Desktop-9.1.0_x64.dmg](https://github.com/conversejs/converse-desktop/releases/download/v9.1.0/Converse.Desktop-9.1.0.dmg)             |
+| Windows          | [Converse_Desktop_Setup-9.1.0_x64.exe](https://github.com/conversejs/converse-desktop/releases/download/v9.1.0/Converse.Desktop.Setup.9.1.0.exe) |
+| Linux DEB        | [converse_desktop-9.1.0_amd64.deb](https://github.com/conversejs/converse-desktop/releases/download/v9.1.0/converse_desktop-9.1.0_amd64.deb)     |
+| Linux other      | [converse_desktop-9.1.0_x64.tar.gz](https://github.com/conversejs/converse-desktop/releases/download/v9.1.0/converse_desktop-9.1.0_x64.tar.gz)   |
 
    - [All releases](https://github.com/conversejs/converse-desktop/releases)
 

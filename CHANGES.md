@@ -1,4 +1,4 @@
-## 9.1.0 (unreleased)
+## 9.1.0 (2022-04-07)
 
 - Update to converse.js 9.1.0
 - Update to Electron to 18.0.1
