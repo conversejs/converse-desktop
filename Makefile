@@ -7,11 +7,11 @@ clean:
 node_modules: package.json package-lock.json
 	npm i
 
-build: node_modules
-	$(BIN)/electron-rebuild
-
-serve: build
+serve: node_modules
 	npm start
+
+dist: node_modules
+	npm dist
 
 .PHONY: eslint
 eslint: node_modules
