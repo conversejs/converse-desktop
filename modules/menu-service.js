@@ -18,7 +18,11 @@ menuService.createMenu = (window) => {
                 accelerator: 'CmdOrCtrl+R',
                 click: () => {
                     window.show()
-                    window.reload()
+                    window.loadFile('index.html').catch((reason) => {
+                        console.log(reason);
+                        app.isQuitting = true;
+                        app.quit();
+                    });
                 }
             },
             {
