@@ -62,7 +62,8 @@
       "icon": "resources/images/logo.png",
       "target": [
         "deb",
-        "tar.gz"
+        "tar.gz",
+        "appImage"
       ]
     },
     "win": {
