@@ -32,12 +32,13 @@ See [CHANGES.md](https://github.com/conversejs/converse-desktop/blob/master/CHAN
 
 #### Latest release installers
 
-| Operation System | Download link                                                                                                                                    |
-|------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
-| macOS            | [Converse_Desktop-9.1.0_x64.dmg](https://github.com/conversejs/converse-desktop/releases/download/v9.1.0/Converse.Desktop-9.1.0.dmg)             |
-| Windows          | [Converse_Desktop_Setup-9.1.0_x64.exe](https://github.com/conversejs/converse-desktop/releases/download/v9.1.0/Converse.Desktop.Setup.9.1.0.exe) |
-| Linux DEB        | [converse_desktop-9.1.0_amd64.deb](https://github.com/conversejs/converse-desktop/releases/download/v9.1.0/converse_desktop-9.1.0_amd64.deb)     |
-| Linux other      | [converse_desktop-9.1.0_x64.tar.gz](https://github.com/conversejs/converse-desktop/releases/download/v9.1.0/converse_desktop-9.1.0_x64.tar.gz)   |
+| Operation System | Download link                                                                                                                                            |
+|------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| macOS            | [Converse_Desktop-9.1.0_x64.dmg](https://github.com/conversejs/converse-desktop/releases/download/v9.1.0/Converse.Desktop-9.1.0.dmg)                     |
+| Windows          | [Converse_Desktop_Setup-9.1.0_x64.exe](https://github.com/conversejs/converse-desktop/releases/download/v9.1.0/Converse.Desktop.Setup.9.1.0.exe)         |
+| Linux DEB        | [converse_desktop-9.1.0_amd64.deb](https://github.com/conversejs/converse-desktop/releases/download/v9.1.0/converse_desktop-9.1.0_amd64.deb)             |
+| Linux AppImage   | [converse_desktop-9.1.0_x86_64.AppImage](https://github.com/conversejs/converse-desktop/releases/download/v9.1.0/converse_desktop-9.1.0_x86_64.AppImage) |
+| Linux other      | [converse_desktop-9.1.0_x64.tar.gz](https://github.com/conversejs/converse-desktop/releases/download/v9.1.0/converse_desktop-9.1.0_x64.tar.gz)           |
 
    - [All releases](https://github.com/conversejs/converse-desktop/releases)
 
@@ -59,11 +60,11 @@ npm start
 
 ### Build targets:
 
-| Operation System | Target                    |
-|------------------|---------------------------|
-| macOS            | `npm run dist`            |
-| Windows          | `npm run dist:win64`      |
-| Linux DEB        | `npm run dist:linux64deb` |
+| Operation System | Target                 |
+|------------------|------------------------|
+| macOS            | `npm run dist`         |
+| Windows          | `npm run dist:win64`   |
+| Linux            | `npm run dist:linux64` |
 
 More targets could be added via `package.json`. See [electron builder docs](https://www.electron.build/configuration/configuration).
 
