@@ -31,6 +31,7 @@ function createWindow () {
     const mainWindowOptions = {
         zoomToPageWidth: true,
         show: false,
+        autoHideMenuBar: settingsService.get('hideMenubar') || false,
         webPreferences: {
             preload: path.join(__dirname, 'preload.js')
         },

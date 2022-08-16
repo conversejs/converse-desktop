@@ -35,6 +35,17 @@ menuService.createMenu = (window) => {
                 }
             },
             {
+                label: 'Hide Menubar',
+                type: 'checkbox',
+                id: 'hide-menubar',
+                checked: settingsService.get('hideMenubar'),
+                click: () => {
+                    const menuItem = converse.getMenuItemById('hide-menubar');
+                    settingsService.set('hideMenubar', menuItem.checked);
+                    window.setAutoHideMenuBar(menuItem.checked);
+                }
+            },
+            {
                 type: 'separator',
             },
             {
