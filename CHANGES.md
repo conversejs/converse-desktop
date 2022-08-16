@@ -1,3 +1,7 @@
+## 10.0.0 (unreleased)
+
+- Add option to hide menu bar
+
 ## 9.1.0 (2022-04-07)
 
 - Update to converse.js 9.1.0
