@@ -1,7 +1,9 @@
 ## 10.0.0 (unreleased)
 
-- Add option to hide menu bar
 - Update to Electron 21
+- Add option to hide menu bar.
+- Add option to enable encryption by default.
+- Change client priority to 0 by default, changeable via settings.json file.
 
 ## 9.1.0 (2022-04-07)
 

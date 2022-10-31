@@ -26,6 +26,9 @@ menuService.createMenu = (window) => {
                 }
             },
             {
+                type: 'separator',
+            },
+            {
                 label: 'Minimize on close',
                 type: 'checkbox',
                 id: 'minimize-on-close',
@@ -43,6 +46,16 @@ menuService.createMenu = (window) => {
                     const menuItem = converse.getMenuItemById('hide-menubar');
                     settingsService.set('hideMenubar', menuItem.checked);
                     window.setAutoHideMenuBar(menuItem.checked);
+                }
+            },
+            {
+                label: 'Encrypt by default',
+                type: 'checkbox',
+                id: 'encrypt-by-default',
+                checked: settingsService.get('omemo_default'),
+                click: () => {
+                    const menuItem = converse.getMenuItemById('encrypt-by-default');
+                    settingsService.set('omemo_default', menuItem.checked);
                 }
             },
             {
