@@ -2,15 +2,18 @@
 
 await import('./app/converse-plugins/desktop-credentials.js')
 await import('./app/converse-plugins/desktop-trayicon.js')
+await import('./app/converse-plugins/desktop-settings.js')
 const getCredentials = (await import('./app/credentials.js')).getCredentials;
 
 
 let websocket_url, bosh_service_url;
-const { connectionManager, login, password } = await getCredentials()
+const { connectionManager, login, password } = await getCredentials();
+const priority = await api.settings.get('priority') || 0;
+const omemo_default = await api.settings.get('omemo_default') || false;
 
-if (connectionManager?.startsWith('ws')) {
+if (connectionManager?.startsWith('ws')){
     websocket_url = connectionManager
-} else if (connectionManager?.startsWith('http')) {
+} else if (connectionManager?.startsWith('http')){
     bosh_service_url = connectionManager
 }
 
@@ -30,15 +33,16 @@ converse.initialize({
     loglevel: 'debug',
     muc_respect_autojoin: true,
     muc_show_logs_before_join: true,
-    password: password,
+    password,
     play_sounds: false,
-    priority: 50,
+    priority,
     prune_messages_above: 250,
     theme: 'concord',
     view_mode: 'fullscreen',
     websocket_url,
-    whitelisted_plugins: ['converse-debug', 'converse-desktop-credentials', 'converse-desktop-trayicon'],
-    show_connection_url_input: true
+    whitelisted_plugins: ['converse-debug', 'converse-desktop-credentials', 'converse-desktop-trayicon', 'converse-desktop-settings'],
+    show_connection_url_input: true,
+    omemo_default
 }).catch((reason) => {
     console.log(reason);
     api.app.quit();
