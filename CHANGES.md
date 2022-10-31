@@ -1,6 +1,7 @@
 ## 10.0.0 (unreleased)
 
 - Add option to hide menu bar
+- Update to Electron 21
 
 ## 9.1.0 (2022-04-07)
 

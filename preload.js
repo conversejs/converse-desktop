@@ -1,5 +1,12 @@
 const { ipcRenderer, contextBridge } = require('electron');
-const keytar = require('keytar');
+const changedHandlers = [];
+ipcRenderer.on('settings', function (e, method, setting, newValue) {
+    if (method === 'changed'){
+        for (let handler of changedHandlers){
+            handler.call(null, setting, newValue);
+        }
+    }
+});
 
 contextBridge.exposeInMainWorld('api', {
     settings: {
@@ -14,6 +21,9 @@ contextBridge.exposeInMainWorld('api', {
         },
         get (setting) {
             return ipcRenderer.invoke('settings', 'get', setting);
+        },
+        changed (cb) {
+            changedHandlers.push(cb);
         }
     },
     trayService: {
@@ -26,13 +36,13 @@ contextBridge.exposeInMainWorld('api', {
     },
     keytar: {
         getPassword (service, login) {
-            return keytar.getPassword(service, login);
+            return ipcRenderer.invoke('keytar', 'getPassword', service, login);
         },
         setPassword (service, login, password) {
-            return keytar.setPassword(service, login, password);
+            return ipcRenderer.invoke('keytar', 'setPassword', service, login, password);
         },
         deletePassword (service, login) {
-            return keytar.deletePassword(service, login);
+            return ipcRenderer.invoke('keytar', 'deletePassword', service, login);
         }
     },
     app: {
