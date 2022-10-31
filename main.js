@@ -1,6 +1,7 @@
 // Modules to control application life and create native browser window
 const { app, BrowserWindow, ipcMain, shell } = require('electron')
 const path = require('path');
+const keytar = require('keytar');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -15,13 +16,13 @@ const isMac = process.platform === 'darwin'
 const isWin = process.platform === 'win32'
 
 function initApp () {
-    if (!app.requestSingleInstanceLock()) {
+    if (!app.requestSingleInstanceLock()){
         app.quit();
     }
 
     createWindow()
     // Set Windows platform notifications
-    if (isWin) {
+    if (isWin){
         app.setAppUserModelId("com.denry.converseDesktop")
     }
 }
@@ -52,7 +53,7 @@ function createWindow () {
 
     // Before close
     mainWindow.on('close', (e) => {
-        if (!app.isQuitting && settingsService.get('minimizeOnClose')) {
+        if (!app.isQuitting && settingsService.get('minimizeOnClose')){
             e.preventDefault()
             mainWindow.hide()
         }
@@ -61,7 +62,7 @@ function createWindow () {
 
     // Handle shutdown event on Mac with minimizeOnClose
     // to prevent shutdown interrupt
-    if (isMac) {
+    if (isMac){
         const { powerMonitor } = require('electron')
         powerMonitor.on('shutdown', () => {
             app.isQuitting = true
@@ -91,12 +92,17 @@ function createWindow () {
         return { action: 'deny' };
     })
 
+    settingsService.webContents = mainWindow.webContents;
     ipcMain.handle('settings', (e, method, ...args) => {
         return settingsService[method].apply(settingsService, args);
     });
 
     ipcMain.handle('trayService', (e, method, ...args) => {
         return trayService[method].apply(trayService, args);
+    });
+
+    ipcMain.handle('keytar', (e, method, ...args) => {
+        return keytar[method].apply(keytar, args);
     });
 
     mainWindow.on('ready-to-show', () => {
@@ -127,7 +133,7 @@ app.on('window-all-closed', function () {
 })
 
 app.on('activate', function () {
-    if (mainWindow === null) {
+    if (mainWindow === null){
         createWindow()
     } else {
         mainWindow.show();
