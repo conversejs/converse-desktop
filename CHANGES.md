@@ -4,6 +4,7 @@
 - Add option to hide menu bar.
 - Add option to enable encryption by default.
 - Change client priority to 0 by default, changeable via settings.json file.
+- Hide connection URL by default
 
 ## 9.1.0 (2022-04-07)
 

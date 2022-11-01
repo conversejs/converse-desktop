@@ -41,7 +41,6 @@ converse.initialize({
     view_mode: 'fullscreen',
     websocket_url,
     whitelisted_plugins: ['converse-debug', 'converse-desktop-credentials', 'converse-desktop-trayicon', 'converse-desktop-settings'],
-    show_connection_url_input: true,
     omemo_default
 }).catch((reason) => {
     console.log(reason);
