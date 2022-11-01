@@ -1,7 +1,7 @@
 {
   "name": "@converse/desktop",
   "productName": "Converse Desktop",
-  "version": "9.1.0",
+  "version": "10.0.0",
   "description": "Desktop Jabber/XMPP client based on Converse.js and Electron",
   "main": "main.js",
   "scripts": {
@@ -31,7 +31,7 @@
     "eslint": "^8.12.0"
   },
   "dependencies": {
-    "converse.js": "^9.1.0",
+    "converse.js": "^10.0.0",
     "electron-settings": "^4.0.2",
     "keytar": "^7.9.0"
   },
