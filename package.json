@@ -9,7 +9,7 @@
     "postinstall": "electron-builder install-app-deps",
     "start": "electron .",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder --mac",
+    "dist": "electron-builder --mac --universal",
     "dist:win64": "electron-builder --win --x64",
     "dist:linux64": "electron-builder --linux --x64"
   },
