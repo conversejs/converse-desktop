@@ -37,6 +37,7 @@ function createWindow () {
             preload: path.join(__dirname, 'preload.js')
         },
         icon: './resources/images/logo.png',
+        ...settingsService.get('winBounds'),
     }
 
     // Create the browser window.
@@ -53,6 +54,7 @@ function createWindow () {
 
     // Before close
     mainWindow.on('close', (e) => {
+        settingsService.set('winBounds', mainWindow.getBounds())
         if (!app.isQuitting && settingsService.get('minimizeOnClose')){
             e.preventDefault()
             mainWindow.hide()
@@ -106,7 +108,7 @@ function createWindow () {
     });
 
     mainWindow.on('ready-to-show', () => {
-        mainWindow.maximize();
+        mainWindow.show();
     });
 
     // and load the index.html of the app.
