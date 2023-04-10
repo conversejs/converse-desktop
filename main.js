@@ -54,7 +54,9 @@ function createWindow () {
 
     // Before close
     mainWindow.on('close', (e) => {
-        settingsService.set('winBounds', mainWindow.getBounds())
+        settingsService.set('winBounds', mainWindow.getBounds());
+        settingsService.set('isMaximized', mainWindow.isMaximized());
+        settingsService.set('isFullScreen', mainWindow.isFullScreen());
         if (!app.isQuitting && settingsService.get('minimizeOnClose')){
             e.preventDefault()
             mainWindow.hide()
@@ -108,7 +110,13 @@ function createWindow () {
     });
 
     mainWindow.on('ready-to-show', () => {
-        mainWindow.show();
+        if (settingsService.get('isMaximized')) {
+            mainWindow.maximize();
+        } else if (settingsService.get('isFullScreen')) {
+            mainWindow.setFullScreen(true);
+        } else {
+            mainWindow.show();
+        }
     });
 
     // and load the index.html of the app.
