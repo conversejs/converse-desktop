@@ -56,7 +56,9 @@ function createWindow () {
     mainWindow.on('close', (e) => {
         settingsService.set('winBounds', mainWindow.getBounds());
         settingsService.set('isMaximized', mainWindow.isMaximized());
-        settingsService.set('isFullScreen', mainWindow.isFullScreen());
+        if (mainWindow.isFullScreen()) {
+            mainWindow.setFullScreen(false);
+        }
         if (!app.isQuitting && settingsService.get('minimizeOnClose')){
             e.preventDefault()
             mainWindow.hide()
@@ -112,8 +114,6 @@ function createWindow () {
     mainWindow.on('ready-to-show', () => {
         if (settingsService.get('isMaximized')) {
             mainWindow.maximize();
-        } else if (settingsService.get('isFullScreen')) {
-            mainWindow.setFullScreen(true);
         } else {
             mainWindow.show();
         }
