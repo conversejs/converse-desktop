@@ -15,7 +15,7 @@ const settingsService = require(__dirname + '/modules/settings-service')
 const isMac = process.platform === 'darwin'
 const isWin = process.platform === 'win32'
 
-function initApp () {
+function initApp() {
     if (!app.requestSingleInstanceLock()){
         app.quit();
     }
@@ -27,7 +27,7 @@ function initApp () {
     }
 }
 
-function createWindow () {
+function createWindow() {
     // Main window options
     const mainWindowOptions = {
         zoomToPageWidth: true,
@@ -54,9 +54,8 @@ function createWindow () {
 
     // Before close
     mainWindow.on('close', (e) => {
-        settingsService.set('winBounds', mainWindow.getBounds());
         settingsService.set('isMaximized', mainWindow.isMaximized());
-        if (mainWindow.isFullScreen()) {
+        if (mainWindow.isFullScreen()){
             mainWindow.setFullScreen(false);
         }
         if (!app.isQuitting && settingsService.get('minimizeOnClose')){
@@ -65,6 +64,14 @@ function createWindow () {
         }
         return false;
     })
+
+    mainWindow.on('resized', () => {
+        settingsService.set('winBounds', mainWindow.getBounds());
+    })
+    mainWindow.on('moved', () => {
+        settingsService.set('winBounds', mainWindow.getBounds());
+    })
+
 
     // Handle shutdown event on Mac with minimizeOnClose
     // to prevent shutdown interrupt
@@ -112,7 +119,7 @@ function createWindow () {
     });
 
     mainWindow.on('ready-to-show', () => {
-        if (settingsService.get('isMaximized')) {
+        if (settingsService.get('isMaximized')){
             mainWindow.maximize();
         } else {
             mainWindow.show();
