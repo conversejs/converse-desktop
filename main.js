@@ -28,6 +28,13 @@ function initApp() {
 }
 
 function createWindow() {
+    function getSavedWindowBounds() {
+        const winBounds = settingsService.get('winBounds');
+        winBounds.width = Math.max(winBounds.width, 200);
+        winBounds.height = Math.max(winBounds.height, 200);
+        return winBounds;
+    }
+
     // Main window options
     const mainWindowOptions = {
         zoomToPageWidth: true,
@@ -37,7 +44,7 @@ function createWindow() {
             preload: path.join(__dirname, 'preload.js')
         },
         icon: './resources/images/logo.png',
-        ...settingsService.get('winBounds'),
+        ...getSavedWindowBounds(),
     }
 
     // Create the browser window.
