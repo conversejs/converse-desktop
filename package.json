@@ -60,7 +60,7 @@
     "linux": {
       "maintainer": "Keith Maika <keithm@aoeex.com>",
       "artifactName": "converse_desktop-${version}_${arch}.${ext}",
-      "icon": "resources/images/logo.png",
+      "icon": "resources/images",
       "target": [
         "deb",
         "tar.gz",
@@ -69,7 +69,7 @@
     },
     "win": {
       "target": "nsis",
-      "icon": "resources/images/logo.png"
+      "icon": "resources/images/logo.ico"
     }
   }
 }

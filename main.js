@@ -43,7 +43,7 @@ function createWindow () {
         webPreferences: {
             preload: path.join(__dirname, 'preload.js')
         },
-        icon: './resources/images/logo.png',
+        icon: path.join(__dirname, 'resources', 'images', 'logo-48x48.png'),
         ...getSavedWindowBounds(),
     }
 
