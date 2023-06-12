@@ -15,20 +15,20 @@ const settingsService = require(__dirname + '/modules/settings-service')
 const isMac = process.platform === 'darwin'
 const isWin = process.platform === 'win32'
 
-function initApp() {
-    if (!app.requestSingleInstanceLock()){
+function initApp () {
+    if (!app.requestSingleInstanceLock()) {
         app.quit();
     }
 
     createWindow()
     // Set Windows platform notifications
-    if (isWin){
+    if (isWin) {
         app.setAppUserModelId("com.denry.converseDesktop")
     }
 }
 
-function createWindow() {
-    function getSavedWindowBounds() {
+function createWindow () {
+    function getSavedWindowBounds () {
         const winBounds = settingsService.get('winBounds');
         winBounds.width = Math.max(winBounds.width, 200);
         winBounds.height = Math.max(winBounds.height, 200);
@@ -62,10 +62,10 @@ function createWindow() {
     // Before close
     mainWindow.on('close', (e) => {
         settingsService.set('isMaximized', mainWindow.isMaximized());
-        if (mainWindow.isFullScreen()){
+        if (mainWindow.isFullScreen()) {
             mainWindow.setFullScreen(false);
         }
-        if (!app.isQuitting && settingsService.get('minimizeOnClose')){
+        if (!app.isQuitting && settingsService.get('minimizeOnClose')) {
             e.preventDefault()
             mainWindow.hide()
         }
@@ -82,7 +82,7 @@ function createWindow() {
 
     // Handle shutdown event on Mac with minimizeOnClose
     // to prevent shutdown interrupt
-    if (isMac){
+    if (isMac) {
         const { powerMonitor } = require('electron')
         powerMonitor.on('shutdown', () => {
             app.isQuitting = true
@@ -126,7 +126,7 @@ function createWindow() {
     });
 
     mainWindow.on('ready-to-show', () => {
-        if (settingsService.get('isMaximized')){
+        if (settingsService.get('isMaximized')) {
             mainWindow.maximize();
         } else {
             mainWindow.show();
@@ -157,7 +157,7 @@ app.on('window-all-closed', function () {
 })
 
 app.on('activate', function () {
-    if (mainWindow === null){
+    if (mainWindow === null) {
         createWindow()
     } else {
         mainWindow.show();
