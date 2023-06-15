@@ -1,7 +1,7 @@
 {
   "name": "@converse/desktop",
   "productName": "Converse Desktop",
-  "version": "10.1.2",
+  "version": "10.1.5",
   "description": "Desktop Jabber/XMPP client based on Converse.js and Electron",
   "main": "main.js",
   "scripts": {

@@ -1,3 +1,11 @@
+## 10.1.5 (unreleased)
+
+ - Update to Electron 22.3.15
+ - Update to Converse.js 10.1.5
+ - Build universal binary for macOS
+ - Remember window size and position
+ - Update icon images
+
 ## 10.0.0 (2022-11-01)
 
 - Update to Electron 21
