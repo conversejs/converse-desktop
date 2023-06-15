@@ -43,20 +43,6 @@
       "icon": "resources/images/logo.icns",
       "target": "dmg"
     },
-    "dmg": {
-      "contents": [
-        {
-          "x": 110,
-          "y": 150
-        },
-        {
-          "x": 240,
-          "y": 150,
-          "type": "link",
-          "path": "/Applications"
-        }
-      ]
-    },
     "linux": {
       "maintainer": "Keith Maika <keithm@aoeex.com>",
       "artifactName": "converse_desktop-${version}_${arch}.${ext}",
