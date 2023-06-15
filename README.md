@@ -18,7 +18,6 @@ A basic integration of [Converse.js](https://conversejs.org/) and Electron. With
 [![One-to-one chat](https://user-images.githubusercontent.com/6234547/161444320-62179698-d4cb-4522-8ee4-5fd727bbff0d.jpg)](https://user-images.githubusercontent.com/6234547/161444152-8a44b284-48a6-4c8e-a16e-95399b4def16.jpg)
 [![Multi-user chat](https://user-images.githubusercontent.com/6234547/161444323-5fe7e478-1923-47c3-9e99-84020fb44009.jpg)](https://user-images.githubusercontent.com/6234547/161444156-eb2224a7-6082-4fe7-aa55-44eec093e04d.jpg)
 
-
 - Permanent account storage
 - Tray icon
 - Tray notifications
@@ -29,19 +28,17 @@ A basic integration of [Converse.js](https://conversejs.org/) and Electron. With
 
 See [CHANGES.md](https://github.com/conversejs/converse-desktop/blob/master/CHANGES.md)
 
-
 #### Latest release installers
 
-| Operation System | Download link                                                                                                                                            |
-|------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
-| macOS            | [Converse_Desktop-9.1.0_x64.dmg](https://github.com/conversejs/converse-desktop/releases/download/v9.1.0/Converse.Desktop-9.1.0.dmg)                     |
-| Windows          | [Converse_Desktop_Setup-9.1.0_x64.exe](https://github.com/conversejs/converse-desktop/releases/download/v9.1.0/Converse.Desktop.Setup.9.1.0.exe)         |
-| Linux DEB        | [converse_desktop-9.1.0_amd64.deb](https://github.com/conversejs/converse-desktop/releases/download/v9.1.0/converse_desktop-9.1.0_amd64.deb)             |
-| Linux AppImage   | [converse_desktop-9.1.0_x86_64.AppImage](https://github.com/conversejs/converse-desktop/releases/download/v9.1.0/converse_desktop-9.1.0_x86_64.AppImage) |
-| Linux other      | [converse_desktop-9.1.0_x64.tar.gz](https://github.com/conversejs/converse-desktop/releases/download/v9.1.0/converse_desktop-9.1.0_x64.tar.gz)           |
+| Operation System | Download link                                                                                                                                               |
+|------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| macOS            | [Converse_Desktop-10.1.2_x64.dmg](https://github.com/conversejs/converse-desktop/releases/download/v10.1.2/Converse.Desktop-10.1.2.dmg)                     |
+| Windows          | [Converse_Desktop_Setup-10.1.2_x64.exe](https://github.com/conversejs/converse-desktop/releases/download/v10.1.2/Converse.Desktop.Setup.10.1.2.exe)         |
+| Linux DEB        | [converse_desktop-10.1.2_amd64.deb](https://github.com/conversejs/converse-desktop/releases/download/v10.1.2/converse_desktop-10.1.2_amd64.deb)             |
+| Linux AppImage   | [converse_desktop-10.1.2_x86_64.AppImage](https://github.com/conversejs/converse-desktop/releases/download/v10.1.2/converse_desktop-10.1.2_x86_64.AppImage) |
+| Linux other      | [converse_desktop-10.1.2_x64.tar.gz](https://github.com/conversejs/converse-desktop/releases/download/v10.1.2/converse_desktop-10.1.2_x64.tar.gz)           |
 
-   - [All releases](https://github.com/conversejs/converse-desktop/releases)
-
+- [All releases](https://github.com/conversejs/converse-desktop/releases)
 
 ## Build from source
 
@@ -75,9 +72,7 @@ Like Converse.js, Converse Desktop's files are released under the Mozilla Public
 
 However, libsignal library, which is required for OMEMO support is released under the GPLv3. The MPLv2 license is compatible with GPLv3 and when GPLv3 code is included, the entire project effectively is licensed under the GPLv3.
 
-Any custom build of Converse Desktop without libsignal included will again be licensed
-under the MPLv2.
-
+Any custom build of Converse Desktop without libsignal included will again be licensed under the MPLv2.
 
 ## Acknowledgements
 
