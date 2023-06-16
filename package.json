@@ -38,6 +38,12 @@
   "build": {
     "appId": "com.denry.converse-desktop",
     "productName": "Converse Desktop",
+    "extraFiles": [
+      {
+        "from": "resources/images/logo.svg",
+        "to": "converse-desktop.svg"
+      }
+    ],
     "mac": {
       "category": "public.app-category.social-networking",
       "icon": "resources/images/logo.icns",
