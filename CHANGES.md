@@ -1,4 +1,4 @@
-## 10.1.5 (unreleased)
+## 10.1.5 (2023-07-03)
 
  - Update to Electron 22.3.15
  - Update to Converse.js 10.1.5
