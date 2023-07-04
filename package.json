@@ -1,7 +1,7 @@
 {
   "name": "@converse/desktop",
   "productName": "Converse Desktop",
-  "version": "10.0.0",
+  "version": "10.1.5",
   "description": "Desktop Jabber/XMPP client based on Converse.js and Electron",
   "main": "main.js",
   "scripts": {
@@ -25,42 +25,34 @@
   ],
   "license": "MPL-2.0",
   "devDependencies": {
-    "electron": "^21.0.0",
+    "electron": "^22.0.0",
     "electron-builder": "^23.0.0",
     "electron-packager": "^17.0.0",
     "eslint": "^8.12.0"
   },
   "dependencies": {
-    "converse.js": "^10.0.0",
+    "converse.js": "^10.1.0",
     "electron-settings": "^4.0.2",
     "keytar": "^7.9.0"
   },
   "build": {
     "appId": "com.denry.converse-desktop",
     "productName": "Converse Desktop",
+    "extraFiles": [
+      {
+        "from": "resources/images/logo.svg",
+        "to": "converse-desktop.svg"
+      }
+    ],
     "mac": {
       "category": "public.app-category.social-networking",
       "icon": "resources/images/logo.icns",
       "target": "dmg"
     },
-    "dmg": {
-      "contents": [
-        {
-          "x": 110,
-          "y": 150
-        },
-        {
-          "x": 240,
-          "y": 150,
-          "type": "link",
-          "path": "/Applications"
-        }
-      ]
-    },
     "linux": {
       "maintainer": "Keith Maika <keithm@aoeex.com>",
       "artifactName": "converse_desktop-${version}_${arch}.${ext}",
-      "icon": "resources/images/logo.png",
+      "icon": "resources/images",
       "target": [
         "deb",
         "tar.gz",
@@ -69,7 +61,7 @@
     },
     "win": {
       "target": "nsis",
-      "icon": "resources/images/logo.png"
+      "icon": "resources/images/logo.ico"
     }
   }
 }

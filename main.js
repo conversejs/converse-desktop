@@ -16,18 +16,25 @@ const isMac = process.platform === 'darwin'
 const isWin = process.platform === 'win32'
 
 function initApp () {
-    if (!app.requestSingleInstanceLock()){
+    if (!app.requestSingleInstanceLock()) {
         app.quit();
     }
 
     createWindow()
     // Set Windows platform notifications
-    if (isWin){
+    if (isWin) {
         app.setAppUserModelId("com.denry.converseDesktop")
     }
 }
 
 function createWindow () {
+    function getSavedWindowBounds () {
+        const winBounds = settingsService.get('winBounds');
+        winBounds.width = Math.max(winBounds.width, 200);
+        winBounds.height = Math.max(winBounds.height, 200);
+        return winBounds;
+    }
+
     // Main window options
     const mainWindowOptions = {
         zoomToPageWidth: true,
@@ -36,8 +43,8 @@ function createWindow () {
         webPreferences: {
             preload: path.join(__dirname, 'preload.js')
         },
-        icon: './resources/images/logo.png',
-        ...settingsService.get('winBounds'),
+        icon: path.join(__dirname, 'resources', 'images', 'logo-48x48.png'),
+        ...getSavedWindowBounds(),
     }
 
     // Create the browser window.
@@ -54,21 +61,28 @@ function createWindow () {
 
     // Before close
     mainWindow.on('close', (e) => {
-        settingsService.set('winBounds', mainWindow.getBounds());
         settingsService.set('isMaximized', mainWindow.isMaximized());
         if (mainWindow.isFullScreen()) {
             mainWindow.setFullScreen(false);
         }
-        if (!app.isQuitting && settingsService.get('minimizeOnClose')){
+        if (!app.isQuitting && settingsService.get('minimizeOnClose')) {
             e.preventDefault()
             mainWindow.hide()
         }
         return false;
     })
 
+    mainWindow.on('resized', () => {
+        settingsService.set('winBounds', mainWindow.getBounds());
+    })
+    mainWindow.on('moved', () => {
+        settingsService.set('winBounds', mainWindow.getBounds());
+    })
+
+
     // Handle shutdown event on Mac with minimizeOnClose
     // to prevent shutdown interrupt
-    if (isMac){
+    if (isMac) {
         const { powerMonitor } = require('electron')
         powerMonitor.on('shutdown', () => {
             app.isQuitting = true
@@ -143,7 +157,7 @@ app.on('window-all-closed', function () {
 })
 
 app.on('activate', function () {
-    if (mainWindow === null){
+    if (mainWindow === null) {
         createWindow()
     } else {
         mainWindow.show();

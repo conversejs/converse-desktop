@@ -2,7 +2,7 @@
  * Module for Tray functions.
  */
 
-const { Tray } = require('electron')
+const {Tray} = require('electron')
 
 const path = require('path')
 
@@ -10,14 +10,19 @@ let tray = null
 
 const trayService = {}
 
-const getTrayServiceIcon = (iconName = 'icon') => {
-    let iconImage;
+const getTrayServiceIcon = (withEnvelope = false) => {
+    let size;
     if (process.platform === 'darwin' || process.platform === 'win32') {
-        iconImage = iconName + '-16x16'
+        size = '16x16';
     } else {
-        iconImage = iconName + '-48x48'
+        size = '48x48';
     }
-    return path.join(__dirname, '..', 'resources', 'images', iconImage + '.png')
+
+    if (withEnvelope) {
+        return path.join(__dirname, '..', 'resources', 'images', 'tray', 'envelope-' + size + '.png');
+    } else {
+        return path.join(__dirname, '..', 'resources', 'images', 'logo-' + size + '.png');
+    }
 }
 
 trayService.initTray = (window) => {
@@ -32,7 +37,7 @@ trayService.initTray = (window) => {
 }
 
 trayService.showEnvelope = () => {
-    const iconPath = getTrayServiceIcon('envelope')
+    const iconPath = getTrayServiceIcon(true)
     tray.setImage(iconPath)
 }
 
