@@ -2,7 +2,7 @@
  * Module for Tray functions.
  */
 
-const {Tray} = require('electron')
+const {Tray, Menu} = require('electron')
 
 const path = require('path')
 
@@ -29,11 +29,21 @@ trayService.initTray = (window) => {
     const iconPath = getTrayServiceIcon()
     tray = new Tray(iconPath)
     tray.setToolTip('Converse Desktop')
-    tray.on('click', function () {
+    tray.on('click', restore)
+
+    if (process.platform === 'linux') {
+        tray.setContextMenu(Menu.buildFromTemplate([
+            {click: restore, role: 'unhide', label: 'Restore'}
+        ]))
+    } else {
+        tray.on('right-click', restore)
+    }
+
+    function restore() {
         window.webContents.send('open-unread-chat')
         trayService.hideEnvelope()
         window.show()
-    })
+    }
 }
 
 trayService.showEnvelope = () => {
