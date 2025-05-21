@@ -1,8 +1,8 @@
 {
   "name": "@converse/desktop",
   "productName": "Converse Desktop",
-  "version": "10.1.5",
-  "description": "Desktop Jabber/XMPP client based on Converse.js and Electron",
+  "version": "11.0.0",
+  "description": "Desktop Jabber/XMPP client based on Converse and Electron",
   "main": "main.js",
   "scripts": {
     "clean": "rm -rf node_modules",
@@ -25,14 +25,14 @@
   ],
   "license": "MPL-2.0",
   "devDependencies": {
-    "electron": "^22.0.0",
-    "electron-builder": "^23.0.0",
-    "electron-packager": "^17.0.0",
-    "eslint": "^8.12.0"
+    "electron": "^36.2.1",
+    "electron-builder": "^26.0.12",
+    "@electron/packager": "^18.3.6",
+    "eslint": "^9.27.0"
   },
   "dependencies": {
-    "converse.js": "^10.1.0",
-    "electron-settings": "^4.0.2",
+    "converse.js": "^11.0.0",
+    "electron-settings": "^4.0.4",
     "keytar": "^7.9.0"
   },
   "build": {

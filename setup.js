@@ -37,10 +37,10 @@ converse.initialize({
     play_sounds: false,
     priority,
     prune_messages_above: 250,
-    theme: 'concord',
+    theme: 'dracula',
     view_mode: 'fullscreen',
     websocket_url,
-    whitelisted_plugins: ['converse-debug', 'converse-desktop-credentials', 'converse-desktop-trayicon', 'converse-desktop-settings'],
+    whitelisted_plugins: ['converse-desktop-credentials', 'converse-desktop-trayicon', 'converse-desktop-settings'],
     omemo_default
 }).catch((reason) => {
     console.log(reason);

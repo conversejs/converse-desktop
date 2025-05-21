@@ -1,3 +1,9 @@
+## 11.0.0
+
+ - Update to Converse.js 11.0.0
+ - Update to Electron 36.2.1
+ - Update other dependencies as well
+
 ## 10.1.5 (2023-07-03)
 
  - Update to Electron 22.3.15
