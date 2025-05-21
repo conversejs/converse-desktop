@@ -1,4 +1,4 @@
-## 11.0.0
+## 11.0.0 (2025-05-21)
 
  - Update to Converse.js 11.0.0
  - Update to Electron 36.2.1
