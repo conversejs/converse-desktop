@@ -8,10 +8,10 @@ node_modules: package.json package-lock.json
 	npm i
 
 serve: node_modules
-	npm start
+	npm run start
 
 dist: node_modules
-	npm dist
+	npm run dist
 
 .PHONY: eslint
 eslint: node_modules
