@@ -59,6 +59,16 @@ menuService.createMenu = (window) => {
                 }
             },
             {
+                label: 'Show myself',
+                type: 'checkbox',
+                id: 'show-self-in-roster',
+                checked: settingsService.get('show_self_in_roster'),
+                click: () => {
+                    const menuItem = converse.getMenuItemById('show-self-in-roster');
+                    settingsService.set('show_self_in_roster', menuItem.checked);
+                }
+            },
+            {
                 type: 'separator',
             },
             {

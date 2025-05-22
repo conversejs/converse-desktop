@@ -10,6 +10,7 @@ let websocket_url, bosh_service_url;
 const { connectionManager, login, password } = await getCredentials();
 const priority = await api.settings.get('priority') || 0;
 const omemo_default = await api.settings.get('omemo_default') || false;
+const show_self_in_roster = await api.settings.get('show_self_in_roster') || false;
 
 if (connectionManager?.startsWith('ws')) {
     websocket_url = connectionManager
@@ -41,7 +42,8 @@ converse.initialize({
     view_mode: 'fullscreen',
     websocket_url,
     whitelisted_plugins: ['converse-desktop-credentials', 'converse-desktop-trayicon', 'converse-desktop-settings'],
-    omemo_default
+    omemo_default,
+    show_self_in_roster
 }).catch((reason) => {
     console.log(reason);
     api.app.quit();
