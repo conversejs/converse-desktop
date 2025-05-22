@@ -46,6 +46,7 @@ menuService.createMenu = (window) => {
                     const menuItem = converse.getMenuItemById('hide-menubar');
                     settingsService.set('hideMenubar', menuItem.checked);
                     window.setAutoHideMenuBar(menuItem.checked);
+                    window.setMenuBarVisibility(!menuItem.checked);
                 }
             },
             {
