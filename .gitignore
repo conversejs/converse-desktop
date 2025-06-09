@@ -2,3 +2,4 @@ node_modules
 .DS_*
 dist/
 .idea/
+.aider*
