@@ -1,7 +1,6 @@
 // Modules to control application life and create native browser window
 const { app, BrowserWindow, ipcMain, shell } = require('electron')
 const path = require('path');
-const keytar = require('keytar');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -11,6 +10,7 @@ let mainWindow
 const trayService = require(__dirname + '/modules/tray-service')
 const menuService = require(__dirname + '/modules/menu-service')
 const settingsService = require(__dirname + '/modules/settings-service')
+const credentials = require(__dirname + '/modules/credentials-service')
 
 const isMac = process.platform === 'darwin'
 const isWin = process.platform === 'win32'
@@ -121,8 +121,8 @@ function createWindow () {
         return trayService[method].apply(trayService, args);
     });
 
-    ipcMain.handle('keytar', (e, method, ...args) => {
-        return keytar[method].apply(keytar, args);
+    ipcMain.handle('credentials', (e, method, ...args) => {
+        return credentials[method].apply(credentials, args);
     });
 
     mainWindow.on('ready-to-show', () => {
