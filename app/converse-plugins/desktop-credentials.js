@@ -1,15 +1,13 @@
-const credentials = await import('../credentials.js');
+/* global api */
 
 converse.plugins.add('converse-desktop-credentials', {
-
     initialize () {
         const { _converse } = this;
-        const { api } = _converse;
 
-        api.listen.on('afterResourceBinding', () => {
-            const connection = api.connection.get();
+        _converse.api.listen.on('afterResourceBinding', () => {
+            const connection = _converse.api.connection.get();
             if (connection.pass) {
-                credentials.addCredentials(
+                api.credentials.save(
                     connection.service,
                     _converse.bare_jid,
                     connection.pass
@@ -18,9 +16,8 @@ converse.plugins.add('converse-desktop-credentials', {
                 });
             }
         });
-
-        api.listen.on('logout', () => {
-            credentials.getCredentials().then((result) => credentials.removeCredentials(result.login))
+        _converse.api.listen.on('logout', () => {
+            api.credentials.clear();
         });
     }
 });

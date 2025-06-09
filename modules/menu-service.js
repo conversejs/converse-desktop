@@ -2,12 +2,21 @@
  * Module for Menu functions.
  */
 const { app, Menu, MenuItem } = require('electron')
-const settingsService = require(__dirname + '/../modules/settings-service')
+const settingsService = require('./settings-service')
+const { clearCredentials } = require('./credentials-service');
 
 const menuService = {}
 
-
 menuService.createMenu = (window) => {
+    function reload () {
+        window.show()
+        window.loadFile('index.html').catch((reason) => {
+            console.log(reason);
+            app.isQuitting = true;
+            app.quit();
+        });
+    }
+
     let converse;
     const application = new Menu();
     application.append(new MenuItem({
@@ -17,12 +26,7 @@ menuService.createMenu = (window) => {
                 label: 'Reconnect',
                 accelerator: 'CmdOrCtrl+R',
                 click: () => {
-                    window.show()
-                    window.loadFile('index.html').catch((reason) => {
-                        console.log(reason);
-                        app.isQuitting = true;
-                        app.quit();
-                    });
+                    reload();
                 }
             },
             {
@@ -126,6 +130,14 @@ menuService.createMenu = (window) => {
                 accelerator: 'F12',
                 click: () => {
                     window.webContents.openDevTools()
+                }
+            },
+            {
+                label: 'Clear Credentials',
+                click: async () => {
+                    await clearCredentials();
+                    await window.webContents.session.clearStorageData();
+                    reload();
                 }
             }
         ])
