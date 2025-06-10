@@ -34,15 +34,15 @@ contextBridge.exposeInMainWorld('api', {
             return ipcRenderer.invoke('trayService', 'hideEnvelope');
         }
     },
-    keytar: {
-        getPassword (service, login) {
-            return ipcRenderer.invoke('keytar', 'getPassword', service, login);
+    credentials: {
+        get () {
+            return ipcRenderer.invoke('credentials', 'getCredentials');
         },
-        setPassword (service, login, password) {
-            return ipcRenderer.invoke('keytar', 'setPassword', service, login, password);
+        save (service, login, password) {
+            return ipcRenderer.invoke('credentials', 'saveCredentials', service, login, password);
         },
-        deletePassword (service, login) {
-            return ipcRenderer.invoke('keytar', 'deletePassword', service, login);
+        clear () {
+            return ipcRenderer.invoke('credentials', 'clearCredentials');
         }
     },
     app: {

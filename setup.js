@@ -3,11 +3,10 @@
 await import('./app/converse-plugins/desktop-credentials.js')
 await import('./app/converse-plugins/desktop-trayicon.js')
 await import('./app/converse-plugins/desktop-settings.js')
-const getCredentials = (await import('./app/credentials.js')).getCredentials;
 
 
 let websocket_url, bosh_service_url;
-const { connectionManager, login, password } = await getCredentials();
+const { connectionManager, login, password } = await api.credentials.get();
 const priority = await api.settings.get('priority') || 0;
 const omemo_default = await api.settings.get('omemo_default') || false;
 const show_self_in_roster = await api.settings.get('show_self_in_roster') || false;
