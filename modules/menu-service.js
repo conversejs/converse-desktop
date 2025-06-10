@@ -74,6 +74,31 @@ menuService.createMenu = (window) => {
                 }
             },
             {
+                label: 'Notifications',
+                submenu: Menu.buildFromTemplate([
+                    {
+                        label: 'Enabled',
+                        type: 'checkbox',
+                        id: 'show-desktop-notifications',
+                        checked: settingsService.get('show_desktop_notifications'),
+                        click: () => {
+                            const menuItem = converse.getMenuItemById('show-desktop-notifications');
+                            settingsService.set('show_desktop_notifications', menuItem.checked);
+                        }
+                    },
+                    {
+                        label: 'Play sound',
+                        type: 'checkbox',
+                        id: 'play-sounds',
+                        checked: settingsService.get('play_sounds'),
+                        click: () => {
+                            const menuItem = converse.getMenuItemById('play-sounds');
+                            settingsService.set('play_sounds', menuItem.checked);
+                        }
+                    }
+                ])
+            },
+            {
                 type: 'separator',
             },
             {

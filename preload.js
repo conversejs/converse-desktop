@@ -19,8 +19,8 @@ contextBridge.exposeInMainWorld('api', {
         unset (setting) {
             return ipcRenderer.invoke('settings', 'unset', setting);
         },
-        get (setting) {
-            return ipcRenderer.invoke('settings', 'get', setting);
+        get (setting, fallback = null) {
+            return ipcRenderer.invoke('settings', 'get', setting, fallback);
         },
         changed (cb) {
             changedHandlers.push(cb);
