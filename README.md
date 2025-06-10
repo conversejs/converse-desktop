@@ -32,11 +32,11 @@ See [CHANGES.md](https://github.com/conversejs/converse-desktop/blob/master/CHAN
 
 | Operation System | Download link                                                                                                                                               |
 |------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| macOS            | [Converse Desktop-10.1.5-universal.dmg](https://github.com/conversejs/converse-desktop/releases/download/v10.1.5/Converse.Desktop-10.1.5-universal.dmg)     |
-| Windows          | [Converse Desktop Setup 10.1.5.exe](https://github.com/conversejs/converse-desktop/releases/download/v10.1.5/Converse.Desktop.Setup.10.1.5.exe)             |
-| Linux DEB        | [converse_desktop-10.1.5_amd64.deb](https://github.com/conversejs/converse-desktop/releases/download/v10.1.5/converse_desktop-10.1.5_amd64.deb)             |
-| Linux AppImage   | [converse_desktop-10.1.5_x86_64.AppImage](https://github.com/conversejs/converse-desktop/releases/download/v10.1.5/converse_desktop-10.1.5_x86_64.AppImage) |
-| Linux other      | [converse_desktop-10.1.5_x64.tar.gz](https://github.com/conversejs/converse-desktop/releases/download/v10.1.5/converse_desktop-10.1.5_x64.tar.gz)           |
+| macOS            | [Converse Desktop-11.0.0-universal.dmg](https://github.com/conversejs/converse-desktop/releases/download/v11.0.0/Converse.Desktop-11.0.0-universal.dmg)     |
+| Windows          | [Converse Desktop Setup 11.0.0.exe](https://github.com/conversejs/converse-desktop/releases/download/v11.0.0/Converse.Desktop.Setup.11.0.0.exe)             |
+| Linux DEB        | [converse_desktop-11.0.0_amd64.deb](https://github.com/conversejs/converse-desktop/releases/download/v11.0.0/converse_desktop-11.0.0_amd64.deb)             |
+| Linux AppImage   | [converse_desktop-11.0.0_x86_64.AppImage](https://github.com/conversejs/converse-desktop/releases/download/v11.0.0/converse_desktop-11.0.0_x86_64.AppImage) |
+| Linux other      | [converse_desktop-11.0.0_x64.tar.gz](https://github.com/conversejs/converse-desktop/releases/download/v11.0.0/converse_desktop-11.0.0_x64.tar.gz)           |
 
 - [All releases](https://github.com/conversejs/converse-desktop/releases)
 
