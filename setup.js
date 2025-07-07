@@ -12,6 +12,8 @@ const omemo_default = await api.settings.get('omemo_default') || false;
 const show_self_in_roster = await api.settings.get('show_self_in_roster') || false;
 const play_sounds = await api.settings.get('play_sounds', true);
 const show_desktop_notifications = await api.settings.get('show_desktop_notifications', true);
+const theme = await api.theme.getTheme();
+const dark_theme = await api.theme.getDarkTheme();
 
 if (connectionManager?.startsWith('ws')) {
     websocket_url = connectionManager
@@ -42,7 +44,8 @@ converse.initialize({
     priority,
     show_background: true,
     show_self_in_roster,
-    theme: 'dracula',
+    dark_theme,
+    theme,
     websocket_url,
     whitelisted_plugins: ['converse-desktop-credentials', 'converse-desktop-trayicon', 'converse-desktop-settings'],
 }).catch((reason) => {

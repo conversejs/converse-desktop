@@ -9,6 +9,14 @@ ipcRenderer.on('settings', function (e, method, setting, newValue) {
 });
 
 contextBridge.exposeInMainWorld('api', {
+    theme: {
+        getTheme () {
+            return ipcRenderer.invoke('theme', 'getTheme');
+        },
+        getDarkTheme () {
+            return ipcRenderer.invoke('theme', 'getDarkTheme');
+        }
+    },
     settings: {
         has (setting) {
             return ipcRenderer.invoke('settings', 'has', setting);

@@ -11,6 +11,7 @@ const trayService = require(__dirname + '/modules/tray-service')
 const menuService = require(__dirname + '/modules/menu-service')
 const settingsService = require(__dirname + '/modules/settings-service')
 const credentials = require(__dirname + '/modules/credentials-service')
+const themeService = require(__dirname + '/modules/theme-service')
 
 const isMac = process.platform === 'darwin'
 const isWin = process.platform === 'win32'
@@ -113,6 +114,10 @@ function createWindow () {
     })
 
     settingsService.webContents = mainWindow.webContents;
+    ipcMain.handle('theme', (e, method, ...args) => {
+        return themeService[method].apply(themeService, args);
+    });
+
     ipcMain.handle('settings', (e, method, ...args) => {
         return settingsService[method].apply(settingsService, args);
     });

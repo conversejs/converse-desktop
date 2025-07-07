@@ -4,6 +4,7 @@
 const { app, Menu, MenuItem } = require('electron')
 const settingsService = require('./settings-service')
 const { clearCredentials } = require('./credentials-service');
+const themeService = require(__dirname + '/../modules/theme-service');
 
 const menuService = {}
 
@@ -96,6 +97,41 @@ menuService.createMenu = (window) => {
                             settingsService.set('play_sounds', menuItem.checked);
                         }
                     }
+                ])
+            },
+            {
+                label: 'Theme',
+                submenu: Menu.buildFromTemplate([
+                    {
+                        label: 'System',
+                        type: 'radio',
+                        checked: themeService.getThemeSetting() === 'default',
+                        click: () => themeService.setTheme('default'),
+                    },
+                    {
+                        label: 'Classic (Light)',
+                        type: 'radio',
+                        checked: themeService.getThemeSetting() === 'classic',
+                        click: () => themeService.setTheme('classic'),
+                    },
+                    {
+                        label: 'Nordic (Light)',
+                        type: 'radio',
+                        checked: themeService.getThemeSetting() === 'nordic',
+                        click: () => themeService.setTheme('nordic'),
+                    },
+                    {
+                        label: 'Dracula (Dark)',
+                        type: 'radio',
+                        checked: themeService.getThemeSetting() === 'dracula',
+                        click: () => themeService.setTheme('dracula'),
+                    },
+                    {
+                        label: 'Cyberpunk',
+                        type: 'radio',
+                        checked: themeService.getThemeSetting() === 'cyberpunk',
+                        click: () => themeService.setTheme('cyberpunk'),
+                    },
                 ])
             },
             {
