@@ -1,5 +1,5 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, ipcMain, shell } = require('electron')
+const { app, BrowserWindow, ipcMain, shell, dialog } = require('electron')
 const path = require('path');
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -21,10 +21,16 @@ function initApp () {
         app.quit();
     }
 
-    createWindow()
-    // Set Windows platform notifications
-    if (isWin) {
-        app.setAppUserModelId("com.denry.converseDesktop")
+    try {
+        createWindow()
+        // Set Windows platform notifications
+        if (isWin) {
+            app.setAppUserModelId("com.denry.converseDesktop")
+        }
+    } catch (error) {
+        console.log(error);
+        dialog.showErrorBox('Failed to start', error.stack);
+        app.quit();
     }
 }
 
