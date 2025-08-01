@@ -36,7 +36,7 @@ function initApp () {
 
 function createWindow () {
     function getSavedWindowBounds () {
-        const winBounds = settingsService.get('winBounds') || { width: 800, height: 600 };
+        const winBounds = settingsService.get('winBounds', { width: 800, height: 600 });
         winBounds.width = Math.max(winBounds.width, 200);
         winBounds.height = Math.max(winBounds.height, 200);
         return winBounds;
@@ -46,7 +46,7 @@ function createWindow () {
     const mainWindowOptions = {
         zoomToPageWidth: true,
         show: false,
-        autoHideMenuBar: settingsService.get('hideMenubar') || false,
+        autoHideMenuBar: settingsService.get('hideMenubar', false),
         webPreferences: {
             preload: path.join(__dirname, 'preload.js')
         },
@@ -72,7 +72,7 @@ function createWindow () {
         if (mainWindow.isFullScreen()) {
             mainWindow.setFullScreen(false);
         }
-        if (!app.isQuitting && settingsService.get('minimizeOnClose')) {
+        if (!app.isQuitting && settingsService.get('minimizeOnClose', false)) {
             e.preventDefault()
             mainWindow.hide()
         }
@@ -137,7 +137,7 @@ function createWindow () {
     });
 
     mainWindow.on('ready-to-show', () => {
-        if (settingsService.get('isMaximized')) {
+        if (settingsService.get('isMaximized', false)) {
             mainWindow.maximize();
         } else {
             mainWindow.show();

@@ -12,7 +12,7 @@ const themeService = {
     },
 
     getThemeSetting () {
-        return settingsService.get('theme') || 'default';
+        return settingsService.get('theme', 'default');
     },
 
     setTheme (theme) {
