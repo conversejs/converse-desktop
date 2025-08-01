@@ -30,7 +30,7 @@ function initApp () {
 
 function createWindow () {
     function getSavedWindowBounds () {
-        const winBounds = settingsService.get('winBounds');
+        const winBounds = settingsService.get('winBounds') || { width: 800, height: 600 };
         winBounds.width = Math.max(winBounds.width, 200);
         winBounds.height = Math.max(winBounds.height, 200);
         return winBounds;
