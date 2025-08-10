@@ -1,3 +1,14 @@
+## 11.0.1.1 (Unreleased)
+
+ - Add a menu item to clear saved credentials.
+ - Add support for configuring the theme.
+ - Add support for enabling/disabling notifications.
+ - Exit the application if there is a problem starting up.
+
+## 11.0.1 (2025-06-10)
+
+ - Update to Converse.js 11.0.1
+
 ## 11.0.0 (2025-05-21)
 
  - Update to Converse.js 11.0.0

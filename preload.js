@@ -9,6 +9,14 @@ ipcRenderer.on('settings', function (e, method, setting, newValue) {
 });
 
 contextBridge.exposeInMainWorld('api', {
+    theme: {
+        getTheme () {
+            return ipcRenderer.invoke('theme', 'getTheme');
+        },
+        getDarkTheme () {
+            return ipcRenderer.invoke('theme', 'getDarkTheme');
+        }
+    },
     settings: {
         has (setting) {
             return ipcRenderer.invoke('settings', 'has', setting);
@@ -19,8 +27,8 @@ contextBridge.exposeInMainWorld('api', {
         unset (setting) {
             return ipcRenderer.invoke('settings', 'unset', setting);
         },
-        get (setting) {
-            return ipcRenderer.invoke('settings', 'get', setting);
+        get (setting, fallback = null) {
+            return ipcRenderer.invoke('settings', 'get', setting, fallback);
         },
         changed (cb) {
             changedHandlers.push(cb);

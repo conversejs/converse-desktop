@@ -1,5 +1,5 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, ipcMain, shell } = require('electron')
+const { app, BrowserWindow, ipcMain, shell, dialog } = require('electron')
 const path = require('path');
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -11,6 +11,7 @@ const trayService = require(__dirname + '/modules/tray-service')
 const menuService = require(__dirname + '/modules/menu-service')
 const settingsService = require(__dirname + '/modules/settings-service')
 const credentials = require(__dirname + '/modules/credentials-service')
+const themeService = require(__dirname + '/modules/theme-service')
 
 const isMac = process.platform === 'darwin'
 const isWin = process.platform === 'win32'
@@ -20,16 +21,22 @@ function initApp () {
         app.quit();
     }
 
-    createWindow()
-    // Set Windows platform notifications
-    if (isWin) {
-        app.setAppUserModelId("com.denry.converseDesktop")
+    try {
+        createWindow()
+        // Set Windows platform notifications
+        if (isWin) {
+            app.setAppUserModelId("com.denry.converseDesktop")
+        }
+    } catch (error) {
+        console.log(error);
+        dialog.showErrorBox('Failed to start', error.stack);
+        app.quit();
     }
 }
 
 function createWindow () {
     function getSavedWindowBounds () {
-        const winBounds = settingsService.get('winBounds');
+        const winBounds = settingsService.get('winBounds', { width: 800, height: 600 });
         winBounds.width = Math.max(winBounds.width, 200);
         winBounds.height = Math.max(winBounds.height, 200);
         return winBounds;
@@ -39,7 +46,7 @@ function createWindow () {
     const mainWindowOptions = {
         zoomToPageWidth: true,
         show: false,
-        autoHideMenuBar: settingsService.get('hideMenubar') || false,
+        autoHideMenuBar: settingsService.get('hideMenubar', false),
         webPreferences: {
             preload: path.join(__dirname, 'preload.js')
         },
@@ -65,7 +72,7 @@ function createWindow () {
         if (mainWindow.isFullScreen()) {
             mainWindow.setFullScreen(false);
         }
-        if (!app.isQuitting && settingsService.get('minimizeOnClose')) {
+        if (!app.isQuitting && settingsService.get('minimizeOnClose', false)) {
             e.preventDefault()
             mainWindow.hide()
         }
@@ -113,6 +120,10 @@ function createWindow () {
     })
 
     settingsService.webContents = mainWindow.webContents;
+    ipcMain.handle('theme', (e, method, ...args) => {
+        return themeService[method].apply(themeService, args);
+    });
+
     ipcMain.handle('settings', (e, method, ...args) => {
         return settingsService[method].apply(settingsService, args);
     });
@@ -126,7 +137,7 @@ function createWindow () {
     });
 
     mainWindow.on('ready-to-show', () => {
-        if (settingsService.get('isMaximized')) {
+        if (settingsService.get('isMaximized', false)) {
             mainWindow.maximize();
         } else {
             mainWindow.show();

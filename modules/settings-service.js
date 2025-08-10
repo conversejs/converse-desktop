@@ -6,10 +6,10 @@ const electronSettings = require('electron-settings')
 
 let settingsService = {}
 
-settingsService.get = (itemKey) => {
+settingsService.get = (itemKey, fallback = null) => {
     const settingValue = electronSettings.getSync(itemKey)
     if (typeof settingValue === 'undefined' || settingValue === null) {
-        return false
+        return fallback;
     }
     return settingValue
 }
