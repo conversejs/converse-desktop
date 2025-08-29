@@ -1,4 +1,4 @@
-## 11.0.1.1 (Unreleased)
+## 12.0.0 (2025-08-31)
 
  - Add a menu item to clear saved credentials.
  - Add support for configuring the theme.
