@@ -15,7 +15,12 @@ converse.plugins.add('converse-desktop-settings', {
                 await _converse.api.settings.set('theme', await api.theme.getTheme());
                 await _converse.api.settings.set('dark_theme', await api.theme.getDarkTheme());
                 document.querySelector('converse-root')?.setThemeAttributes();
-                document.querySelector('converse-bg')?.setThemeAttributes();
+
+                const converseBG = document.querySelector('converse-bg');
+                if (converseBG) {
+                    converseBG.className = '';
+                    converseBG.setThemeAttributes();
+                }
             }
         });
     }
