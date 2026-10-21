@@ -1,3 +1,8 @@
+## 14.0.1 (2026-10-21)
+
+ - Update Electron to v45.0.0 (includes the fix for the leaked eMudhra CA keys)
+ - Update Converse.js to v14.0.1
+
 ## 14.0.0 (2026-08-19)
 
  - Update Electron to v43.4.1
