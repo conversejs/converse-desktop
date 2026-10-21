@@ -1,0 +1,104 @@
+name: "Release"
+
+on:
+  push:
+    tags: [ "v*" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    permissions:
+      contents: read
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            script: dist:linux64
+            files: |
+              dist/*.deb
+              dist/*.tar.gz
+              dist/*.AppImage
+          - os: windows-latest
+            script: dist:win64
+            files: |
+              dist/*.exe
+          - os: macos-latest
+            script: dist
+            files: |
+              dist/*.dmg
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build packages
+        run: npm run ${{ matrix.script }} -- --publish never
+        env:
+          # No signing certificates are configured, so don't let
+          # electron-builder go looking for one in the keychain.
+          CSC_IDENTITY_AUTO_DISCOVERY: false
+
+      - name: Upload packages
+        uses: actions/upload-artifact@v7
+        with:
+          name: packages-${{ matrix.os }}
+          path: ${{ matrix.files }}
+          if-no-files-found: error
+
+  release:
+    name: Draft GitHub release
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Download packages
+        uses: actions/download-artifact@v8
+        with:
+          path: packages
+          pattern: packages-*
+          merge-multiple: true
+
+      - name: Extract release notes from CHANGES.md
+        run: |
+          version="${GITHUB_REF_NAME#v}"
+          awk -v heading="## $version " '
+            index($0, heading) == 1 { found = 1; next }
+            found && /^## / { exit }
+            found { print }
+          ' CHANGES.md > notes.md
+          if [ ! -s notes.md ]; then
+            echo "No section for $version found in CHANGES.md" >&2
+            exit 1
+          fi
+          # Use the CHANGES.md heading, e.g. "14.0.1 (2026-10-21)", as the title.
+          title="$(grep -m1 "^## $version " CHANGES.md | sed 's/^## //')"
+          echo "RELEASE_TITLE=$title" >> "$GITHUB_ENV"
+
+      - name: Create draft release and upload packages
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if ! gh release view "$GITHUB_REF_NAME" > /dev/null 2>&1; then
+            gh release create "$GITHUB_REF_NAME" --draft --verify-tag \
+              --title "$RELEASE_TITLE" --notes-file notes.md
+          fi
+          gh release upload "$GITHUB_REF_NAME" packages/* --clobber
